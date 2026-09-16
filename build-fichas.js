@@ -54,7 +54,8 @@ function header() {
         ${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}
       </nav>
       <button class="lang-btn" type="button" data-lang-toggle aria-label="${esc(es('switchLabel'))}" data-i18n-attr="aria-label:switchLabel">
-        ${icon('i-lang')}<span data-i18n="switchTo">${esc(es('switchTo'))}</span>
+        ${icon('i-lang')}<span class="lang-long" data-i18n="switchTo">${esc(es('switchTo'))}</span>
+        <span class="lang-short" data-i18n="switchCode">${esc(es('switchCode'))}</span>
       </button>
       <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-mobile" aria-label="Menú">
         ${icon('i-menu')}

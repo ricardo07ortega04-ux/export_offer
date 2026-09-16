@@ -202,11 +202,11 @@ button { cursor: pointer; }
   display: flex; align-items: center; gap: var(--space-2);
   min-height: var(--header-h);
 }
-.brand { display: flex; align-items: center; gap: 0.875rem; text-decoration: none; color: inherit; margin-right: auto; }
-.brand img { width: 108px; height: auto; }
+.brand { display: flex; align-items: center; gap: 0.875rem; text-decoration: none; color: inherit; margin-right: auto; min-width: 0; }
+.brand img { width: 108px; height: auto; flex: none; }
 .brand-divider { width: 1px; height: 34px; background: var(--linea); flex: none; }
-.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
-.brand-name { font-family: var(--font-display); font-size: 1.1875rem; font-weight: 700; color: var(--noche); letter-spacing: -0.01em; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.brand-name { font-family: var(--font-display); font-size: 1.1875rem; font-weight: 700; color: var(--noche); letter-spacing: -0.01em; white-space: nowrap; }
 .brand-sub { font-size: 0.6875rem; color: var(--pizarra); letter-spacing: 0.03em; }
 
 .nav { display: flex; align-items: center; gap: 0.25rem; }
@@ -226,6 +226,8 @@ button { cursor: pointer; }
 }
 .lang-btn:hover { background: var(--niebla); border-color: var(--cobalto); }
 .lang-btn svg { width: 16px; height: 16px; flex: none; }
+.lang-btn { flex: none; }
+.lang-short { display: none; }
 
 .menu-toggle {
   display: none; align-items: center; justify-content: center;
@@ -239,6 +241,22 @@ button { cursor: pointer; }
   .menu-toggle { display: inline-flex; }
   .brand-sub { display: none; }
   .nav-mobile:not([hidden]) { display: block; }
+  .menu-toggle { flex: none; }
+}
+
+/* Celulares: el encabezado no alcanza para logotipo, nombre, "English" y menú */
+@media (max-width: 560px) {
+  .header-inner { gap: 0.5rem; }
+  .brand { gap: 0.625rem; }
+  .brand img { width: 84px; }
+  .brand-name { font-size: 1.0625rem; }
+  .lang-btn { padding-inline: 0.75rem; }
+  .lang-long { display: none; }
+  .lang-short { display: inline; }
+}
+@media (max-width: 380px) {
+  .brand-divider { display: none; }
+  .brand img { width: 76px; }
 }
 
 .nav-mobile { display: none; border-top: 1px solid var(--linea-2); padding: var(--space-2) 0 var(--space-3); }
@@ -431,7 +449,7 @@ button { cursor: pointer; }
 
 /* ---------- Tarjetas ---------- */
 
-.cards { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
+.cards { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr)); }
 .cards.is-list { grid-template-columns: 1fr; }
 
 .card {
@@ -547,7 +565,7 @@ button { cursor: pointer; }
 
 /* ---------- Cómo funciona ---------- */
 
-.steps { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); counter-reset: step; }
+.steps { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); counter-reset: step; }
 .step { position: relative; padding-top: var(--space-3); border-top: 2px solid var(--linea); }
 .step::before {
   counter-increment: step; content: counter(step, decimal-leading-zero);
@@ -677,7 +695,7 @@ button { cursor: pointer; }
 .p-photo { border-radius: var(--radius-md); overflow: hidden; background: var(--niebla-2); margin-bottom: var(--space-2); }
 .p-photo img { width: 100%; height: auto; }
 
-.dl { display: grid; gap: 0.875rem var(--space-2); grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.dl { display: grid; gap: 0.875rem var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
 .dl > div { min-width: 0; }
 .dl dt { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pizarra); margin-bottom: 0.1875rem; }
 .dl dd { margin: 0; font-weight: 600; color: var(--noche); font-variant-numeric: tabular-nums; }
@@ -702,7 +720,7 @@ button { cursor: pointer; }
 
 .p-others { background: var(--noche); color: var(--texto-claro); }
 .p-others .section-head h2 { color: #fff; }
-.p-others .cards { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.p-others .cards { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
 
 /* =========================================================
    Animaciones

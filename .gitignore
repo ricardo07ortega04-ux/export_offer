@@ -1,0 +1,13 @@
+# Configuración local de Claude Code (vista previa)
+.claude/
+
+# Sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Vercel CLI
+.vercel/
+
+# Node, por si algún día se agregan dependencias
+node_modules/
