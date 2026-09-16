@@ -700,7 +700,8 @@ button { cursor: pointer; }
 
 .p-form { position: sticky; top: calc(var(--header-h) + var(--space-2)); }
 
-.p-others { background: var(--noche); }
+.p-others { background: var(--noche); color: var(--texto-claro); }
+.p-others .section-head h2 { color: #fff; }
 .p-others .cards { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 
 /* =========================================================
