@@ -155,7 +155,8 @@ function page(c) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Archivo:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="comce-sur-logo.webp" type="image/webp">
-<script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+<script>(function(d){var h=d.documentElement;h.className=h.className.replace('no-js','js');
+setTimeout(function(){if(!window.__seReady)h.classList.add('reveal-off');},2500);})(document);</script>
 <script type="application/ld+json">
 ${JSON.stringify({
   '@context': 'https://schema.org',

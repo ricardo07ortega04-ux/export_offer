@@ -706,13 +706,16 @@ button { cursor: pointer; }
    Animaciones
    ========================================================= */
 
+/* El estado oculto se aplica solo si hay JS vivo. Si app.js no llega, el guion
+   de failsafe del <head> añade .reveal-off y el contenido se muestra igual. */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
   transition-delay: var(--d, 0ms);
 }
-[data-reveal].is-in { opacity: 1; transform: none; }
+html.js:not(.reveal-off) [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(18px);
+}
 
 .card-enter { animation: cardIn 420ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
 @keyframes cardIn {
@@ -722,7 +725,7 @@ button { cursor: pointer; }
 
 .cards.is-swapping { opacity: 0.35; transition: opacity 140ms linear; }
 
-html:not(.is-ready) .hero-inner > * { opacity: 0; transform: translateY(16px); }
+html.js:not(.is-ready):not(.reveal-off) .hero-inner > * { opacity: 0; transform: translateY(16px); }
 html.is-ready .hero-inner > * {
   animation: heroIn 720ms var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 90ms + 120ms);
@@ -740,8 +743,8 @@ html.is-ready .hero-inner > * {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  [data-reveal] { opacity: 1; transform: none; }
-  html:not(.is-ready) .hero-inner > * { opacity: 1; transform: none; }
+  html.js [data-reveal]:not(.is-in) { opacity: 1; transform: none; }
+  html.js:not(.is-ready) .hero-inner > * { opacity: 1; transform: none; }
   .card:hover { transform: none; }
 }
 

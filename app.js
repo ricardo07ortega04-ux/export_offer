@@ -7,6 +7,9 @@
   var SE = window.SE;
   if (!SE) return;
 
+  // Le avisa al failsafe del <head> que app.js sí arrancó.
+  window.__seReady = true;
+
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var store = {
     get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -108,19 +111,35 @@
 
   /* ---------- Revelado al hacer scroll ---------- */
 
+  var revealIO = null;
+
   function observeReveals(root) {
     var items = (root || document).querySelectorAll('[data-reveal]:not(.is-in)');
     if (!items.length) return;
+
     if (reduce.matches || !('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('is-in'); });
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
+
+    // Pase sincrónico: lo que ya está a la vista (o por encima) se muestra de
+    // inmediato. El observador no se ejecuta en pestañas en segundo plano, así
+    // que sin esto el contenido del pliegue superior podría quedar invisible.
+    var pending = [];
+    items.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-in');
+      else pending.push(el);
+    });
+    if (!pending.length) return;
+
+    if (!revealIO) {
+      revealIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('is-in'); revealIO.unobserve(entry.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }
+    pending.forEach(function (el) { revealIO.observe(el); });
   }
 
   /* ---------- Contadores ---------- */
@@ -522,7 +541,8 @@
   var meter = document.querySelector('[data-meter]');
   if (meter) {
     var pct = Number(meter.getAttribute('data-meter'));
-    if (reduce.matches || !('IntersectionObserver' in window)) {
+    if (reduce.matches || !('IntersectionObserver' in window) ||
+        meter.getBoundingClientRect().top < window.innerHeight) {
       meter.style.width = pct + '%';
     } else {
       var mio = new IntersectionObserver(function (entries) {
