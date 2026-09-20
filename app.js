@@ -171,15 +171,18 @@
 
   function wireBriefForm(form) {
     if (!form) return;
-    var scope = form.closest('.form-card') || document;
+    var scope = form.closest('.form-card') || form.closest('.panel') || document;
     var box = scope.querySelector('[data-form-errors]');
     var ok = scope.querySelector('[data-form-ok]');
+    var submit = form.querySelector('button[type="submit"]');
+    var cargado = Date.now();
 
     function checks() {
       return [
-        { id: 'need', el: form.querySelector('[name="need"]'), key: 'formErrNeed', test: function (v) { return v.trim().length > 0; } },
-        { id: 'name', el: form.querySelector('[name="name"]'), key: 'formErrName', test: function (v) { return v.trim().length > 0; } },
-        { id: 'email', el: form.querySelector('[name="email"]'), key: 'formErrEmail', test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } }
+        { el: form.querySelector('[name="need"]'), key: 'formErrNeed', test: function (el) { return el.value.trim().length > 0; } },
+        { el: form.querySelector('[name="name"]'), key: 'formErrName', test: function (el) { return el.value.trim().length > 0; } },
+        { el: form.querySelector('[name="email"]'), key: 'formErrEmail', test: function (el) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim()); } },
+        { el: form.querySelector('[name="consent"]'), key: 'formErrConsent', test: function (el) { return el.checked; } }
       ].filter(function (c) { return c.el; });
     }
 
@@ -190,25 +193,38 @@
     }
 
     checks().forEach(function (c) {
-      c.el.addEventListener('blur', function () {
-        if (c.el.value.trim() !== '' || c.el.getAttribute('aria-invalid') === 'true') mark(c, !c.test(c.el.value));
+      var evento = c.el.type === 'checkbox' ? 'change' : 'blur';
+      c.el.addEventListener(evento, function () {
+        if (c.el.type === 'checkbox' || c.el.value.trim() !== '' || c.el.getAttribute('aria-invalid') === 'true') {
+          mark(c, !c.test(c.el));
+        }
       });
     });
 
+    function mostrarError(titulo, cuerpo) {
+      if (!box) return;
+      box.querySelector('h3').textContent = titulo;
+      box.querySelector('ul').innerHTML = cuerpo ? '<li>' + esc(cuerpo) + '</li>' : '';
+      box.hidden = false;
+      box.focus();
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
       var bad = [];
       checks().forEach(function (c) {
-        var fail = !c.test(c.el.value);
+        var fail = !c.test(c.el);
         mark(c, fail);
         if (fail) bad.push(c);
       });
 
+      if (ok) ok.hidden = true;
+
       if (bad.length) {
-        if (ok) ok.hidden = true;
         if (box) {
-          var list = box.querySelector('ul');
-          list.innerHTML = bad.map(function (c) {
+          box.querySelector('h3').textContent = t('formErrTitle');
+          box.querySelector('ul').innerHTML = bad.map(function (c) {
             return '<li><a href="#' + c.el.id + '">' + esc(t(c.key)) + '</a></li>';
           }).join('');
           box.hidden = false;
@@ -218,8 +234,42 @@
       }
 
       if (box) box.hidden = true;
-      form.reset();
-      if (ok) { ok.hidden = false; ok.focus(); }
+
+      var datos = {
+        need: form.querySelector('[name="need"]').value,
+        name: form.querySelector('[name="name"]').value,
+        email: form.querySelector('[name="email"]').value,
+        company: (form.querySelector('[name="company"]') || {}).value || '',
+        country: (form.querySelector('[name="country"]') || {}).value || '',
+        timeline: (form.querySelector('[name="timeline"]') || {}).value || '',
+        company_slug: (form.querySelector('[name="company_slug"]') || {}).value || '',
+        website: (form.querySelector('[name="website"]') || {}).value || '',
+        consent: true,
+        lang: lang,
+        page: location.pathname,
+        elapsed: Date.now() - cargado
+      };
+
+      var etiquetaOriginal = submit ? submit.textContent : '';
+      if (submit) { submit.setAttribute('aria-busy', 'true'); submit.textContent = t('formSending'); }
+
+      fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      }).then(function (r) {
+        return r.json().catch(function () { return { ok: r.ok }; });
+      }).then(function (res) {
+        if (!res || !res.ok) throw new Error((res && res.error) || 'error');
+        form.reset();
+        cargado = Date.now();
+        form.querySelectorAll('.field.has-error').forEach(function (f) { f.classList.remove('has-error'); });
+        if (ok) { ok.hidden = false; ok.focus(); }
+      }).catch(function () {
+        mostrarError(t('formFail'), t('formFailBody'));
+      }).then(function () {
+        if (submit) { submit.removeAttribute('aria-busy'); submit.textContent = etiquetaOriginal || t('formSubmit'); }
+      });
     });
   }
 

@@ -313,8 +313,21 @@
             </select>
           </div>
 
+          <div class="field field-consent">
+            <label class="consent" for="f-consent">
+              <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
+              <span data-i18n="formConsent">Acepto que COMCE Región Sur trate mis datos para atender esta solicitud.</span>
+            </label>
+            <p class="field-error" id="f-consent-err"><svg aria-hidden="true"><use href="#i-alert"/></svg><span data-i18n="formErrConsent">Necesitamos tu autorización para tratar tus datos</span></p>
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label for="f-website">No llenar</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
           <button class="btn btn-gold btn-block" type="submit" data-i18n="formSubmit">Enviar requerimiento</button>
-          <p class="form-demo" data-i18n="formDemo">Versión de demostración: el formulario valida los datos pero todavía no envía el correo.</p>
+          <p class="form-demo" data-i18n="formDemo">Tus datos se usan únicamente para atender esta solicitud y no se comparten con terceros.</p>
         </form>
       </div>
     </div>

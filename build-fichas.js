@@ -281,6 +281,17 @@ ${header()}
                 <input id="p-email" name="email" type="email" autocomplete="email" required aria-describedby="p-email-err">
                 <p class="field-error" id="p-email-err">${icon('i-alert')}<span data-i18n="formErrEmail">${esc(es('formErrEmail'))}</span></p>
               </div>
+              <div class="field field-consent">
+                <label class="consent" for="p-consent">
+                  <input id="p-consent" name="consent" type="checkbox" required aria-describedby="p-consent-err">
+                  <span data-i18n="formConsent">${esc(es('formConsent'))}</span>
+                </label>
+                <p class="field-error" id="p-consent-err">${icon('i-alert')}<span data-i18n="formErrConsent">${esc(es('formErrConsent'))}</span></p>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="p-website">No llenar</label>
+                <input id="p-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
               <button class="btn btn-gold btn-block" type="submit" data-i18n="formSubmit">${esc(es('formSubmit'))}</button>
               ${i18('p', 'formDemo', 'form-demo')}
             </form>
