@@ -1,0 +1,12 @@
+{
+  "name": "sur-exporta",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Directorio de oferta exportable de la Región Sur — COMCE Región Sur",
+  "scripts": {
+    "pull": "node supabase/pull-data.js",
+    "fichas": "node build-fichas.js",
+    "build": "node supabase/pull-data.js && node build-fichas.js",
+    "seed": "node supabase/build-seed.js"
+  }
+}

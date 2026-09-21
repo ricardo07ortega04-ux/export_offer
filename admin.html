@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de Vinculación — Sur Exporta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="comce-sur-logo.webp" type="image/webp">
+<script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+</head>
+<body class="admin">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.4v.2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5.5 5.5L20 7"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6 6-6-6 6-6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M9 16l-4-4 4-4M5 12h11"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V6m-6 6 6-6 6 6"/></symbol>
+</defs></svg>
+
+<header class="admin-bar">
+  <div class="admin-bar-in">
+    <a class="admin-brand" href="admin.html">
+      <img src="comce-sur-logo.webp" width="286" height="131" alt="">
+      <span>Panel de Vinculación</span>
+    </a>
+    <span class="admin-user" data-user hidden></span>
+    <button class="btn btn-outline btn-sm" type="button" data-publicar hidden>
+      <svg aria-hidden="true"><use href="#i-up"/></svg> Publicar cambios
+    </button>
+    <button class="btn btn-outline btn-sm" type="button" data-salir hidden>
+      <svg aria-hidden="true"><use href="#i-out"/></svg> Salir
+    </button>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <!-- Acceso -->
+  <section class="admin-wrap admin-narrow" data-vista="acceso" hidden>
+    <div class="panel">
+      <h1 class="admin-h1">Acceso para personal de COMCE</h1>
+      <p class="admin-lede">Escribe tu correo institucional y te enviaremos un enlace de acceso. No hay contraseñas que recordar ni que perder.</p>
+
+      <div class="form-alert alert-error" role="alert" tabindex="-1" hidden data-acceso-error>
+        <h3>No pudimos enviarte el enlace</h3>
+        <ul></ul>
+      </div>
+      <div class="form-alert alert-ok" role="status" tabindex="-1" hidden data-acceso-ok>
+        <h3>Revisa tu correo</h3>
+        <p>Te enviamos un enlace de acceso. Ábrelo en este mismo navegador; vence en una hora.</p>
+      </div>
+
+      <form data-acceso-form novalidate>
+        <div class="field">
+          <label for="a-email">Correo electrónico</label>
+          <input id="a-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <button class="btn btn-gold btn-block" type="submit">Enviarme el enlace</button>
+      </form>
+      <p class="admin-nota">Solo funciona con cuentas dadas de alta por COMCE.</p>
+    </div>
+  </section>
+
+  <!-- Sin permiso -->
+  <section class="admin-wrap admin-narrow" data-vista="sin-permiso" hidden>
+    <div class="panel">
+      <h1 class="admin-h1">Tu cuenta no tiene acceso</h1>
+      <p class="admin-lede">Iniciaste sesión correctamente, pero tu usuario no está registrado como personal de COMCE. Pide a la Dirección de Vinculación que te dé de alta.</p>
+      <button class="btn btn-outline" type="button" data-salir-2>Cerrar sesión</button>
+    </div>
+  </section>
+
+  <!-- Lista -->
+  <section class="admin-wrap" data-vista="lista" hidden>
+    <div class="admin-head">
+      <div>
+        <h1 class="admin-h1">Empresas</h1>
+        <p class="admin-lede" data-conteo></p>
+      </div>
+      <button class="btn btn-primary" type="button" data-nueva>Agregar empresa</button>
+    </div>
+
+    <div class="admin-filtros">
+      <div class="search-shell">
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="u-sr" for="a-buscar">Buscar empresa</label>
+        <input id="a-buscar" type="search" placeholder="Buscar por marca, municipio o razón social" autocomplete="off" data-buscar>
+      </div>
+      <div class="select-shell">
+        <label class="u-sr" for="a-estatus">Filtrar por estatus</label>
+        <select id="a-estatus" data-filtro-estatus>
+          <option value="">Todos los estatus</option>
+          <option value="borrador">Borrador</option>
+          <option value="en_revision">En revisión</option>
+          <option value="publicado">Publicado</option>
+          <option value="suspendido">Suspendido</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="admin-tabla-scroll">
+      <table class="admin-tabla">
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Municipio</th>
+            <th class="num">Capacidad</th>
+            <th class="num">Mercados</th>
+            <th>Estatus</th>
+            <th><span class="u-sr">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody data-filas></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Editor -->
+  <section class="admin-wrap" data-vista="editor" hidden>
+    <button class="p-back admin-volver" type="button" data-volver>
+      <svg aria-hidden="true"><use href="#i-back"/></svg> Volver a la lista
+    </button>
+
+    <div class="admin-head">
+      <h1 class="admin-h1" data-editor-titulo>Editar empresa</h1>
+      <span class="admin-guardado" data-guardado hidden>Guardado</span>
+    </div>
+
+    <div class="form-alert alert-error" role="alert" tabindex="-1" hidden data-editor-error>
+      <h3>No se pudo guardar</h3>
+      <ul></ul>
+    </div>
+
+    <form data-editor-form novalidate>
+      <div class="admin-cols">
+
+        <div class="panel">
+          <h2>Identidad</h2>
+          <div class="field-row">
+            <div class="field"><label for="e-marca">Marca *</label><input id="e-marca" name="marca" required></div>
+            <div class="field"><label for="e-slug">Identificador (URL) *</label><input id="e-slug" name="slug" required pattern="[a-z0-9\-]+"><p class="field-help">Solo minúsculas, números y guiones. Cambiarlo cambia la dirección de la ficha.</p></div>
+          </div>
+          <div class="field"><label for="e-razon">Razón social</label><input id="e-razon" name="razon_social"></div>
+          <div class="field-row">
+            <div class="field"><label for="e-estado">Estado *</label><select id="e-estado" name="estado" required data-opciones="estados"></select></div>
+            <div class="field"><label for="e-municipio">Municipio</label><input id="e-municipio" name="municipio"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="e-sector">Sector *</label><select id="e-sector" name="sector" required data-opciones="sectores"></select></div>
+            <div class="field"><label for="e-abv">Graduación alcohólica</label><input id="e-abv" name="abv" placeholder="45–46%"></div>
+          </div>
+          <div class="field"><label for="e-domicilio">Domicilio fiscal <span class="admin-privado">interno</span></label><input id="e-domicilio" name="domicilio_fiscal"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Textos</h2>
+          <div class="field"><label for="e-res-es">Resumen (español)</label><textarea id="e-res-es" name="resumen_es" rows="3"></textarea></div>
+          <div class="field"><label for="e-res-en">Resumen (inglés)</label><textarea id="e-res-en" name="resumen_en" rows="3"></textarea></div>
+          <div class="field"><label for="e-des-es">Descripción (español)</label><textarea id="e-des-es" name="descripcion_es" rows="6"></textarea></div>
+          <div class="field"><label for="e-des-en">Descripción (inglés)</label><textarea id="e-des-en" name="descripcion_en" rows="6"></textarea></div>
+          <div class="field-row">
+            <div class="field"><label for="e-dest-es">Distintivo (español)</label><input id="e-dest-es" name="destacado_es"></div>
+            <div class="field"><label for="e-dest-en">Distintivo (inglés)</label><input id="e-dest-en" name="destacado_en"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Capacidad y exportación</h2>
+          <div class="field-row">
+            <div class="field"><label for="e-cap">Capacidad mensual (L)</label><input id="e-cap" name="capacidad_mensual_l" type="number" min="0"></div>
+            <div class="field"><label for="e-pct">Porcentaje exportado</label><input id="e-pct" name="porcentaje_exportado" type="number" min="0" max="100"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="e-exp">Capacidad exportada (L)</label><input id="e-exp" name="capacidad_exportada_l" type="number" min="0"></div>
+            <div class="field"><label for="e-desde">Exporta desde (año)</label><input id="e-desde" name="exporta_desde" type="number" min="1900" max="2100"></div>
+          </div>
+          <p class="admin-aviso" data-aritmetica hidden></p>
+          <div class="field-row">
+            <div class="field"><label for="e-situacion">Situación</label><select id="e-situacion" name="situacion">
+              <option value="exportando">Exportando</option>
+              <option value="buscando_comprador">Busca comprador</option>
+              <option value="sin_dato">Sin dato</option>
+            </select></div>
+            <div class="field"><label for="e-padron">Padrón de exportadores</label><select id="e-padron" name="padron">
+              <option value="vigente">Vigente</option>
+              <option value="pendiente_actualizar">Pendiente de actualizar</option>
+              <option value="sin_dato">Sin dato</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <label class="consent" for="e-maquila"><input id="e-maquila" name="maquila" type="checkbox"><span>Ofrece maquila para otras marcas</span></label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Oferta</h2>
+          <div class="field"><label for="e-productos">Productos</label><textarea id="e-productos" name="productos" rows="3"></textarea><p class="field-help">Uno por línea.</p></div>
+          <div class="field"><label for="e-present">Presentaciones (ml)</label><input id="e-present" name="presentaciones_ml"><p class="field-help">Separadas por coma. Ejemplo: 375, 700, 750</p></div>
+        </div>
+
+        <div class="panel">
+          <h2>Mercados de destino</h2>
+          <div class="admin-casillas" data-mercados></div>
+        </div>
+
+        <div class="panel">
+          <h2>Certificaciones</h2>
+          <div class="admin-casillas" data-certificaciones></div>
+        </div>
+
+        <div class="panel">
+          <h2>Contacto <span class="admin-privado">no se publica</span></h2>
+          <div class="field-row">
+            <div class="field"><label for="e-cemail">Correo</label><input id="e-cemail" name="contacto_email" type="email"></div>
+            <div class="field"><label for="e-ctel">Teléfono</label><input id="e-ctel" name="contacto_tel"></div>
+          </div>
+          <div class="field"><label for="e-web">Sitio web</label><input id="e-web" name="sitio_web" type="url"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Publicación</h2>
+          <div class="field">
+            <label for="e-estatus">Estatus</label>
+            <select id="e-estatus" name="estatus" data-estatus>
+              <option value="borrador">Borrador — no se ve en el sitio</option>
+              <option value="en_revision">En revisión — no se ve en el sitio</option>
+              <option value="publicado">Publicado — visible para todos</option>
+              <option value="suspendido">Suspendido — retirado del sitio</option>
+            </select>
+          </div>
+          <div class="field"><label for="e-fuente">Fuente de los datos</label><input id="e-fuente" name="fuente"></div>
+          <div class="field"><label for="e-notas">Notas de revisión <span class="admin-privado">interno</span></label><textarea id="e-notas" name="notas_revision" rows="4"></textarea><p class="field-help">Una por línea. Sirve para registrar lo que falta validar con la empresa.</p></div>
+          <div class="field"><label for="e-logo">URL del logotipo</label><input id="e-logo" name="logo_url"></div>
+          <div class="field"><label for="e-foto">URL de la foto</label><input id="e-foto" name="foto_url"></div>
+        </div>
+
+      </div>
+
+      <div class="admin-acciones">
+        <button class="btn btn-gold" type="submit">Guardar cambios</button>
+        <button class="btn btn-outline" type="button" data-volver>Cancelar</button>
+        <span class="admin-actualizado" data-actualizado></span>
+      </div>
+    </form>
+  </section>
+
+  <!-- Publicación -->
+  <div class="admin-toast" role="status" aria-live="polite" data-toast hidden></div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
