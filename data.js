@@ -697,7 +697,7 @@ window.SE = {
           "marca": "Mezcal Altares de mi Tierra",
           "razonSocial": "Cristal Dalila Santiago Andrade",
           "estado": "Oaxaca",
-          "municipio": "San Dionisio El Grande",
+          "municipio": "San Dionisio Ocotepec",
           "sector": "destilados-de-agave",
           "resumen": {
               "es": "Empresa dirigida por una mujer oaxaqueña, con destilados de autor en chocolate, frutos rojos y cempasúchil. Exporta a Japón.",
