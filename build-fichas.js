@@ -49,8 +49,8 @@ function header() {
       </a>
       <nav class="nav" aria-label="Principal">
         ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
+        <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
         ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-        ${i18('a', 'navPrograma').replace('<a ', '<a href="index.html#programa" ')}
         ${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}
       </nav>
       <button class="lang-btn" type="button" data-lang-toggle aria-label="${esc(es('switchLabel'))}" data-i18n-attr="aria-label:switchLabel">
@@ -63,8 +63,8 @@ function header() {
     </div>
     <nav class="nav-mobile" id="nav-mobile" hidden aria-label="Principal (móvil)">
       ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
+      <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
       ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-      ${i18('a', 'navPrograma').replace('<a ', '<a href="index.html#programa" ')}
       ${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}
     </nav>
   </div>
@@ -91,8 +91,7 @@ function footer() {
       <div>
         ${i18('h4', 'backToComce')}
         <ul>
-          <li><a href="https://comce-sur.vercel.app/">comce-sur.vercel.app</a></li>
-          <li><a href="https://comce-sur.odoo.com/">comce-sur.odoo.com</a></li>
+          <li><a href="https://www.comce-sur.org.mx/" rel="noopener">comce-sur.org.mx</a></li>
         </ul>
       </div>
     </div>
