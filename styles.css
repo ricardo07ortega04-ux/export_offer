@@ -894,7 +894,9 @@ button { cursor: pointer; }
 .lg-hero-texto { max-width: calc(15rem + 46rem + var(--space-4)); margin-inline: auto; }
 .lg-hero .eyebrow { color: var(--ocre); }
 .lg-hero h1 { color: #fff; font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem); margin-bottom: var(--space-2); }
-.lg-lead { font-size: var(--fs-lead); color: var(--texto-claro-2); max-width: 40rem; }
+/* Una oración por renglón; en pantallas angostas cada una se acomoda sola */
+.lg-lead { font-size: var(--fs-lead); color: var(--texto-claro-2); }
+.lg-lead span { display: block; }
 .lg-datos { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: var(--space-3); font-size: var(--fs-sm); }
 .lg-datos li { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 0; }
 .lg-datos svg { width: 16px; height: 16px; flex: none; color: var(--ocre); }
