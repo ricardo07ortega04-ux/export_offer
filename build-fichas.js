@@ -95,7 +95,10 @@ function footer() {
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">${i18('p', 'footerSource')}</div>
+    <div class="footer-bottom">
+      ${i18('p', 'footerSource')}
+      ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="aviso-de-privacidad.html" ')}
+    </div>
   </div>
 </footer>`;
 }
@@ -285,6 +288,7 @@ ${header()}
                   <input id="p-consent" name="consent" type="checkbox" required aria-describedby="p-consent-err">
                   <span data-i18n="formConsent">${esc(es('formConsent'))}</span>
                 </label>
+                ${bi('a', 'Consulta el aviso de privacidad', 'Read the privacy notice', 'consent-link').replace('<a ', '<a href="aviso-de-privacidad.html" target="_blank" rel="noopener" ')}
                 <p class="field-error" id="p-consent-err">${icon('i-alert')}<span data-i18n="formErrConsent">${esc(es('formErrConsent'))}</span></p>
               </div>
               <div class="hp" aria-hidden="true">

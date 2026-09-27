@@ -604,6 +604,28 @@
     }
   }
 
+  /* =========================================================
+     Aviso de privacidad: el índice marca la sección en pantalla
+     ========================================================= */
+
+  var tocLinks = document.querySelectorAll('.lg-toc a[href^="#"]');
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    var tocMap = {};
+    tocLinks.forEach(function (a) { tocMap[a.getAttribute('href').slice(1)] = a; });
+    var tocIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        tocLinks.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var link = tocMap[en.target.id];
+        if (link) link.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Object.keys(tocMap).forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (sec) tocIO.observe(sec);
+    });
+  }
+
   /* ---------- Arranque general ---------- */
 
   document.querySelectorAll('[data-brief-form]').forEach(wireBriefForm);
