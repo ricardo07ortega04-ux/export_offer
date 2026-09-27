@@ -42,6 +42,14 @@
     var s = SE.sectores[id];
     return s ? s[lang] : id;
   }
+  // Tipo de oferta de una empresa: 'producto' o 'servicio', según su sector
+  function tipoDe(c) {
+    var s = SE.sectores[c.sector];
+    return (s && s.tipo) || 'producto';
+  }
+  function tipoTexto(v) {
+    return t(v === 'servicio' ? 'tipoServicio' : 'tipoProducto');
+  }
   function loc(obj) {
     return obj && typeof obj === 'object' ? (obj[lang] || obj.es) : obj;
   }
@@ -144,7 +152,29 @@
 
   /* ---------- Contadores ---------- */
 
+  // Las cifras del inicio se calculan con los datos publicados
+  function syncStats() {
+    var unicos = function (campo) {
+      var s = {};
+      SE.empresas.forEach(function (c) { c[campo].forEach(function (v) { s[v] = 1; }); });
+      return Object.keys(s).length;
+    };
+    var valores = {
+      empresas: SE.empresas.length,
+      mercados: unicos('mercados'),
+      certs: unicos('certs'),
+      capacidad: SE.empresas.reduce(function (a, c) { return a + (c.capacidad || 0); }, 0)
+    };
+    document.querySelectorAll('[data-stat]').forEach(function (el) {
+      var v = valores[el.getAttribute('data-stat')];
+      if (v === undefined) return;
+      el.setAttribute('data-count', v);
+      el.textContent = fmt(v);
+    });
+  }
+
   function runCounters() {
+    syncStats();
     var nodes = document.querySelectorAll('[data-count]');
     if (!nodes.length) return;
     nodes.forEach(function (el) {
@@ -289,13 +319,14 @@
     var filtersForm = document.getElementById('filters');
     var filtersToggle = document.querySelector('[data-filters-toggle]');
 
-    var state = { q: '', mercado: [], cert: [], sector: [], estado: [], maquila: false, sort: 'relevance', view: 'grid' };
+    var LISTAS = ['tipo', 'mercado', 'cert', 'sector', 'estado'];
+    var state = { q: '', tipo: [], mercado: [], cert: [], sector: [], estado: [], maquila: false, sort: 'relevance', view: 'grid' };
 
     /* --- Estado en la URL --- */
     function readURL() {
       var p = new URLSearchParams(location.search);
       state.q = p.get('q') || '';
-      ['mercado', 'cert', 'sector', 'estado'].forEach(function (k) {
+      LISTAS.forEach(function (k) {
         state[k] = (p.get(k) || '').split(',').filter(Boolean);
       });
       state.maquila = p.get('maquila') === '1';
@@ -305,7 +336,7 @@
     function writeURL() {
       var p = new URLSearchParams();
       if (state.q) p.set('q', state.q);
-      ['mercado', 'cert', 'sector', 'estado'].forEach(function (k) {
+      LISTAS.forEach(function (k) {
         if (state[k].length) p.set(k, state[k].join(','));
       });
       if (state.maquila) p.set('maquila', '1');
@@ -318,12 +349,13 @@
     /* --- Filtrado --- */
     function matchesExcept(c, skip) {
       if (state.q) {
-        var hay = norm([c.marca, c.razonSocial, c.municipio, c.estado, loc(c.resumen), sector(c.sector),
+        var hay = norm([c.marca, c.razonSocial, c.municipio, c.estado, loc(c.resumen), sector(c.sector), tipoTexto(tipoDe(c)),
           c.productos.join(' '), c.certs.join(' '), c.mercados.join(' '),
           c.mercados.map(country).join(' '), c.certs.map(cert).join(' ')].join(' '));
         var terms = norm(state.q).split(/\s+/).filter(Boolean);
         for (var i = 0; i < terms.length; i++) if (hay.indexOf(terms[i]) === -1) return false;
       }
+      if (skip !== 'tipo' && state.tipo.length && state.tipo.indexOf(tipoDe(c)) === -1) return false;
       if (skip !== 'mercado' && state.mercado.length && !state.mercado.every(function (m) { return c.mercados.indexOf(m) > -1; })) return false;
       if (skip !== 'cert' && state.cert.length && !state.cert.every(function (x) { return c.certs.indexOf(x) > -1; })) return false;
       if (skip !== 'sector' && state.sector.length && state.sector.indexOf(c.sector) === -1) return false;
@@ -335,19 +367,41 @@
 
     function sorted(list) {
       var l = list.slice();
-      if (state.sort === 'capacity') l.sort(function (a, b) { return b.capacidad - a.capacidad; });
+      // Las empresas de servicios no tienen litros ni año: sin dato cuentan como 0 / al final
+      var n = function (v) { return v || 0; };
+      var anio = function (v) { return v || 9999; };
+      if (state.sort === 'capacity') l.sort(function (a, b) { return n(b.capacidad) - n(a.capacidad); });
       else if (state.sort === 'markets') l.sort(function (a, b) { return b.mercados.length - a.mercados.length; });
-      else if (state.sort === 'experience') l.sort(function (a, b) { return a.desde - b.desde; });
+      else if (state.sort === 'experience') l.sort(function (a, b) { return anio(a.desde) - anio(b.desde); });
       else if (state.sort === 'name') l.sort(function (a, b) { return a.marca.localeCompare(b.marca, 'es'); });
-      else l.sort(function (a, b) { return (b.capacidadExportada - a.capacidadExportada) || (b.mercados.length - a.mercados.length); });
+      else l.sort(function (a, b) { return (n(b.capacidadExportada) - n(a.capacidadExportada)) || (b.mercados.length - a.mercados.length); });
       return l;
     }
 
     /* --- Panel de filtros --- */
+    // Sectores presentes, ordenados por tipo (productos primero) y luego por nombre.
+    // Si hay un tipo elegido, solo se ofrecen los sectores de ese tipo.
+    function sectoresVisibles() {
+      var s = {};
+      SE.empresas.forEach(function (c) {
+        if (!state.tipo.length || state.tipo.indexOf(tipoDe(c)) > -1) s[c.sector] = 1;
+      });
+      state.sector.forEach(function (v) { s[v] = 1; });   // lo ya marcado nunca desaparece
+      return Object.keys(s).sort(function (a, b) {
+        var ta = (SE.sectores[a] || {}).tipo === 'servicio' ? 1 : 0;
+        var tb = (SE.sectores[b] || {}).tipo === 'servicio' ? 1 : 0;
+        return (ta - tb) || sector(a).localeCompare(sector(b), 'es');
+      });
+    }
+
     var FACETS = [
+      { key: 'tipo', label: 'filterTipo', values: function () {
+          var s = {}; SE.empresas.forEach(function (c) { s[tipoDe(c)] = 1; });
+          return ['producto', 'servicio'].filter(function (v) { return s[v]; });
+        }, text: tipoTexto, test: function (c, v) { return tipoDe(c) === v; }, hideSingle: true },
       { key: 'mercado', label: 'filterMercado', values: function () { var s = {}; SE.empresas.forEach(function (c) { c.mercados.forEach(function (m) { s[m] = 1; }); }); return Object.keys(s).sort(function (a, b) { return country(a).localeCompare(country(b), 'es'); }); }, text: country },
       { key: 'cert', label: 'filterCert', values: function () { var s = {}; SE.empresas.forEach(function (c) { c.certs.forEach(function (m) { s[m] = 1; }); }); return Object.keys(s).sort(function (a, b) { return cert(a).localeCompare(cert(b), 'es'); }); }, text: cert },
-      { key: 'sector', label: 'filterSector', values: function () { var s = {}; SE.empresas.forEach(function (c) { s[c.sector] = 1; }); return Object.keys(s); }, text: sector },
+      { key: 'sector', label: 'filterSector', values: sectoresVisibles, text: sector },
       { key: 'estado', label: 'filterEstado', values: function () { var s = {}; SE.empresas.forEach(function (c) { s[c.estado] = 1; }); return Object.keys(s).sort(); }, text: function (v) { return v; } }
     ];
 
@@ -355,6 +409,8 @@
       var html = '';
       FACETS.forEach(function (f) {
         var vals = f.values();
+        // Mientras todo el directorio sea de un solo tipo, el filtro de tipo no se muestra
+        if (f.hideSingle && vals.length < 2 && !state[f.key].length) return;
         if (vals.length < 2 && f.key !== 'mercado' && f.key !== 'cert') {
           // Con un solo valor el filtro no aporta: se muestra como dato, no como control.
           html += '<div class="filter-group"><h4>' + esc(t(f.label)) + '</h4>' +
@@ -363,13 +419,23 @@
         }
         var pool = SE.empresas.filter(function (c) { return matchesExcept(c, f.key); });
         html += '<div class="filter-group"><h4>' + esc(t(f.label)) + '</h4><div class="filter-opts">';
+        var tipoPrevio = null;
         vals.forEach(function (v) {
           var n = pool.filter(function (c) {
-            return f.key === 'mercado' ? c.mercados.indexOf(v) > -1
+            return f.test ? f.test(c, v)
+              : f.key === 'mercado' ? c.mercados.indexOf(v) > -1
               : f.key === 'cert' ? c.certs.indexOf(v) > -1
                 : f.key === 'sector' ? c.sector === v : c.estado === v;
           }).length;
           var on = state[f.key].indexOf(v) > -1;
+          // Con productos y servicios a la vez, los sectores llevan un subtítulo por tipo
+          if (f.key === 'sector' && FACETS[0].values().length > 1 && !state.tipo.length) {
+            var tipoV = (SE.sectores[v] || {}).tipo || 'producto';
+            if (tipoV !== tipoPrevio) {
+              html += '<p class="filter-sub">' + esc(tipoTexto(tipoV)) + '</p>';
+              tipoPrevio = tipoV;
+            }
+          }
           html += '<label class="check' + (n === 0 && !on ? ' is-empty' : '') + '">' +
             '<input type="checkbox" data-facet="' + f.key + '" value="' + esc(v) + '"' + (on ? ' checked' : '') + '>' +
             '<span>' + esc(f.text(v)) + '</span><span class="count">' + n + '</span></label>';
@@ -377,7 +443,9 @@
         html += '</div></div>';
       });
 
-      html += '<div class="filter-group"><h4>' + esc(t('filterMaquila')) + '</h4><div class="filter-opts">' +
+      // La maquila solo aplica a productos
+      var soloServicios = state.tipo.length === 1 && state.tipo[0] === 'servicio';
+      if (!soloServicios) html += '<div class="filter-group"><h4>' + esc(t('filterMaquila')) + '</h4><div class="filter-opts">' +
         '<label class="check"><input type="checkbox" data-facet="maquila"' + (state.maquila ? ' checked' : '') + '>' +
         '<span>' + esc(t('filterMaquilaOn')) + '</span><span class="count">' +
         SE.empresas.filter(function (c) { return matchesExcept(c, 'maquila') && c.maquila; }).length +
@@ -394,6 +462,7 @@
           'aria-label="' + esc(t('clearOne') + ': ' + label) + '"><span class="txt">' + esc(label) + '</span>' + svg('i-x') + '</button>');
       }
       if (state.q) chip('q', '', '“' + state.q + '”');
+      state.tipo.forEach(function (v) { chip('tipo', v, tipoTexto(v)); });
       state.mercado.forEach(function (v) { chip('mercado', v, country(v)); });
       state.cert.forEach(function (v) { chip('cert', v, cert(v)); });
       state.sector.forEach(function (v) { chip('sector', v, sector(v)); });
@@ -419,33 +488,46 @@
       return html;
     }
 
+    function metric(label, value) {
+      return '<div><p class="metric-l">' + esc(label) + '</p><p class="metric-v">' + value + '</p></div>';
+    }
+
     function cardHTML(c, i) {
       var href = 'empresa-' + c.slug + '.html';
-      var disponible = c.capacidad - c.capacidadExportada;
+      var servicio = tipoDe(c) === 'servicio';
       var logo = 'logo-' + c.slug + '.webp';
-      var lowRes = c.slug === 'mezcal-lyobaa';
+      var monograma = c.logo === false || c.slug === 'mezcal-lyobaa';
+      var lugar = [c.municipio, c.estado].filter(Boolean).map(esc).join(' · ');
+
+      // Productos con capacidad registrada: litros y año. Servicios, o productos
+      // sin ese dato (socios de COMCE): sector y año.
+      var metricas = servicio || !c.capacidad
+        ? metric(t('filterSector'), '<span class="metric-txt">' + esc(sector(c.sector)) + '</span>') +
+          (c.desde ? metric(t(servicio ? 'serviceSince' : 'since'), c.desde) : '')
+        : metric(t('capacity'), fmt(c.capacidad || 0) + ' <small>L</small>') +
+          metric(t('available'), fmt((c.capacidad || 0) - (c.capacidadExportada || 0)) + ' <small>L</small>') +
+          (c.desde ? metric(t('since'), c.desde) : '');
 
       return '<article class="card' + (reduce.matches ? '' : ' card-enter') + '" style="--d:' + (i * 55) + 'ms">' +
         '<div class="card-top">' +
-          (lowRes
+          (monograma
             ? '<span class="card-mono" aria-hidden="true">' + esc(initials(c.marca)) + '</span>'
             : '<img src="' + logo + '" alt="' + esc(c.marca) + '" loading="lazy" decoding="async">') +
-          '<span class="card-flag">' + svg('i-spark') + esc(loc(c.destacado)) + '</span>' +
+          (loc(c.destacado) ? '<span class="card-flag">' + svg('i-spark') + esc(loc(c.destacado)) + '</span>' : '') +
         '</div>' +
         '<div class="card-body">' +
-          '<p class="card-place">' + svg('i-pin') + esc(c.municipio) + ' · ' + esc(c.estado) + '</p>' +
+          '<p class="card-place">' + svg('i-pin') + lugar + '</p>' +
           '<h3 class="card-title"><a href="' + href + '">' + esc(c.marca) + '</a></h3>' +
-          '<p class="card-sum">' + esc(loc(c.resumen)) + '</p>' +
+          '<p class="card-sum">' + esc(loc(c.resumen) || '') + '</p>' +
+          (servicio && c.productos.length ? '<div class="chips">' + chipRow(c.productos, function (v) { return v; }, 'chip-serv', c.slug + '-s') + '</div>' : '') +
           '<div class="chips">' + chipRow(c.mercados, country, 'chip-market', c.slug + '-m') + '</div>' +
           '<div class="chips">' + chipRow(c.certs, cert, 'chip-cert', c.slug + '-c') + '</div>' +
-          '<div class="card-metrics">' +
-            '<div><p class="metric-l">' + esc(t('capacity')) + '</p><p class="metric-v">' + fmt(c.capacidad) + ' <small>L</small></p></div>' +
-            '<div><p class="metric-l">' + esc(t('available')) + '</p><p class="metric-v">' + fmt(disponible) + ' <small>L</small></p></div>' +
-            '<div><p class="metric-l">' + esc(t('since')) + '</p><p class="metric-v">' + c.desde + '</p></div>' +
-          '</div>' +
+          '<div class="card-metrics">' + metricas + '</div>' +
         '</div>' +
         '<div class="card-foot">' +
-          '<span class="card-note">' + svg('i-globe') + '<span>' + fmt(c.mercados.length) + ' ' + esc(t('markets').toLowerCase()) + '</span></span>' +
+          '<span class="card-note">' + svg('i-globe') + '<span>' +
+            (c.mercados.length ? fmt(c.mercados.length) + ' ' + esc(t('markets').toLowerCase()) : esc(tipoTexto(tipoDe(c)))) +
+          '</span></span>' +
           '<a class="btn btn-outline btn-sm" href="' + href + '">' + esc(t('viewProfile')) + '</a>' +
         '</div>' +
       '</article>';
@@ -487,6 +569,13 @@
         var idx = state[key].indexOf(v);
         if (input.checked && idx === -1) state[key].push(v);
         if (!input.checked && idx > -1) state[key].splice(idx, 1);
+        // Al elegir un tipo se sueltan los sectores del otro tipo, que ya no darían resultados
+        if (key === 'tipo' && state.tipo.length) {
+          state.sector = state.sector.filter(function (s) {
+            return state.tipo.indexOf((SE.sectores[s] || {}).tipo || 'producto') > -1;
+          });
+          if (state.tipo.indexOf('producto') === -1) state.maquila = false;
+        }
       }
       buildFilters();
       render();
@@ -508,7 +597,8 @@
 
     if (clearAllBtn) {
       clearAllBtn.addEventListener('click', function () {
-        state.q = ''; state.mercado = []; state.cert = []; state.sector = []; state.estado = []; state.maquila = false;
+        state.q = ''; state.maquila = false;
+        LISTAS.forEach(function (k) { state[k] = []; });
         syncSearchInputs();
         buildFilters();
         render();

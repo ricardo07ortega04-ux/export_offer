@@ -1,5 +1,5 @@
 /* Sur Exporta — datos del directorio
- * GENERADO por supabase/pull-data.js el 2026-09-21.
+ * GENERADO por supabase/pull-data.js el 2026-09-27.
  * No edites las empresas aquí: cámbialas en Supabase y vuelve a generar.
  * Las cadenas de interfaz (i18n) sí se editan en este archivo.
  */
@@ -39,9 +39,65 @@ window.SE = {
   },
 
   sectores: {
+      "alimentos-procesados": {
+          "es": "Alimentos procesados",
+          "en": "Processed foods",
+          "tipo": "producto"
+      },
+      "bebidas-espirituosas": {
+          "es": "Bebidas espirituosas",
+          "en": "Spirits",
+          "tipo": "producto"
+      },
+      "consultoria": {
+          "es": "Consultoría empresarial",
+          "en": "Business consulting",
+          "tipo": "servicio"
+      },
+      "cosmetica": {
+          "es": "Cosmética y cuidado personal",
+          "en": "Cosmetics and personal care",
+          "tipo": "producto"
+      },
       "destilados-de-agave": {
           "es": "Destilados de agave",
-          "en": "Agave spirits"
+          "en": "Agave spirits",
+          "tipo": "producto"
+      },
+      "educacion-movilidad": {
+          "es": "Educación y movilidad internacional",
+          "en": "Education and international mobility",
+          "tipo": "servicio"
+      },
+      "frutas-y-hortalizas": {
+          "es": "Frutas y hortalizas frescas",
+          "en": "Fresh fruit and vegetables",
+          "tipo": "producto"
+      },
+      "logistica-comercio-exterior": {
+          "es": "Logística y comercio exterior",
+          "en": "Logistics and foreign trade",
+          "tipo": "servicio"
+      },
+      "pagos-internacionales": {
+          "es": "Pagos internacionales",
+          "en": "International payments",
+          "tipo": "servicio"
+      },
+      "productos-metalicos": {
+          "es": "Productos metálicos",
+          "en": "Metal products",
+          "tipo": "producto"
+      },
+      "tecnologia": {
+          "es": "Tecnología y digitalización",
+          "en": "Technology and digitalisation",
+          "tipo": "servicio"
+      },
+      "textil-y-confeccion": {
+          "es": "Textil y confección",
+          "en": "Textiles and apparel",
+          "tipo": "producto"
       }
   },
 
@@ -78,6 +134,12 @@ window.SE = {
           "filtersShow": "Mostrar filtros",
           "filtersHide": "Ocultar filtros",
           "filterSector": "Sector",
+          "filterTipo": "Tipo de oferta",
+          "tipoProducto": "Productos",
+          "tipoServicio": "Servicios",
+          "services": "Servicios",
+          "serviceSince": "Opera desde",
+          "profileServiceData": "Datos de la empresa",
           "filterEstado": "Estado",
           "filterMercado": "Mercado de destino",
           "filterCert": "Certificación",
@@ -168,7 +230,7 @@ window.SE = {
           "formOkBody": "Gracias. El equipo de COMCE Región Sur te responderá en los próximos días hábiles.",
           "formDemo": "Tus datos se usan únicamente para atender esta solicitud y no se comparten con terceros.",
           "footerRights": "Consejo Mexicano de Comercio Exterior, Inversión y Tecnología Región Sur, A.C.",
-          "footerSource": "Datos: Catálogo de Oferta Exportable de Mezcal, SEDECO Oaxaca. En validación.",
+          "footerSource": "Datos: Catálogo de Oferta Exportable de Mezcal (SEDECO Oaxaca) y Directorio de Socios de COMCE Sur. En validación.",
           "footerNav": "Navegación",
           "footerLegal": "Aviso"
       },
@@ -204,6 +266,12 @@ window.SE = {
           "filtersShow": "Show filters",
           "filtersHide": "Hide filters",
           "filterSector": "Sector",
+          "filterTipo": "Offer type",
+          "tipoProducto": "Products",
+          "tipoServicio": "Services",
+          "services": "Services",
+          "serviceSince": "Operating since",
+          "profileServiceData": "Company data",
           "filterEstado": "State",
           "filterMercado": "Destination market",
           "filterCert": "Certification",
@@ -294,7 +362,7 @@ window.SE = {
           "formOkBody": "Thank you. The COMCE Southern Region team will reply within the next business days.",
           "formDemo": "Your data is used only to handle this request and is not shared with third parties.",
           "footerRights": "Mexican Council for Foreign Trade, Investment and Technology, Southern Region.",
-          "footerSource": "Data: Mezcal Export Offer Catalogue, SEDECO Oaxaca. Under validation.",
+          "footerSource": "Data: Mezcal Export Offer Catalogue (SEDECO Oaxaca) and COMCE Sur Member Directory. Under validation.",
           "footerNav": "Navigation",
           "footerLegal": "Notice"
       }
@@ -355,7 +423,9 @@ window.SE = {
           "abv": "45–46%",
           "presentaciones": [
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-bendito-remedio",
@@ -417,7 +487,9 @@ window.SE = {
               750,
               1000,
               4000
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-casa-parada",
@@ -473,7 +545,9 @@ window.SE = {
               375,
               700,
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-don-galo",
@@ -525,7 +599,9 @@ window.SE = {
           "abv": "45–48%",
           "presentaciones": [
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-elixir-de-agave",
@@ -580,7 +656,9 @@ window.SE = {
               50,
               250,
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-convite",
@@ -635,7 +713,9 @@ window.SE = {
           "presentaciones": [
               700,
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-los-danzantes",
@@ -690,7 +770,9 @@ window.SE = {
           "presentaciones": [
               700,
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-altares-de-mi-tierra",
@@ -743,7 +825,9 @@ window.SE = {
               50,
               375,
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-trascendente",
@@ -792,7 +876,9 @@ window.SE = {
           "abv": "35–42%",
           "presentaciones": [
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       },
       {
           "slug": "mezcal-lyobaa",
@@ -841,7 +927,9 @@ window.SE = {
           "abv": "40–42%",
           "presentaciones": [
               750
-          ]
+          ],
+          "logo": true,
+          "foto": true
       }
   ]
 };

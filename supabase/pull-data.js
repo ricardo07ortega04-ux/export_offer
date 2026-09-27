@@ -36,13 +36,20 @@ async function consultar(recurso, params) {
 const porClave = (filas, campo) => filas.reduce((acc, f) => { acc[f[campo]] = f; return acc; }, {});
 
 (async () => {
-  const [paises, certs, sectores, empresas] = await Promise.all([
+  const [estados, paises, certs, sectores, empresas] = await Promise.all([
+    consultar('estados', 'select=clave,nombre'),
     consultar('paises', 'select=clave,nombre_es,nombre_en&order=nombre_es'),
     consultar('certificaciones', 'select=clave,nombre_es,nombre_en&order=nombre_es'),
-    consultar('sectores', 'select=clave,nombre_es,nombre_en&activo=eq.true'),
-    consultar('directorio_publico', 'select=*&order=capacidad_exportada_l.desc')
+    // select=* y no una lista de columnas: si 05-tipos-sectores.sql aún no se
+    // ha ejecutado, la columna «tipo» no existe y el build no debe romperse.
+    consultar('sectores', 'select=*&activo=eq.true&order=nombre_es'),
+    // Las empresas de servicios no tienen litros: van al final, no al principio
+    consultar('directorio_publico', 'select=*&order=capacidad_exportada_l.desc.nullslast,marca')
   ]);
 
+  // Nombre del estado tal como está en el catálogo («Ciudad de México», «Nuevo León»)
+  const nombreEstado = {};
+  estados.forEach((e) => { nombreEstado[e.clave] = e.nombre; });
   const paisPorClave = porClave(paises, 'clave');
   const certPorClave = porClave(certs, 'clave');
 
@@ -51,7 +58,11 @@ const porClave = (filas, campo) => filas.reduce((acc, f) => { acc[f[campo]] = f;
   const dicCerts = {};
   certs.forEach((c) => { dicCerts[c.nombre_es] = c.nombre_en; });
   const dicSectores = {};
-  sectores.forEach((s) => { dicSectores[s.clave] = { es: s.nombre_es, en: s.nombre_en }; });
+  sectores.forEach((s) => { dicSectores[s.clave] = { es: s.nombre_es, en: s.nombre_en, tipo: s.tipo || 'producto' }; });
+
+  // Logotipo y foto viven en el repositorio como logo-<slug>.webp / foto-<slug>.webp.
+  // Si faltan, el sitio usa la inicial de la marca y omite la foto.
+  const existe = (archivo) => fs.existsSync(path.join(RAIZ, archivo));
 
   const faltantes = [];
   const lista = empresas.map((e) => {
@@ -70,7 +81,8 @@ const porClave = (filas, campo) => filas.reduce((acc, f) => { acc[f[campo]] = f;
       slug: e.slug,
       marca: e.marca,
       razonSocial: e.razon_social,
-      estado: e.estado ? e.estado.replace(/(^|-)([a-z])/g, (m, a, b) => a.replace('-', ' ') + b.toUpperCase()) : '',
+      estado: nombreEstado[e.estado] ||
+        (e.estado ? e.estado.replace(/(^|-)([a-z])/g, (m, a, b) => a.replace('-', ' ') + b.toUpperCase()) : ''),
       municipio: e.municipio,
       sector: e.sector,
       resumen: { es: e.resumen_es, en: e.resumen_en },
@@ -87,7 +99,9 @@ const porClave = (filas, campo) => filas.reduce((acc, f) => { acc[f[campo]] = f;
       certs: certificaciones,
       productos: e.productos || [],
       abv: e.abv,
-      presentaciones: e.presentaciones_ml || []
+      presentaciones: e.presentaciones_ml || [],
+      logo: existe(`logo-${e.slug}.webp`),
+      foto: existe(`foto-${e.slug}.webp`)
     };
   });
 

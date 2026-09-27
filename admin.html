@@ -154,7 +154,7 @@
           </div>
           <div class="field-row">
             <div class="field"><label for="e-sector">Sector *</label><select id="e-sector" name="sector" required data-opciones="sectores"></select></div>
-            <div class="field"><label for="e-abv">Graduación alcohólica</label><input id="e-abv" name="abv" placeholder="45–46%"></div>
+            <div class="field" data-solo-producto><label for="e-abv">Graduación alcohólica</label><input id="e-abv" name="abv" placeholder="45–46%"></div>
           </div>
           <div class="field"><label for="e-domicilio">Domicilio fiscal <span class="admin-privado">interno</span></label><input id="e-domicilio" name="domicilio_fiscal"></div>
         </div>
@@ -172,17 +172,18 @@
         </div>
 
         <div class="panel">
-          <h2>Capacidad y exportación</h2>
-          <div class="field-row">
+          <h2 data-titulo-capacidad>Capacidad y exportación</h2>
+          <p class="field-help" data-solo-servicio hidden>Las empresas de servicios no registran litros, presentaciones ni padrón de exportadores.</p>
+          <div class="field-row" data-solo-producto>
             <div class="field"><label for="e-cap">Capacidad mensual (L)</label><input id="e-cap" name="capacidad_mensual_l" type="number" min="0"></div>
             <div class="field"><label for="e-pct">Porcentaje exportado</label><input id="e-pct" name="porcentaje_exportado" type="number" min="0" max="100"></div>
           </div>
           <div class="field-row">
-            <div class="field"><label for="e-exp">Capacidad exportada (L)</label><input id="e-exp" name="capacidad_exportada_l" type="number" min="0"></div>
-            <div class="field"><label for="e-desde">Exporta desde (año)</label><input id="e-desde" name="exporta_desde" type="number" min="1900" max="2100"></div>
+            <div class="field" data-solo-producto><label for="e-exp">Capacidad exportada (L)</label><input id="e-exp" name="capacidad_exportada_l" type="number" min="0"></div>
+            <div class="field"><label for="e-desde" data-etiqueta-desde>Exporta desde (año)</label><input id="e-desde" name="exporta_desde" type="number" min="1900" max="2100"></div>
           </div>
           <p class="admin-aviso" data-aritmetica hidden></p>
-          <div class="field-row">
+          <div class="field-row" data-solo-producto>
             <div class="field"><label for="e-situacion">Situación</label><select id="e-situacion" name="situacion">
               <option value="exportando">Exportando</option>
               <option value="buscando_comprador">Busca comprador</option>
@@ -194,15 +195,15 @@
               <option value="sin_dato">Sin dato</option>
             </select></div>
           </div>
-          <div class="field">
+          <div class="field" data-solo-producto>
             <label class="consent" for="e-maquila"><input id="e-maquila" name="maquila" type="checkbox"><span>Ofrece maquila para otras marcas</span></label>
           </div>
         </div>
 
         <div class="panel">
           <h2>Oferta</h2>
-          <div class="field"><label for="e-productos">Productos</label><textarea id="e-productos" name="productos" rows="3"></textarea><p class="field-help">Uno por línea.</p></div>
-          <div class="field"><label for="e-present">Presentaciones (ml)</label><input id="e-present" name="presentaciones_ml"><p class="field-help">Separadas por coma. Ejemplo: 375, 700, 750</p></div>
+          <div class="field"><label for="e-productos" data-etiqueta-productos>Productos</label><textarea id="e-productos" name="productos" rows="3"></textarea><p class="field-help">Uno por línea.</p></div>
+          <div class="field" data-solo-producto><label for="e-present">Presentaciones (ml)</label><input id="e-present" name="presentaciones_ml"><p class="field-help">Separadas por coma. Ejemplo: 375, 700, 750</p></div>
         </div>
 
         <div class="panel">

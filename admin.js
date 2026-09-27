@@ -98,7 +98,7 @@
   async function cargarCatalogos() {
     var r = await Promise.all([
       sb.from('estados').select('clave,nombre').order('nombre'),
-      sb.from('sectores').select('clave,nombre_es').eq('activo', true).order('nombre_es'),
+      sb.from('sectores').select('*').eq('activo', true).order('nombre_es'),
       sb.from('paises').select('clave,nombre_es').order('nombre_es'),
       sb.from('certificaciones').select('clave,nombre_es').order('nombre_es')
     ]);
@@ -109,8 +109,14 @@
 
     $('[data-opciones="estados"]').innerHTML = catalogos.estados
       .map(function (x) { return '<option value="' + x.clave + '">' + x.nombre + '</option>'; }).join('');
-    $('[data-opciones="sectores"]').innerHTML = catalogos.sectores
-      .map(function (x) { return '<option value="' + x.clave + '">' + x.nombre_es + '</option>'; }).join('');
+    // Sectores agrupados por tipo de oferta
+    $('[data-opciones="sectores"]').innerHTML = [['producto', 'Productos'], ['servicio', 'Servicios']]
+      .map(function (g) {
+        var ops = catalogos.sectores.filter(function (x) { return (x.tipo || 'producto') === g[0]; });
+        return ops.length ? '<optgroup label="' + g[1] + '">' + ops.map(function (x) {
+          return '<option value="' + x.clave + '">' + x.nombre_es + '</option>';
+        }).join('') + '</optgroup>' : '';
+      }).join('');
 
     function casillas(cont, lista, nombre) {
       $(cont).innerHTML = lista.map(function (x) {
@@ -179,6 +185,23 @@
 
   /* ---------- editor ---------- */
 
+  // Las empresas de servicios no llevan litros, graduación, presentaciones, padrón ni maquila
+  function esServicio() {
+    var clave = $('#e-sector').value;
+    var s = catalogos.sectores.filter(function (x) { return x.clave === clave; })[0];
+    return !!s && s.tipo === 'servicio';
+  }
+  function ajustarTipo() {
+    var servicio = esServicio();
+    $$('[data-solo-producto]').forEach(function (el) { el.hidden = servicio; });
+    $$('[data-solo-servicio]').forEach(function (el) { el.hidden = !servicio; });
+    $('[data-titulo-capacidad]').textContent = servicio ? 'Trayectoria' : 'Capacidad y exportación';
+    $('[data-etiqueta-desde]').textContent = servicio ? 'Opera desde (año)' : 'Exporta desde (año)';
+    $('[data-etiqueta-productos]').textContent = servicio ? 'Servicios' : 'Productos';
+    if (servicio) $('[data-aritmetica]').hidden = true;
+  }
+  $('#e-sector').addEventListener('change', ajustarTipo);
+
   async function abrirEditor(id) {
     $('[data-editor-error]').hidden = true;
     $('[data-guardado]').hidden = true;
@@ -193,6 +216,7 @@
       $('#e-estatus').value = 'borrador';
       $('#e-situacion').value = 'sin_dato';
       $('#e-padron').value = 'sin_dato';
+      ajustarTipo();
       vista('editor');
       $('#e-marca').focus();
       return;
@@ -232,7 +256,8 @@
       if (c) c.checked = true;
     });
 
-    revisarAritmetica();
+    ajustarTipo();
+    if (!esServicio()) revisarAritmetica();
     vista('editor');
   }
 
@@ -296,6 +321,19 @@
       estatus: f.elements.estatus.value,
       fuente: f.elements.fuente.value.trim() || null
     };
+
+    // Si la empresa pasó de un sector de productos a uno de servicios, los campos
+    // ocultos no deben arrastrar datos de mezcal
+    if (esServicio()) {
+      datos.capacidad_mensual_l = null;
+      datos.porcentaje_exportado = null;
+      datos.capacidad_exportada_l = null;
+      datos.abv = null;
+      datos.presentaciones_ml = [];
+      datos.maquila = null;
+      datos.situacion = 'sin_dato';
+      datos.padron = 'sin_dato';
+    }
 
     var fallas = [];
     if (!datos.marca) fallas.push('La marca es obligatoria.');

@@ -109,38 +109,88 @@ function tagList(values, fn, cls) {
   ).join('') + `</div>`;
 }
 
+/* Productos o servicios, según el tipo del sector (05-tipos-sectores.sql) */
+const esServicio = (c) => (SE.sectores[c.sector] || {}).tipo === 'servicio';
+// Sin logotipo en el repositorio (o con uno de baja resolución) se usa la inicial
+const monograma = (c) => c.logo === false || c.slug === 'mezcal-lyobaa';
+const inicial = (c) => c.marca.replace(/^Mezcal\s+/i, '').trim().charAt(0).toUpperCase();
+const lugar = (c) => [c.municipio, c.estado].filter(Boolean).map(esc).join(', ');
+
 function otherCard(c) {
-  const lowRes = c.slug === 'mezcal-lyobaa';
   return `<article class="card">
   <div class="card-top">
-    ${lowRes
-      ? `<span class="card-mono" aria-hidden="true">${esc(c.marca.replace(/^Mezcal\s+/i, '').charAt(0))}</span>`
+    ${monograma(c)
+      ? `<span class="card-mono" aria-hidden="true">${esc(inicial(c))}</span>`
       : `<img src="logo-${c.slug}.webp" alt="${esc(c.marca)}" loading="lazy" decoding="async">`}
   </div>
   <div class="card-body">
-    <p class="card-place">${icon('i-pin')}${esc(c.municipio)}</p>
+    <p class="card-place">${icon('i-pin')}${esc(c.municipio || c.estado)}</p>
     <h3 class="card-title"><a href="empresa-${c.slug}.html">${esc(c.marca)}</a></h3>
-    ${bi('p', c.destacado.es, c.destacado.en, 'card-sum')}
+    ${c.destacado.es ? bi('p', c.destacado.es, c.destacado.en || c.destacado.es, 'card-sum') : ''}
   </div>
 </article>`;
 }
 
 function page(c) {
-  const disponible = c.capacidad - c.capacidadExportada;
-  const lowRes = c.slug === 'mezcal-lyobaa';
-  const others = SE.empresas.filter((x) => x.slug !== c.slug).slice(0, 3);
+  const servicio = esServicio(c);
+  const disponible = (c.capacidad || 0) - (c.capacidadExportada || 0);
+  // Primero empresas del mismo tipo; si no alcanzan, se completan con las demás
+  const resto = SE.empresas.filter((x) => x.slug !== c.slug);
+  const others = resto.filter((x) => esServicio(x) === servicio)
+    .concat(resto.filter((x) => esServicio(x) !== servicio)).slice(0, 3);
 
   const titleEs = `${c.marca} — ${sectorName(c.sector, 'es')}, ${c.estado} | Sur Exporta`;
   const titleEn = `${c.marca} — ${sectorName(c.sector, 'en')}, ${c.estado} | Sur Exporta`;
 
-  const dl = [
-    [ 'registry', `<span data-i18n="registryOk">${esc(es('registryOk'))}</span>` ],
-    [ 'capacity', `${nfmt(c.capacidad, 'es')} <small>L</small>` ],
-    [ 'available', `${nfmt(disponible, 'es')} <small>L</small>` ],
-    [ 'since', String(c.desde) ],
-    [ 'abv', esc(c.abv) ],
-    [ 'maquila', `<span data-i18n="${c.maquila ? 'yes' : 'no'}">${esc(es(c.maquila ? 'yes' : 'no'))}</span>` ]
-  ].map(([k, v]) => `<div><dt data-i18n="${k}">${esc(es(k))}</dt><dd>${v}</dd></div>`).join('');
+  const filas = servicio
+    ? [
+        [ 'filterSector', bi('span', sectorName(c.sector, 'es'), sectorName(c.sector, 'en')) ],
+        c.desde && [ 'serviceSince', String(c.desde) ]
+      ]
+    : [
+        c.padron === 'vigente' && [ 'registry', `<span data-i18n="registryOk">${esc(es('registryOk'))}</span>` ],
+        c.capacidad && [ 'capacity', `${nfmt(c.capacidad, 'es')} <small>L</small>` ],
+        c.capacidad && [ 'available', `${nfmt(disponible, 'es')} <small>L</small>` ],
+        c.desde && [ 'since', String(c.desde) ],
+        c.abv && [ 'abv', esc(c.abv) ],
+        c.maquila != null && [ 'maquila', `<span data-i18n="${c.maquila ? 'yes' : 'no'}">${esc(es(c.maquila ? 'yes' : 'no'))}</span>` ]
+      ];
+  const dl = filas.filter(Boolean)
+    .map(([k, v]) => `<div><dt data-i18n="${k}">${esc(es(k))}</dt><dd>${v}</dd></div>`).join('');
+
+  const subtitulo = (key) =>
+    `<h3 style="font-family:var(--font-text);font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.06em;color:var(--pizarra);margin-bottom:.75rem" data-i18n="${key}">${esc(es(key))}</h3>`;
+  const etiquetas = (lista, fn, ultimo) => `<div class="tag-list"${ultimo ? '' : ' style="margin-bottom:1.5rem"'}>${lista.map((v) => `<span class="tag">${esc(fn ? fn(v) : v)}</span>`).join('')}</div>`;
+
+  // Sin ningún dato que mostrar (socios sin capacidad registrada) no se pinta el panel
+  const panelDatos = !dl ? '' : servicio
+    ? `<div class="panel" data-reveal style="--d:80ms">
+            ${i18('h2', 'profileServiceData')}
+            <dl class="dl">${dl}</dl>
+          </div>`
+    : `<div class="panel" data-reveal style="--d:80ms">
+            ${i18('h2', 'profileData')}
+            <dl class="dl">${dl}</dl>${c.pctExportado != null && c.capacidadExportada != null ? `
+            <div style="margin-top:1.5rem">
+              <div class="meter"><div class="meter-fill" data-meter="${c.pctExportado}"></div></div>
+              <p class="meter-legend">
+                <span data-i18n="exported">${esc(es('exported'))}</span>
+                <strong>${c.pctExportado}% · ${nfmt(c.capacidadExportada, 'es')} L</strong>
+              </p>
+            </div>` : ''}
+          </div>`;
+
+  const panelOferta = servicio
+    ? (c.productos.length ? `<div class="panel" data-reveal style="--d:200ms">
+            ${i18('h2', 'profileOffer')}
+            ${subtitulo('services')}
+            ${etiquetas(c.productos, null, true)}
+          </div>` : '')
+    : `<div class="panel" data-reveal style="--d:200ms">
+            ${i18('h2', 'profileOffer')}
+            ${c.productos.length ? subtitulo('products') + etiquetas(c.productos) : ''}
+            ${c.presentaciones.length ? subtitulo('formats') + etiquetas(c.presentaciones, (m) => m >= 1000 ? (m / 1000) + ' L' : m + ' ml', true) : ''}
+          </div>`;
 
   return `<!DOCTYPE html>
 <html lang="es" class="no-js">
@@ -169,7 +219,7 @@ ${JSON.stringify({
   description: c.resumen.es,
   address: { '@type': 'PostalAddress', addressLocality: c.municipio, addressRegion: c.estado, addressCountry: 'MX' },
   foundingLocation: c.municipio,
-  makesOffer: c.productos.map((p) => ({ '@type': 'Offer', itemOffered: { '@type': 'Product', name: p } }))
+  makesOffer: c.productos.map((p) => ({ '@type': 'Offer', itemOffered: { '@type': servicio ? 'Service' : 'Product', name: p } }))
 }, null, 2)}
 </script>
 </head>
@@ -189,15 +239,15 @@ ${header()}
         <div>
           <h1>${esc(c.marca)}</h1>
           <p class="p-place">
-            <span>${icon('i-pin')}${esc(c.municipio)}, ${esc(c.estado)}</span>
+            <span>${icon('i-pin')}${lugar(c)}</span>
             <span>${icon('i-box')}<span data-es="${esc(sectorName(c.sector, 'es'))}" data-en="${esc(sectorName(c.sector, 'en'))}">${esc(sectorName(c.sector, 'es'))}</span></span>
-            <span>${icon('i-globe')}${c.mercados.length} <span data-i18n="markets">${esc(es('markets'))}</span></span>
+            ${c.mercados.length ? `<span>${icon('i-globe')}${c.mercados.length} <span data-i18n="markets">${esc(es('markets'))}</span></span>` : ''}
           </p>
-          ${bi('p', c.resumen.es, c.resumen.en, 'p-lead')}
+          ${c.resumen.es ? bi('p', c.resumen.es, c.resumen.en || c.resumen.es, 'p-lead') : ''}
         </div>
         <div class="p-logo">
-          ${lowRes
-            ? `<span class="card-mono" style="width:110px;height:110px;font-size:2.5rem" aria-hidden="true">${esc(c.marca.replace(/^Mezcal\s+/i, '').charAt(0))}</span>`
+          ${monograma(c)
+            ? `<span class="card-mono" style="width:110px;height:110px;font-size:2.5rem" aria-hidden="true">${esc(inicial(c))}</span>`
             : `<img src="logo-${c.slug}.webp" alt="${esc(c.marca)}" width="240" height="160">`}
         </div>
       </div>
@@ -210,44 +260,28 @@ ${header()}
         <div>
 
           <div class="panel" data-reveal>
-            <div class="p-photo"><img src="foto-${c.slug}.webp" alt="${esc(c.marca)}" loading="lazy" decoding="async"></div>
+            ${c.foto !== false ? `<div class="p-photo"><img src="foto-${c.slug}.webp" alt="${esc(c.marca)}" loading="lazy" decoding="async"></div>` : ''}
             ${i18('h2', 'profileAbout')}
-            ${bi('p', c.descripcion.es, c.descripcion.en)}
+            ${c.descripcion.es ? bi('p', c.descripcion.es, c.descripcion.en || c.descripcion.es) : ''}
             <dl class="dl" style="margin-top:1.5rem">
-              <div><dt data-i18n="profileLegal">${esc(es('profileLegal'))}</dt><dd style="font-weight:500">${esc(c.razonSocial)}</dd></div>
-              <div><dt data-i18n="profileOrigin">${esc(es('profileOrigin'))}</dt><dd style="font-weight:500">${esc(c.municipio)}, ${esc(c.estado)}</dd></div>
+              ${c.razonSocial ? `<div><dt data-i18n="profileLegal">${esc(es('profileLegal'))}</dt><dd style="font-weight:500">${esc(c.razonSocial)}</dd></div>` : ''}
+              <div><dt data-i18n="profileOrigin">${esc(es('profileOrigin'))}</dt><dd style="font-weight:500">${lugar(c)}</dd></div>
             </dl>
           </div>
 
-          <div class="panel" data-reveal style="--d:80ms">
-            ${i18('h2', 'profileData')}
-            <dl class="dl">${dl}</dl>
-            <div style="margin-top:1.5rem">
-              <div class="meter"><div class="meter-fill" data-meter="${c.pctExportado}"></div></div>
-              <p class="meter-legend">
-                <span data-i18n="exported">${esc(es('exported'))}</span>
-                <strong>${c.pctExportado}% · ${nfmt(c.capacidadExportada, 'es')} L</strong>
-              </p>
-            </div>
-          </div>
+          ${panelDatos}
 
-          <div class="panel" data-reveal style="--d:120ms">
+          ${c.mercados.length ? `<div class="panel" data-reveal style="--d:120ms">
             ${i18('h2', 'markets')}
             ${tagList(c.mercados, country, '')}
-          </div>
+          </div>` : ''}
 
-          <div class="panel" data-reveal style="--d:160ms">
+          ${c.certs.length ? `<div class="panel" data-reveal style="--d:160ms">
             ${i18('h2', 'certs')}
             ${tagList(c.certs, certName, 'tag-cert')}
-          </div>
+          </div>` : ''}
 
-          <div class="panel" data-reveal style="--d:200ms">
-            ${i18('h2', 'profileOffer')}
-            <h3 style="font-family:var(--font-text);font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.06em;color:var(--pizarra);margin-bottom:.75rem" data-i18n="products">${esc(es('products'))}</h3>
-            <div class="tag-list" style="margin-bottom:1.5rem">${c.productos.map((p) => `<span class="tag">${esc(p)}</span>`).join('')}</div>
-            <h3 style="font-family:var(--font-text);font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.06em;color:var(--pizarra);margin-bottom:.75rem" data-i18n="formats">${esc(es('formats'))}</h3>
-            <div class="tag-list">${c.presentaciones.map((m) => `<span class="tag">${m >= 1000 ? (m / 1000) + ' L' : m + ' ml'}</span>`).join('')}</div>
-          </div>
+          ${panelOferta}
 
         </div>
 
