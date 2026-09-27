@@ -19,6 +19,14 @@ const ESTADOS = [
   ['ciudad-de-mexico', 'Ciudad de México'], ['nuevo-leon', 'Nuevo León']
 ];
 
+// Certificaciones nuevas del catálogo. «COFEPRIS» es distinta de «Libre Venta COFEPRIS»,
+// que ya existía (certificado de libre venta de 4 mezcales).
+const CERTIFICACIONES = [
+  ['cofepris', 'COFEPRIS', 'COFEPRIS',
+   'Cumplimiento sanitario ante la Comisión Federal para la Protección contra Riesgos Sanitarios.',
+   'Health compliance with Mexico\'s Federal Commission for the Protection against Sanitary Risks.']
+];
+
 const SOCIOS = [
   {
     slug: 'calten-group', marca: 'Calten Group', estado: 'puebla', municipio: 'Puebla',
@@ -244,23 +252,50 @@ const SOCIOS = [
   {
     slug: 'toke-innova', marca: 'Toke Innova', estado: 'puebla', municipio: 'Puebla',
     sector: 'alimentos-procesados', email: 'aortiz.ventas@tokeinnova.com', situacion: 'exportando',
-    mercados: ['estados-unidos'],
-    destacado: ['Exporta a Estados Unidos', 'Exports to the United States'],
-    resumen: ['Salsas y condimentos artesanales mexicanos, con presencia en 12 estados y exportación a Estados Unidos.',
-              'Artisanal Mexican sauces and condiments, sold in 12 Mexican states and exported to the United States.'],
-    descripcion: ['Toke Innova, fundada en Puebla en 2017, produce y comercializa productos artesanales mexicanos. Empezó con su Salsa Macha y hoy tiene un portafolio de más de 30 productos bajo sus marcas La Artesanal Herencia ORZA® y Ay Buey®, con presencia en 12 estados del país y exportaciones a Estados Unidos.',
-                  'Toke Innova, founded in Puebla in 2017, produces and sells artisanal Mexican products. It started with its Salsa Macha and now has more than 30 products under its La Artesanal Herencia ORZA® and Ay Buey® brands, sold in 12 Mexican states and exported to the United States.'],
-    oferta: ['Salsa macha', 'Salsas', 'Condimentos']
+    mercados: ['estados-unidos'], certs: ['fda', 'cofepris'],   // confirmadas por COMCE
+    tel: '+52 222 801 7636',
+    // Datos del catálogo de la empresa (mayo 2024), entregado por COMCE
+    destacado: ['Vende en 4 estados de EUA', 'Sold in 4 US states'],
+    resumen: ['Salsa macha, chimichurri, especias y productos artesanales de Puebla, 100% naturales, con venta en 12 estados de México y cuatro de Estados Unidos.',
+              'Artisanal salsa macha, chimichurri, spices and pantry products from Puebla — 100% natural, sold in 12 Mexican states and four US states.'],
+    descripcion: ['Toke Innova, fundada en Puebla en 2017, elabora productos artesanales mexicanos 100% naturales bajo sus marcas La Artesanal Herencia Orza® y ¡Ay Buey!®. Empezó con su Salsa Macha y hoy su catálogo reúne 24 presentaciones: salsa macha en cuatro variedades, chimichurri, chiles y especias, miel, perlas de tapioca, crema de cacahuate y galletas.\n\nVende en 12 estados de México y en Estados Unidos, donde tiene presencia en California, Kansas, Oklahoma y Texas; sus etiquetas ya vienen en inglés y francés. Cuenta con registro ante COFEPRIS y la FDA. Sus productos tienen una vida de anaquel de 6 meses a 3 años y se surten en cajas de 8 a 52 piezas, según la presentación.',
+                  'Toke Innova, founded in Puebla in 2017, makes 100% natural artisanal Mexican products under its La Artesanal Herencia Orza® and ¡Ay Buey!® brands. It started with its Salsa Macha and its catalogue now includes 24 products: salsa macha in four varieties, chimichurri, chillies and spices, honey, tapioca pearls, peanut butter and cookies.\n\nIt sells in 12 Mexican states and in the United States, with presence in California, Kansas, Oklahoma and Texas, and its labels are already in English and French. It is registered with COFEPRIS and the FDA. Shelf life ranges from 6 months to 3 years, and products ship in cases of 8 to 52 units depending on the item.'],
+    oferta: [
+      'Salsa Macha 4 chiles y 6 semillas · 200 g',
+      'Salsa Macha 3 chiles y 3 semillas · 80 g',
+      'Salsa Macha de cacahuate con chile morita · 200 g y 80 g',
+      'Salsa Macha de miel de abeja y arándanos · 200 g y 80 g',
+      'Salsa No Tan Macha · 200 g y 80 g',
+      'Chimichurri · 200 g y 80 g',
+      'Chimichurri picoso · 80 g',
+      'Chile quebrado · 150 g',
+      'Pimienta de cayena · 60 g',
+      'Paprika · 60 g',
+      'Ajonjolí negro · 75 g',
+      'Miel pura de abeja · 100 g',
+      'Perlas de miel con propóleo · 80 g',
+      'Perlas de tapioca · 250 g y 500 g',
+      'Crema de cacahuate · 340 g',
+      'Galletas artesanales (nuez con amaranto, arándanos, avena, avellana) · 100 g'
+    ]
   }
 ];
 
 // ---------------------------------------------------------------
 
-module.exports = { SOCIOS, ESTADOS, FUENTE };
+module.exports = { SOCIOS, ESTADOS, CERTIFICACIONES, FUENTE };
 if (require.main !== module) return;
 
 const q = (v) => (v === null || v === undefined ? 'null' : `'${String(v).replace(/'/g, "''")}'`);
 const arr = (a) => (a && a.length ? `array[${a.map(q).join(', ')}]::text[]` : `'{}'::text[]`);
+
+// Mercados y certificaciones de un socio (no duplican si ya existen)
+function relaciones(s) {
+  return (s.mercados || []).map((m) =>
+    `insert into empresa_mercados (empresa_id, pais) select id, ${q(m)} from empresas where slug = ${q(s.slug)} on conflict do nothing;`)
+    .concat((s.certs || []).map((c) =>
+    `insert into empresa_certificaciones (empresa_id, certificacion) select id, ${q(c)} from empresas where slug = ${q(s.slug)} on conflict do nothing;`));
+}
 
 const L = [];
 L.push('-- Sur Exporta — 06 · Socios de COMCE Sur');
@@ -273,19 +308,22 @@ ESTADOS.forEach(([clave, nombre]) => {
   L.push(`insert into estados (clave, nombre) values (${q(clave)}, ${q(nombre)}) on conflict (clave) do update set nombre = excluded.nombre;`);
 });
 L.push('');
+L.push('-- Certificaciones nuevas');
+CERTIFICACIONES.forEach(([clave, es, en, des, den]) => {
+  L.push(`insert into certificaciones (clave, nombre_es, nombre_en, descripcion_es, descripcion_en) values (${[clave, es, en, des, den].map(q).join(', ')}) on conflict (clave) do update set nombre_es = excluded.nombre_es, nombre_en = excluded.nombre_en, descripcion_es = excluded.descripcion_es, descripcion_en = excluded.descripcion_en;`);
+});
+L.push('');
 L.push(`-- ${SOCIOS.length} empresas`);
 SOCIOS.forEach((s) => {
-  L.push(`insert into empresas (slug, marca, razon_social, estado, municipio, sector, resumen_es, resumen_en, descripcion_es, descripcion_en, destacado_es, destacado_en, exporta_desde, situacion, maquila, productos, contacto_email, estatus, fuente)`);
+  L.push(`insert into empresas (slug, marca, razon_social, estado, municipio, sector, resumen_es, resumen_en, descripcion_es, descripcion_en, destacado_es, destacado_en, exporta_desde, situacion, maquila, productos, contacto_email, contacto_tel, estatus, fuente)`);
   L.push(`values (${[
     q(s.slug), q(s.marca), q(s.razon || null), q(s.estado), q(s.municipio), q(s.sector),
     q(s.resumen[0]), q(s.resumen[1]), q(s.descripcion[0]), q(s.descripcion[1]),
     q(s.destacado[0]), q(s.destacado[1]), s.desde || 'null', `'${s.situacion || 'sin_dato'}'`,
-    s.maquila === undefined ? 'null' : s.maquila, arr(s.oferta), q(s.email), `'borrador'`, q(FUENTE)
+    s.maquila === undefined ? 'null' : s.maquila, arr(s.oferta), q(s.email), q(s.tel || null), `'borrador'`, q(FUENTE)
   ].join(', ')})`);
   L.push('on conflict (slug) do nothing;');
-  (s.mercados || []).forEach((m) => {
-    L.push(`insert into empresa_mercados (empresa_id, pais) select id, ${q(m)} from empresas where slug = ${q(s.slug)} on conflict do nothing;`);
-  });
+  L.push(...relaciones(s));
   L.push('');
 });
 L.push('-- Después de revisarlas en el panel, para publicar todas de una vez:');
@@ -293,6 +331,33 @@ L.push(`-- update empresas set estatus = 'publicado' where fuente = ${q(FUENTE)}
 L.push('');
 
 fs.writeFileSync(path.join(__dirname, '06-socios.sql'), L.join('\n'), 'utf8');
+
+// ---------------------------------------------------------------
+// 07 · Fichas enriquecidas después de la carga inicial.
+// 06 no toca empresas que ya existen, así que los datos nuevos van como UPDATE.
+// Ojo: sobrescribe los textos y la oferta de estas empresas aunque se hayan
+// editado en el panel; el estatus (borrador/publicado) no se toca.
+const ACTUALIZAR = ['toke-innova'];   // catálogo de la empresa, mayo 2024
+
+const U = [];
+U.push('-- Sur Exporta — 07 · Fichas de socios enriquecidas');
+U.push('-- GENERADO por supabase/build-socios.js. Ejecutar después de 06-socios.sql.');
+U.push('-- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.');
+U.push('');
+SOCIOS.filter((s) => ACTUALIZAR.includes(s.slug)).forEach((s) => {
+  U.push(`-- ${s.marca}`);
+  U.push(`update empresas set ${[
+    `resumen_es = ${q(s.resumen[0])}`, `resumen_en = ${q(s.resumen[1])}`,
+    `descripcion_es = ${q(s.descripcion[0])}`, `descripcion_en = ${q(s.descripcion[1])}`,
+    `destacado_es = ${q(s.destacado[0])}`, `destacado_en = ${q(s.destacado[1])}`,
+    `situacion = '${s.situacion || 'sin_dato'}'`, `productos = ${arr(s.oferta)}`,
+    `contacto_email = ${q(s.email)}`, `contacto_tel = ${q(s.tel || null)}`,
+    `actualizado_en = now()`
+  ].join(',\n    ')}\nwhere slug = ${q(s.slug)};`);
+  U.push(...relaciones(s));
+  U.push('');
+});
+fs.writeFileSync(path.join(__dirname, '07-socios-fichas.sql'), U.join('\n'), 'utf8');
 
 // Revisión: cada socio debe tener su logotipo en el repositorio
 const sinLogo = SOCIOS.filter((s) => !fs.existsSync(path.join(__dirname, '..', `logo-${s.slug}.webp`)));

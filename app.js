@@ -526,7 +526,7 @@
         '</div>' +
         '<div class="card-foot">' +
           '<span class="card-note">' + svg('i-globe') + '<span>' +
-            (c.mercados.length ? fmt(c.mercados.length) + ' ' + esc(t('markets').toLowerCase()) : esc(tipoTexto(tipoDe(c)))) +
+            (c.mercados.length ? fmt(c.mercados.length) + ' ' + esc(t(c.mercados.length === 1 ? 'marketOne' : 'markets').toLowerCase()) : esc(tipoTexto(tipoDe(c)))) +
           '</span></span>' +
           '<a class="btn btn-outline btn-sm" href="' + href + '">' + esc(t('viewProfile')) + '</a>' +
         '</div>' +

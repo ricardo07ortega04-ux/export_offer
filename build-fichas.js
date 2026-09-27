@@ -114,6 +114,14 @@ const esServicio = (c) => (SE.sectores[c.sector] || {}).tipo === 'servicio';
 // Sin logotipo en el repositorio (o con uno de baja resolución) se usa la inicial
 const monograma = (c) => c.logo === false || c.slug === 'mezcal-lyobaa';
 const inicial = (c) => c.marca.replace(/^Mezcal\s+/i, '').trim().charAt(0).toUpperCase();
+// Una línea en blanco en la descripción separa párrafos (si ES y EN tienen los mismos)
+function parrafos(esTxt, enTxt) {
+  if (!esTxt) return '';
+  const a = esTxt.split(/\n\s*\n/);
+  const b = (enTxt || esTxt).split(/\n\s*\n/);
+  if (a.length !== b.length) return bi('p', esTxt, enTxt || esTxt);
+  return a.map((p, i) => bi('p', p.trim(), b[i].trim())).join('\n            ');
+}
 const lugar = (c) => [c.municipio, c.estado].filter(Boolean).map(esc).join(', ');
 
 function otherCard(c) {
@@ -241,7 +249,7 @@ ${header()}
           <p class="p-place">
             <span>${icon('i-pin')}${lugar(c)}</span>
             <span>${icon('i-box')}<span data-es="${esc(sectorName(c.sector, 'es'))}" data-en="${esc(sectorName(c.sector, 'en'))}">${esc(sectorName(c.sector, 'es'))}</span></span>
-            ${c.mercados.length ? `<span>${icon('i-globe')}${c.mercados.length} <span data-i18n="markets">${esc(es('markets'))}</span></span>` : ''}
+            ${c.mercados.length ? `<span>${icon('i-globe')}${c.mercados.length} ${i18('span', c.mercados.length === 1 ? 'marketOne' : 'markets')}</span>` : ''}
           </p>
           ${c.resumen.es ? bi('p', c.resumen.es, c.resumen.en || c.resumen.es, 'p-lead') : ''}
         </div>
@@ -262,7 +270,7 @@ ${header()}
           <div class="panel" data-reveal>
             ${c.foto !== false ? `<div class="p-photo"><img src="foto-${c.slug}.webp" alt="${esc(c.marca)}" loading="lazy" decoding="async"></div>` : ''}
             ${i18('h2', 'profileAbout')}
-            ${c.descripcion.es ? bi('p', c.descripcion.es, c.descripcion.en || c.descripcion.es) : ''}
+            ${parrafos(c.descripcion.es, c.descripcion.en)}
             <dl class="dl" style="margin-top:1.5rem">
               ${c.razonSocial ? `<div><dt data-i18n="profileLegal">${esc(es('profileLegal'))}</dt><dd style="font-weight:500">${esc(c.razonSocial)}</dd></div>` : ''}
               <div><dt data-i18n="profileOrigin">${esc(es('profileOrigin'))}</dt><dd style="font-weight:500">${lugar(c)}</dd></div>
