@@ -1,0 +1,13 @@
+{
+  "name": "Sur Exporta",
+  "short_name": "Sur Exporta",
+  "description": "Directorio de oferta exportable de la Región Sur de México — COMCE Región Sur",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#04162b",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
