@@ -3,7 +3,9 @@
 -- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.
 
 -- Solferino Native
-update empresas set resumen_es = 'Primera destilería de Quintana Roo: gin artesanal con botánicos de la selva maya, medalla de oro como Mejor Gin de México en los World Gin Awards 2025.',
+update empresas set marca = 'Solferino Native',
+    municipio = 'Solferino',
+    resumen_es = 'Primera destilería de Quintana Roo: gin artesanal con botánicos de la selva maya, medalla de oro como Mejor Gin de México en los World Gin Awards 2025.',
     resumen_en = 'Quintana Roo''s first distillery: craft gin with Mayan jungle botanicals, awarded gold as Best Mexican Gin at the World Gin Awards 2025.',
     descripcion_es = 'Solferino Native es la primera destilería de Quintana Roo. Nació en 2020 en Solferino, un poblado de la selva maya camino a Holbox, y elabora gin y licores artesanales en alambique de cobre, en microlotes de máximo 120 botellas. Sus botánicos —zacate limón, hierbabuena, hoja santa, pimienta negra, romero y piel de toronja— se recolectan frescos con los vecinos del pueblo y se suman al enebro, el regaliz y la canela, sin químicos ni conservadores.
 

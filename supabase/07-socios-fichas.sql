@@ -3,7 +3,9 @@
 -- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.
 
 -- Toke Innova
-update empresas set resumen_es = 'Salsa macha, chimichurri, especias y productos artesanales de Puebla, 100% naturales, con venta en 12 estados de México y cuatro de Estados Unidos.',
+update empresas set marca = 'Toke Innova',
+    municipio = 'Puebla',
+    resumen_es = 'Salsa macha, chimichurri, especias y productos artesanales de Puebla, 100% naturales, con venta en 12 estados de México y cuatro de Estados Unidos.',
     resumen_en = 'Artisanal salsa macha, chimichurri, spices and pantry products from Puebla — 100% natural, sold in 12 Mexican states and four US states.',
     descripcion_es = 'Toke Innova, fundada en Puebla en 2017, elabora productos artesanales mexicanos 100% naturales bajo sus marcas La Artesanal Herencia Orza® y ¡Ay Buey!®. Empezó con su Salsa Macha y hoy su catálogo reúne 24 presentaciones: salsa macha en cuatro variedades, chimichurri, chiles y especias, miel, perlas de tapioca, crema de cacahuate y galletas.
 

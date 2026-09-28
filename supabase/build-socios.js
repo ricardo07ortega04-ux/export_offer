@@ -230,14 +230,29 @@ const SOCIOS = [
     oferta: ['Business Intelligence', 'Automatización de procesos', 'Implementación de ERP Odoo', 'Arquitectura en la nube', 'Integración de bases de datos']
   },
   {
-    slug: 'saeta', marca: 'Saeta Consulting', estado: 'puebla', municipio: 'Puebla',
-    sector: 'consultoria', email: 'eduardo.lopez@saetaoc.com',
-    destacado: ['Orientación corporativa', 'Corporate guidance'],
-    resumen: ['Consultoría empresarial que simplifica los procesos corporativos.',
-              'Business consulting that simplifies corporate processes.'],
-    descripcion: ['Saeta es una firma de consultoría empresarial que ofrece soluciones estratégicas y personalizadas para el crecimiento de las organizaciones. Trabaja como un aliado cercano para facilitar la toma de decisiones y hacer los procesos corporativos más claros, eficientes y transparentes.',
-                  'Saeta is a business consulting firm offering strategic, tailored solutions for organisational growth. It works as a close partner to support decision-making and make corporate processes clearer, more efficient and more transparent.'],
-    oferta: ['Consultoría empresarial', 'Estrategia', 'Mejora de procesos']
+    // Datos de su sitio oficial, saetaoc.com (sept. 2026). Oficina principal en
+    // San Andrés Cholula (Corporativo Alsur); también tiene oficina en el German Centre, CDMX.
+    // Fundada en 2022: celebra su 4.º aniversario el 25 de junio de 2026.
+    slug: 'saeta', marca: 'SAETA Orientación Corporativa', estado: 'puebla', municipio: 'San Andrés Cholula',
+    sector: 'consultoria', email: 'eduardo.lopez@saetaoc.com', tel: '+52 222 533 9586', desde: 2022,
+    destacado: ['Atiende en español, inglés y alemán', 'Service in Spanish, English and German'],
+    resumen: ['Consultoría integral para empresas mexicanas y extranjeras: comercio exterior e IMMEX, contabilidad, legal, nómina y softlanding, en español, inglés y alemán.',
+              'All-in-one consulting for Mexican and foreign companies: foreign trade and IMMEX, accounting, legal, payroll and soft landing, in Spanish, English and German.'],
+    descripcion: ['SAETA Orientación Corporativa es una firma de consultoría que reúne bajo un mismo techo siete áreas de servicio —softlanding, legal, contabilidad, fiscal, nómina y tesorería, comercio exterior y auditoría— para descomplicar los procesos corporativos de sus clientes. Fundada en 2022, atiende a más de 60 empresas nacionales e internacionales desde sus oficinas en Puebla y en el German Centre de la Ciudad de México.\n\nEn comercio exterior acompaña a las empresas en el programa IMMEX, el cumplimiento de NOMs y permisos de COFEPRIS y SEDENA, auditorías con Data Stage y de los Anexos 24 y 30, reglas de origen, devolución de IVA y la coordinación de la logística y el despacho aduanal. Trabaja en español, inglés y alemán, y acompaña a empresas extranjeras, incluidas las de habla alemana, en su llegada a México.',
+                  'SAETA Orientación Corporativa is a consulting firm that brings seven service areas under one roof — soft landing, legal, accounting, tax, payroll and treasury, foreign trade and auditing — to simplify its clients\' corporate processes. Founded in 2022, it serves more than 60 Mexican and international companies from its offices in Puebla and at the German Centre in Mexico City.\n\nIn foreign trade, it supports companies with the IMMEX programme, compliance with Mexican Official Standards (NOMs) and COFEPRIS and SEDENA permits, Data Stage audits and Annex 24 and 30 reviews, rules of origin, VAT refunds, and coordination of logistics and customs clearance. It works in Spanish, English and German, and helps foreign companies, including German-speaking ones, set up in Mexico.'],
+    oferta: [
+      'Softlanding para empresas extranjeras',
+      'Programa IMMEX',
+      'NOMs y permisos COFEPRIS y SEDENA',
+      'Auditoría de comercio exterior (Data Stage, Anexos 24 y 30)',
+      'Consultoría aduanera y reglas de origen',
+      'Coordinación logística y aduanal',
+      'Contabilidad, controlling y fiscal',
+      'Nómina y tesorería',
+      'Derecho corporativo, laboral y mercantil',
+      'Trámites migratorios',
+      'Registro de marcas'
+    ]
   },
   {
     slug: 'solferino-native', marca: 'Solferino Native', estado: 'quintana-roo', municipio: 'Solferino',
@@ -351,7 +366,8 @@ fs.writeFileSync(path.join(__dirname, '06-socios.sql'), L.join('\n'), 'utf8');
 // editado en el panel; el estatus (borrador/publicado) no se toca.
 const ACTUALIZAR = [
   ['07-socios-fichas.sql', ['toke-innova'], 'catálogo de la empresa, mayo 2024'],
-  ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026']
+  ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026'],
+  ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
@@ -363,6 +379,8 @@ ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
   SOCIOS.filter((s) => slugs.includes(s.slug)).forEach((s) => {
     U.push(`-- ${s.marca}`);
     U.push(`update empresas set ${[
+      `marca = ${q(s.marca)}`, `municipio = ${q(s.municipio)}`,
+      ...(s.desde ? [`exporta_desde = ${s.desde}`] : []),
       `resumen_es = ${q(s.resumen[0])}`, `resumen_en = ${q(s.resumen[1])}`,
       `descripcion_es = ${q(s.descripcion[0])}`, `descripcion_en = ${q(s.descripcion[1])}`,
       `destacado_es = ${q(s.destacado[0])}`, `destacado_en = ${q(s.destacado[1])}`,
