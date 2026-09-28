@@ -716,6 +716,26 @@
     });
   }
 
+  /* ---------- Política de cookies: borrar preferencias ---------- */
+
+  var borrarBtn = document.querySelector('[data-borrar-preferencias]');
+  if (borrarBtn) {
+    borrarBtn.addEventListener('click', function () {
+      var estado = document.querySelector('[data-borrar-estado]');
+      try {
+        localStorage.removeItem('se-lang');
+        localStorage.removeItem('se-view');
+        estado.textContent = lang === 'en'
+          ? 'Done. Your preferences were deleted from this browser.'
+          : 'Listo. Tus preferencias se borraron de este navegador.';
+      } catch (e) {
+        estado.textContent = lang === 'en'
+          ? 'Your browser does not allow access to local storage, so nothing is stored.'
+          : 'Tu navegador no permite el almacenamiento local, así que no hay nada guardado.';
+      }
+    });
+  }
+
   /* ---------- Arranque general ---------- */
 
   document.querySelectorAll('[data-brief-form]').forEach(wireBriefForm);

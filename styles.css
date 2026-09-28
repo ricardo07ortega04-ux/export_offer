@@ -3,6 +3,45 @@
    Hereda los tokens de COMCE Región Sur (comce-sur/styles.css)
    ========================================================= */
 
+/* ---------- Tipografías ----------
+   Alojadas en el propio sitio (licencia SIL Open Font License): ningún
+   tercero recibe datos de la visita. Fuentes variables: un archivo por
+   subconjunto cubre todos los pesos. */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/bodoni-moda-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/bodoni-moda-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 :root {
   /* Marca COMCE */
   --noche: #04162b;
@@ -967,6 +1006,45 @@ button { cursor: pointer; }
   display: grid; place-items: center;
   background: var(--cobalto-100); color: var(--cobalto); font-size: var(--fs-sm); font-weight: 700;
 }
+
+/* ---------- Política de cookies ---------- */
+
+.lg-sec-primera { border-top: 0; padding-top: 0; margin-top: 0; }
+.lg-nota-en:not(:empty) + .lg-sec-primera { margin-top: var(--space-2); }
+
+.lg-resumen {
+  display: grid; gap: 0.75rem; margin-bottom: var(--space-3);
+  background: var(--exito-suave); border: 1px solid #cde6da; border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.lg-resumen li { display: grid; grid-template-columns: 22px 1fr; gap: 0.625rem; align-items: start; font-weight: 500; color: var(--noche); }
+.lg-resumen svg { width: 20px; height: 20px; margin-top: 0.2rem; color: var(--exito); }
+
+.lg-items { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); margin-bottom: var(--space-3); }
+.lg-item { border: 1px solid var(--linea-2); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); background: var(--niebla-2); }
+.lg-item > p { font-size: var(--fs-sm); color: var(--pizarra); line-height: 1.55; }
+.lg-item-nombre { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.625rem; margin-bottom: 0.5rem; }
+.lg-item-nombre span { font-weight: 700; color: var(--noche); font-size: var(--fs-base); }
+.lg-doc code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.875em;
+  background: var(--cobalto-100); color: var(--cobalto-700); padding: 0.1em 0.4em; border-radius: 4px;
+}
+.lg-item dl { display: grid; gap: 0.375rem; margin: var(--space-2) 0 0; padding-top: 0.75rem; border-top: 1px solid var(--linea-2); font-size: var(--fs-sm); }
+.lg-item dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; }
+.lg-item dt { color: var(--pizarra); }
+.lg-item dd { margin: 0; font-weight: 600; color: var(--noche); }
+
+.lg-borrar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2);
+  border: 1px solid var(--linea); border-radius: var(--radius-md); padding: var(--space-3); margin-bottom: var(--space-3);
+}
+.lg-borrar > div { flex: 1 1 16rem; min-width: 0; }
+.lg-borrar > div p { margin: 0; font-size: var(--fs-sm); color: var(--pizarra); }
+.lg-borrar .lg-borrar-titulo { font-weight: 700; color: var(--noche); font-size: var(--fs-base); margin-bottom: 0.25rem; }
+.lg-borrar-estado { flex-basis: 100%; margin: 0; font-size: var(--fs-sm); font-weight: 600; color: var(--exito); }
+.lg-borrar-estado:empty { display: none; }
+
+.footer-legal { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 
 /* Enlace al aviso junto a la casilla de consentimiento (fuera del <label> para no marcarla) */
 .consent-link { display: inline-block; margin: 0.375rem 0 0 1.875rem; font-size: var(--fs-xs); }

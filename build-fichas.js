@@ -97,7 +97,10 @@ function footer() {
     </div>
     <div class="footer-bottom">
       ${i18('p', 'footerSource')}
-      ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="aviso-de-privacidad.html" ')}
+      <span class="footer-legal">
+        ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="aviso-de-privacidad.html" ')}
+        ${bi('a', 'Política de cookies', 'Cookie policy').replace('<a ', '<a href="politica-de-cookies.html" ')}
+      </span>
     </div>
   </div>
 </footer>`;
@@ -211,9 +214,8 @@ function page(c) {
 <meta property="og:type" content="profile">
 <meta property="og:title" content="${esc(c.marca)} | Sur Exporta">
 <meta property="og:description" content="${esc(c.resumen.es)}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
