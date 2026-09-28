@@ -1,4 +1,4 @@
--- Sur Exporta — 07 · Fichas de socios enriquecidas
+-- Sur Exporta — 07 · Fichas de socios enriquecidas (catálogo de la empresa, mayo 2024)
 -- GENERADO por supabase/build-socios.js. Ejecutar después de 06-socios.sql.
 -- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.
 

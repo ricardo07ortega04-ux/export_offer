@@ -242,12 +242,22 @@ const SOCIOS = [
   {
     slug: 'solferino-native', marca: 'Solferino Native', estado: 'quintana-roo', municipio: 'Solferino',
     sector: 'bebidas-espirituosas', email: 'info@solferinogin.com',
-    destacado: ['Destilados en lotes pequeños', 'Small-batch spirits'],
-    resumen: ['Destilería artesanal de Quintana Roo: ginebra, ron, whisky y licores en lotes pequeños.',
-              'Craft distillery in Quintana Roo: gin, rum, whisky and liqueurs in small batches.'],
-    descripcion: ['Solferino Native es una destilería artesanal en el poblado de Solferino, Quintana Roo, que produce destilados y licores en lotes pequeños. Su portafolio incluye ginebra, ron, whisky y licores artesanales elaborados con ingredientes seleccionados que reflejan la identidad de la región.',
-                  'Solferino Native is a craft distillery in the village of Solferino, Quintana Roo, producing spirits and liqueurs in small batches. Its range includes gin, rum, whisky and craft liqueurs made with selected ingredients that reflect the identity of the region.'],
-    oferta: ['Ginebra', 'Ron', 'Whisky', 'Licores artesanales']
+    // Datos de su sitio oficial, ginsolferino.com (sept. 2026). Ahí no aparecen el ron
+    // ni el whisky que mencionaba la página de socios, así que se quitaron.
+    abv: '30–55%', presentaciones: [750],
+    destacado: ['Oro · World Gin Awards 2025', 'Gold · World Gin Awards 2025'],
+    resumen: ['Primera destilería de Quintana Roo: gin artesanal con botánicos de la selva maya, medalla de oro como Mejor Gin de México en los World Gin Awards 2025.',
+              'Quintana Roo\'s first distillery: craft gin with Mayan jungle botanicals, awarded gold as Best Mexican Gin at the World Gin Awards 2025.'],
+    descripcion: ['Solferino Native es la primera destilería de Quintana Roo. Nació en 2020 en Solferino, un poblado de la selva maya camino a Holbox, y elabora gin y licores artesanales en alambique de cobre, en microlotes de máximo 120 botellas. Sus botánicos —zacate limón, hierbabuena, hoja santa, pimienta negra, romero y piel de toronja— se recolectan frescos con los vecinos del pueblo y se suman al enebro, el regaliz y la canela, sin químicos ni conservadores.\n\nSu Dry Gin ganó la medalla de oro como Mejor Gin de México en los World Gin Awards 2025, en Reino Unido, donde quedó entre los seis mejores del mundo en la categoría Contemporary Style, y volvió a ser reconocido en la edición 2026. Suma oro en Cata d\'Or World Spirits Awards (Chile, 2021 y 2025), plata en Las Vegas Global Spirit Awards 2025 y Gran Oro en el Concurso de Espirituosos de Guanajuato, y es miembro de The Gin Guild de Londres. Se vende en Quintana Roo, Ciudad de México, Estado de México, Querétaro y Baja California, en las tiendas La Europea de todo el país y en Amazon y Mercado Libre.',
+                  'Solferino Native is Quintana Roo\'s first distillery. It was founded in 2020 in Solferino, a village in the Mayan jungle on the way to Holbox, and makes craft gin and liqueurs in copper stills, in micro-batches of no more than 120 bottles. Its botanicals — lemongrass, spearmint, hoja santa, black pepper, rosemary and grapefruit peel — are gathered fresh with local villagers and added to juniper, liquorice and cinnamon, with no chemicals or preservatives.\n\nIts Dry Gin won gold as Best Mexican Gin at the World Gin Awards 2025 in the United Kingdom, where it ranked among the world\'s top six in the Contemporary Style category, and was recognised again in the 2026 edition. It also holds gold at the Cata d\'Or World Spirits Awards (Chile, 2021 and 2025), silver at the Las Vegas Global Spirit Awards 2025 and Grand Gold at the Guanajuato Spirits Competition, and is a member of The Gin Guild in London. It is sold in Quintana Roo, Mexico City, the State of Mexico, Querétaro and Baja California, in La Europea stores nationwide, and on Amazon and Mercado Libre.'],
+    oferta: [
+      'Solferino Native Dry Gin · 40% Alc. · 750 ml',
+      'Solferino Native Overproof Edition · gin 55% Alc.',
+      'Solferino Native Flair Edition · gin para bartenders de flair',
+      'Solferino Native Absenta · 55% Alc.',
+      'Balam · licor cítrico de zacate limón, naranja y toronja',
+      'Pancheel · licor de yaka · 30% Alc.'
+    ]
   },
   {
     slug: 'toke-innova', marca: 'Toke Innova', estado: 'puebla', municipio: 'Puebla',
@@ -288,6 +298,7 @@ if (require.main !== module) return;
 
 const q = (v) => (v === null || v === undefined ? 'null' : `'${String(v).replace(/'/g, "''")}'`);
 const arr = (a) => (a && a.length ? `array[${a.map(q).join(', ')}]::text[]` : `'{}'::text[]`);
+const arrInt = (a) => (a && a.length ? `array[${a.map(Number).join(', ')}]::integer[]` : `'{}'::integer[]`);
 
 // Mercados y certificaciones de un socio (no duplican si ya existen)
 function relaciones(s) {
@@ -315,12 +326,13 @@ CERTIFICACIONES.forEach(([clave, es, en, des, den]) => {
 L.push('');
 L.push(`-- ${SOCIOS.length} empresas`);
 SOCIOS.forEach((s) => {
-  L.push(`insert into empresas (slug, marca, razon_social, estado, municipio, sector, resumen_es, resumen_en, descripcion_es, descripcion_en, destacado_es, destacado_en, exporta_desde, situacion, maquila, productos, contacto_email, contacto_tel, estatus, fuente)`);
+  L.push(`insert into empresas (slug, marca, razon_social, estado, municipio, sector, resumen_es, resumen_en, descripcion_es, descripcion_en, destacado_es, destacado_en, exporta_desde, situacion, maquila, abv, productos, presentaciones_ml, contacto_email, contacto_tel, estatus, fuente)`);
   L.push(`values (${[
     q(s.slug), q(s.marca), q(s.razon || null), q(s.estado), q(s.municipio), q(s.sector),
     q(s.resumen[0]), q(s.resumen[1]), q(s.descripcion[0]), q(s.descripcion[1]),
     q(s.destacado[0]), q(s.destacado[1]), s.desde || 'null', `'${s.situacion || 'sin_dato'}'`,
-    s.maquila === undefined ? 'null' : s.maquila, arr(s.oferta), q(s.email), q(s.tel || null), `'borrador'`, q(FUENTE)
+    s.maquila === undefined ? 'null' : s.maquila, q(s.abv || null), arr(s.oferta), arrInt(s.presentaciones),
+    q(s.email), q(s.tel || null), `'borrador'`, q(FUENTE)
   ].join(', ')})`);
   L.push('on conflict (slug) do nothing;');
   L.push(...relaciones(s));
@@ -333,31 +345,38 @@ L.push('');
 fs.writeFileSync(path.join(__dirname, '06-socios.sql'), L.join('\n'), 'utf8');
 
 // ---------------------------------------------------------------
-// 07 · Fichas enriquecidas después de la carga inicial.
+// Fichas enriquecidas después de la carga inicial, un archivo por tanda.
 // 06 no toca empresas que ya existen, así que los datos nuevos van como UPDATE.
 // Ojo: sobrescribe los textos y la oferta de estas empresas aunque se hayan
 // editado en el panel; el estatus (borrador/publicado) no se toca.
-const ACTUALIZAR = ['toke-innova'];   // catálogo de la empresa, mayo 2024
+const ACTUALIZAR = [
+  ['07-socios-fichas.sql', ['toke-innova'], 'catálogo de la empresa, mayo 2024'],
+  ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026']
+];
 
-const U = [];
-U.push('-- Sur Exporta — 07 · Fichas de socios enriquecidas');
-U.push('-- GENERADO por supabase/build-socios.js. Ejecutar después de 06-socios.sql.');
-U.push('-- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.');
-U.push('');
-SOCIOS.filter((s) => ACTUALIZAR.includes(s.slug)).forEach((s) => {
-  U.push(`-- ${s.marca}`);
-  U.push(`update empresas set ${[
-    `resumen_es = ${q(s.resumen[0])}`, `resumen_en = ${q(s.resumen[1])}`,
-    `descripcion_es = ${q(s.descripcion[0])}`, `descripcion_en = ${q(s.descripcion[1])}`,
-    `destacado_es = ${q(s.destacado[0])}`, `destacado_en = ${q(s.destacado[1])}`,
-    `situacion = '${s.situacion || 'sin_dato'}'`, `productos = ${arr(s.oferta)}`,
-    `contacto_email = ${q(s.email)}`, `contacto_tel = ${q(s.tel || null)}`,
-    `actualizado_en = now()`
-  ].join(',\n    ')}\nwhere slug = ${q(s.slug)};`);
-  U.push(...relaciones(s));
+ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
+  const U = [];
+  U.push(`-- Sur Exporta — ${archivo.slice(0, 2)} · Fichas de socios enriquecidas (${fuente})`);
+  U.push('-- GENERADO por supabase/build-socios.js. Ejecutar después de 06-socios.sql.');
+  U.push('-- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.');
   U.push('');
+  SOCIOS.filter((s) => slugs.includes(s.slug)).forEach((s) => {
+    U.push(`-- ${s.marca}`);
+    U.push(`update empresas set ${[
+      `resumen_es = ${q(s.resumen[0])}`, `resumen_en = ${q(s.resumen[1])}`,
+      `descripcion_es = ${q(s.descripcion[0])}`, `descripcion_en = ${q(s.descripcion[1])}`,
+      `destacado_es = ${q(s.destacado[0])}`, `destacado_en = ${q(s.destacado[1])}`,
+      `situacion = '${s.situacion || 'sin_dato'}'`, `productos = ${arr(s.oferta)}`,
+      ...(s.abv ? [`abv = ${q(s.abv)}`] : []),
+      ...(s.presentaciones ? [`presentaciones_ml = ${arrInt(s.presentaciones)}`] : []),
+      `contacto_email = ${q(s.email)}`, `contacto_tel = ${q(s.tel || null)}`,
+      `actualizado_en = now()`
+    ].join(',\n    ')}\nwhere slug = ${q(s.slug)};`);
+    U.push(...relaciones(s));
+    U.push('');
+  });
+  fs.writeFileSync(path.join(__dirname, archivo), U.join('\n'), 'utf8');
 });
-fs.writeFileSync(path.join(__dirname, '07-socios-fichas.sql'), U.join('\n'), 'utf8');
 
 // Revisión: cada socio debe tener su logotipo en el repositorio
 const sinLogo = SOCIOS.filter((s) => !fs.existsSync(path.join(__dirname, '..', `logo-${s.slug}.webp`)));
