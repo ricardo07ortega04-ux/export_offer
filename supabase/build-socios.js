@@ -119,14 +119,29 @@ const SOCIOS = [
     oferta: ['Comercialización internacional', 'Asesoría en comercio exterior', 'Logística internacional', 'Despacho aduanal', 'Planes de negocio e internacionalización']
   },
   {
-    slug: 'amp-solutions', marca: 'AMP Solutions', estado: 'ciudad-de-mexico', municipio: null,
-    sector: 'logistica-comercio-exterior', email: 'rcareaga@grupoamp.mx',
-    destacado: ['Logística integral', 'End-to-end logistics'],
-    resumen: ['Logística integral, segura y personalizada a lo largo de toda la cadena de suministro.',
-              'Safe, tailored end-to-end logistics across the whole supply chain.'],
-    descripcion: ['AMP Solutions ofrece soluciones logísticas integrales, seguras y personalizadas para toda la cadena de suministro. Apoya a empresas de distintos sectores en la coordinación, distribución y gestión logística, con atención cercana y operaciones adaptadas a cada cliente.',
-                  'AMP Solutions provides safe, tailored end-to-end logistics solutions across the supply chain. It supports companies in different sectors with coordination, distribution and logistics management, with close attention and operations adapted to each client.'],
-    oferta: ['Logística integral', 'Distribución', 'Gestión de cadena de suministro']
+    // Datos de su sitio oficial, grupoamp.mx (sept. 2026). Oficina en Av. Insurgentes Centro,
+    // alcaldía Cuauhtémoc. De sus cifras se usan 250 despachos/mes y 75,000 t/año; se omiten
+    // «196 países atendidos» (no verificable) y «85 fletes» (sin periodo). Sus fotos son de
+    // banco de imágenes, no de sus instalaciones: la ficha va sin foto.
+    slug: 'amp-solutions', marca: 'Grupo AMP Solutions', estado: 'ciudad-de-mexico', municipio: 'Cuauhtémoc',
+    sector: 'logistica-comercio-exterior', email: 'rcareaga@grupoamp.mx', tel: '+52 314 146 2708',
+    destacado: ['250 despachos aduanales al mes', '250 customs clearances a month'],
+    resumen: ['Logística integral y asesoría en comercio exterior: despacho aduanal, fletes marítimo y terrestre, almacenaje y Recinto Fiscalizado Estratégico (RFE).',
+              'End-to-end logistics and foreign trade advice: customs clearance, sea and road freight, warehousing and Strategic Bonded Zone (RFE) services.'],
+    descripcion: ['Grupo AMP Solutions integra en un solo servicio la cadena logística de importación y exportación: flete marítimo y terrestre, despacho aduanal, almacenaje, maniobras y seguro de mercancías. Trabaja con agentes aduanales aliados en las principales aduanas del país —Manzanillo, Lázaro Cárdenas, Veracruz, el AICM, Pantaco y el Aeropuerto de Guadalajara— y maneja alrededor de 250 despachos al mes y 75,000 toneladas de carga al año.\n\nMueve contenedor completo (FCL), carga consolidada (LCL), refrigerada, de proyecto, sobredimensionada y mercancía peligrosa, con unidades con rastreo GPS las 24 horas y custodia en carretera. Cuenta con 1,500 m² de almacén techado y 4,200 m² de bodega con vigilancia por circuito cerrado, y ofrece Recinto Fiscalizado Estratégico (RFE), depósito fiscal, oficina IMMEX, certificación de IVA e IEPS y clasificación arancelaria. Atiende sobre todo a las industrias de maquinaria pesada, acero, automotriz, equipo médico, química, calzado, textil y electrónica.',
+                  'Grupo AMP Solutions brings the whole import and export logistics chain into a single service: sea and road freight, customs clearance, warehousing, cargo handling and cargo insurance. It works with partner customs brokers at Mexico\'s main customs points — Manzanillo, Lázaro Cárdenas, Veracruz, Mexico City International Airport, Pantaco and Guadalajara Airport — and handles around 250 customs clearances a month and 75,000 tonnes of cargo a year.\n\nIt moves full container loads (FCL), less-than-container loads (LCL), refrigerated, project, oversized and dangerous cargo, with 24/7 GPS-tracked trucks and road escort. It has 1,500 m² of covered warehouse and 4,200 m² of storage with CCTV surveillance, and offers Strategic Bonded Zone (RFE) and bonded warehouse services, an IMMEX office, VAT and IEPS certification, and tariff classification. It mainly serves the heavy machinery, steel, automotive, medical equipment, chemical, footwear, textile and electronics industries.'],
+    oferta: [
+      'Despacho aduanal de importación y exportación',
+      'Flete marítimo: FCL, LCL, refrigerado y carga de proyecto',
+      'Flete terrestre con rastreo GPS y custodia',
+      'Almacenaje, consolidación y desconsolidación',
+      'Recinto Fiscalizado Estratégico (RFE) y depósito fiscal',
+      'Oficina IMMEX',
+      'Certificación de IVA e IEPS',
+      'Clasificación arancelaria y control de permisos',
+      'Seguro de mercancías',
+      'Mercancía peligrosa y carga sobredimensionada'
+    ]
   },
   {
     slug: 'grupo-ravara', marca: 'Grupo RAVARA', estado: 'nuevo-leon', municipio: 'García',
@@ -378,7 +393,8 @@ const ACTUALIZAR = [
   ['07-socios-fichas.sql', ['toke-innova'], 'catálogo de la empresa, mayo 2024'],
   ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026'],
   ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026'],
-  ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026']
+  ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026'],
+  ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
