@@ -29,14 +29,29 @@ const CERTIFICACIONES = [
 
 const SOCIOS = [
   {
-    slug: 'calten-group', marca: 'Calten Group', estado: 'puebla', municipio: 'Puebla',
-    sector: 'logistica-comercio-exterior', email: 'emma.perez@caltengroup.com',
-    destacado: ['18 años de experiencia', '18 years of experience'],
-    resumen: ['Logística y comercio exterior para pymes que no cuentan con un departamento de operaciones internacionales.',
-              'Logistics and foreign trade services for SMEs without an in-house international operations team.'],
-    descripcion: ['Calten Group integra servicios de logística y comercio exterior para pequeñas y medianas empresas. Con más de 18 años de experiencia, ofrece soluciones personalizadas en comercio internacional, transporte, comercialización y auditoría, y acompaña a sus clientes en importación y exportación, cumplimiento, certificaciones IMMEX y PROSEC, capacitación y desarrollo de proveeduría internacional.',
-                  'Calten Group provides integrated logistics and foreign trade services for small and medium-sized companies. With more than 18 years of experience, it offers tailored solutions in international trade, transport, sales and auditing, and supports clients with imports and exports, compliance, IMMEX and PROSEC certification, training and international supplier development.'],
-    oferta: ['Logística internacional', 'Gestión aduanera', 'Coordinación de embarques', 'Consultoría en comercio exterior', 'Certificaciones IMMEX y PROSEC', 'Capacitación', 'Desarrollo de proveeduría internacional']
+    // Datos de su sitio oficial, caltengroup.com (sept. 2026), más lo que ya traía la página
+    // de socios (IMMEX y PROSEC). Oficina en San Pedro Cholula. Su sitio (2023) dice «más de
+    // 15 años»; la página de socios (2026) dice 18, que es coherente. Su única foto es de banco
+    // de imágenes y de baja resolución: la ficha va sin foto.
+    slug: 'calten-group', marca: 'Calten Group', estado: 'puebla', municipio: 'San Pedro Cholula',
+    sector: 'logistica-comercio-exterior', email: 'emma.perez@caltengroup.com', tel: '+52 222 455 3621',
+    destacado: ['Inspección de calidad en origen', 'Quality inspection at origin'],
+    resumen: ['Logística, comercio exterior e inspección en origen para pymes que no tienen un departamento de operaciones internacionales.',
+              'Logistics, foreign trade and inspection at origin for SMEs without an in-house international operations team.'],
+    descripcion: ['Calten Group acompaña a pequeñas y medianas empresas que importan o exportan sin tener un departamento de operaciones internacionales. Con más de 18 años de experiencia, integra logística internacional, gestión aduanera, transporte nacional y coordinación de embarques, ya sea por operación o como equipo in-house por contrato, y actúa también como comercializadora.\n\nEn comercio exterior arma y revisa expedientes, gestiona trámites ante la VUCEM, asesora en importación y exportación, en el cumplimiento de NOMs y en certificaciones IMMEX y PROSEC, y ayuda a calcular el costo y precio de productos internacionales. Además ofrece inspección en origen —auditoría de fábrica, control de calidad e inspección previa al embarque—, seguros de carga nacional e internacional y cursos de comercio exterior, básicos o a la medida.',
+                  'Calten Group supports small and medium-sized companies that import or export without an international operations department. With more than 18 years of experience, it combines international logistics, customs management, domestic transport and shipment coordination — per operation or as an in-house team on a time-based contract — and also acts as a trading company.\n\nIn foreign trade, it prepares and reviews compliance files, handles procedures on Mexico\'s VUCEM single window, advises on imports and exports, Mexican Official Standards (NOMs) and IMMEX and PROSEC certification, and helps cost and price international products. It also offers inspection at origin — factory audits, quality control and pre-shipment inspection — domestic and international cargo insurance, and foreign trade courses, from basics to custom programmes.'],
+    oferta: [
+      'Logística internacional y transporte nacional',
+      'Gestión aduanera',
+      'Coordinación de embarques (por operación o in-house)',
+      'Expedientes de comercio exterior y trámites VUCEM',
+      'Certificaciones IMMEX y PROSEC',
+      'Asesoría en NOMs',
+      'Costeo y pricing de productos internacionales',
+      'Inspección en origen: auditoría de fábrica y control de calidad',
+      'Seguros de carga nacional e internacional',
+      'Cursos de comercio exterior'
+    ]
   },
   {
     slug: 'cashabroad', marca: 'CashAbroad', estado: 'ciudad-de-mexico', municipio: null,
@@ -406,7 +421,8 @@ const ACTUALIZAR = [
   ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026'],
   ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026'],
   ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026'],
-  ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026']
+  ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026'],
+  ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
