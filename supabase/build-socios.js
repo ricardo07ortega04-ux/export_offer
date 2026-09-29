@@ -40,13 +40,23 @@ const SOCIOS = [
   },
   {
     slug: 'cashabroad', marca: 'CashAbroad', estado: 'ciudad-de-mexico', municipio: null,
-    sector: 'pagos-internacionales', email: 'ruth@cashabroad.one',
-    destacado: ['Cuentas en EUA en 72 h', 'US accounts in 72 hours'],
-    resumen: ['Pagos internacionales para empresas mexicanas con cuentas virtuales y dólares digitales.',
-              'International payments for Mexican companies through virtual accounts and digital dollars.'],
-    descripcion: ['CashAbroad es una startup que facilita los pagos internacionales de empresas mexicanas mediante tecnología blockchain. Su wallet empresarial admite varias stablecoins y permite transferencias empresa–proveedor y cliente–empresa con Estados Unidos, Canadá, Europa, China, Panamá, Colombia y República Dominicana. Abre cuentas virtuales en Estados Unidos en menos de 72 horas, ofrece pagos B2B en dólares digitales las 24 horas con liquidez inmediata en pesos, y opera bajo estándares de cumplimiento del SAT, la UIF, AML, OFAC y FATF.',
-                  'CashAbroad is a start-up that uses blockchain technology to simplify international payments for Mexican companies. Its business wallet supports multiple stablecoins for company-to-supplier and customer-to-company transfers with the United States, Canada, Europe, China, Panama, Colombia and the Dominican Republic. It opens US virtual accounts in under 72 hours, offers 24/7 B2B payments in digital dollars with immediate liquidity in pesos, and operates under SAT, UIF, AML, OFAC and FATF compliance standards.'],
-    oferta: ['Cuentas virtuales en Estados Unidos', 'Pagos B2B en dólares digitales', 'Conversión de divisas y activos digitales', 'Wallet empresarial multi-stablecoin']
+    sector: 'pagos-internacionales', email: 'ruth@cashabroad.one', tel: '+52 55 8046 5994',
+    // Datos de su sitio oficial, cashabroad.one (sept. 2026). Sustituyen a los de la página
+    // de socios: ahora se enfoca en México–EUA–China, activa cuentas en <48 h (antes 72 h)
+    // y opera con USDC. El sitio no tiene fotos de producto: la ficha va sin foto.
+    destacado: ['Pagos internacionales en 4 horas', 'International payments in 4 hours'],
+    resumen: ['Pagos a proveedores internacionales con dólares digitales (USDC) para exportadores e importadores que operan entre México, Estados Unidos y China.',
+              'Supplier payments abroad with digital dollars (USDC) for exporters and importers trading between Mexico, the United States and China.'],
+    descripcion: ['CashAbroad es una plataforma de tesorería empresarial para exportadores e importadores que operan entre México, Estados Unidos y China. Con una cuenta en dólares digitales (USDC, con paridad 1:1 con el dólar), las empresas pagan a proveedores y reciben cobros de clientes en el extranjero en unas cuatro horas —en lugar de los días que toma una transferencia tradicional—, deciden cuándo convertir y liquidan en moneda local mediante socios bancarios en más de ocho países.\n\nLa cuenta se activa en menos de 48 horas, no cobra anualidad y funciona junto a las cuentas bancarias que la empresa ya usa. Opera sobre las blockchains Stellar y Starknet, con procesos KYB/KYC, prevención de lavado de dinero y monitoreo de transacciones alineados con los requisitos del SAT para actividades vulnerables, y ofrece acompañamiento para configurar cada flujo (Business Concierge). Cuenta con el respaldo de Techstars y Draper University.',
+                  'CashAbroad is a corporate treasury platform for exporters and importers trading between Mexico, the United States and China. With an account in digital dollars (USDC, pegged 1:1 to the US dollar), companies pay suppliers and collect from customers abroad in about four hours — instead of the days a traditional wire takes — decide when to convert, and settle in local currency through banking partners in more than eight countries.\n\nAccounts are activated in under 48 hours, with no annual fee, and work alongside the bank accounts a company already uses. It runs on the Stellar and Starknet blockchains, with KYB/KYC, anti-money-laundering and transaction-monitoring processes aligned with Mexican tax authority (SAT) requirements for vulnerable activities, and offers hands-on support to set up each flow (Business Concierge). It is backed by Techstars and Draper University.'],
+    oferta: [
+      'Cuenta empresarial en dólares digitales (USDC)',
+      'Pagos a proveedores en México, Estados Unidos y China',
+      'Cobros de clientes en el extranjero',
+      'Conversión a moneda local y salida bancaria en más de 8 países',
+      'Tesorería con stablecoins',
+      'Business Concierge: configuración de flujos financieros'
+    ]
   },
   {
     slug: 'cogne-mexico', marca: 'COGNE México', estado: 'tlaxcala', municipio: 'Huamantla',
@@ -367,7 +377,8 @@ fs.writeFileSync(path.join(__dirname, '06-socios.sql'), L.join('\n'), 'utf8');
 const ACTUALIZAR = [
   ['07-socios-fichas.sql', ['toke-innova'], 'catálogo de la empresa, mayo 2024'],
   ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026'],
-  ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026']
+  ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026'],
+  ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
