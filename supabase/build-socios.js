@@ -74,26 +74,32 @@ const SOCIOS = [
     ]
   },
   {
-    // Sin sitio propio accesible (cogne.com.mx tiene un certificado inválido). Fuentes:
-    // lo que Cogne entregó al directorio de socios de COMCE (procesos y productos de la planta)
-    // y el sitio oficial del grupo, cogne.com (México figura entre sus plantas productivas).
-    // Las certificaciones EN 9100 / NADCAP / IATF que cita metalica.com.mx son de la planta
-    // de Aosta: no se atribuyen a Huamantla. Sin foto (la de ese directorio es de terceros).
+    // Fuentes: catálogo de productos de la empresa (entregado por COMCE, sept. 2026; es de la
+    // época en que la planta se llamaba Trefilados Inoxidables de México, TIM, del grupo
+    // Novametal, hoy Cogne), el directorio de socios de COMCE y el sitio del grupo, cogne.com.
+    // Las certificaciones citadas son las que el catálogo atribuye a la planta de Huamantla
+    // (ISO 9001:2015, IATF 16949:2016, ISO 14001:2015, Industria Limpia); las EN 9100 / NADCAP
+    // que cita metalica.com.mx son de Aosta y no se usan. Exporta a EUA (confirmado por COMCE).
+    // Foto: interior de la planta, de la página «Nuestra planta» del catálogo.
     slug: 'cogne-mexico', marca: 'COGNE México', estado: 'tlaxcala', municipio: 'Huamantla',
-    sector: 'productos-metalicos', email: 'mcastillo@cogne.com.mx',
+    sector: 'productos-metalicos', email: 'mcastillo@cogne.com.mx', situacion: 'exportando',
+    mercados: ['estados-unidos'],
     destacado: ['Planta del grupo italiano Cogne', 'Plant of Italy\'s Cogne Group'],
-    resumen: ['Barras y alambres de acero inoxidable y aleaciones especiales, producidos en Tlaxcala por la filial mexicana del grupo italiano Cogne Acciai Speciali.',
-              'Stainless steel and special alloy bars and wire, produced in Tlaxcala by the Mexican subsidiary of Italy\'s Cogne Acciai Speciali group.'],
-    descripcion: ['COGNE México es la planta productiva en México del grupo Cogne Acciai Speciali, con sede en Aosta, Italia, y más de un siglo de historia, líder mundial en productos largos de acero inoxidable y aleaciones de níquel. Desde Huamantla, Tlaxcala, produce y transforma barras y alambres de acero inoxidable y aleaciones especiales para aplicaciones industriales de alta exigencia.\n\nSus procesos incluyen el trefilado de barras, la fabricación de barras para válvulas de motores de combustión interna, el enderezado y el rectificado grueso y fino, que dan precisión dimensional y buen acabado superficial. Ofrece alambre para resortes y para forja en frío, perfiles especiales y material de soldadura de acero inoxidable para las industrias automotriz, aeroespacial, médica, petrolera, química, energética y de la construcción.',
-                  'COGNE México is the Mexican production plant of the Cogne Acciai Speciali group, headquartered in Aosta, Italy, with more than a century of history and a world leader in long stainless steel and nickel alloy products. From Huamantla, Tlaxcala, it produces and processes stainless steel and special alloy bars and wire for demanding industrial applications.\n\nIts processes include bar drawing, manufacturing bars for internal combustion engine valves, straightening, and rough and fine grinding, which provide dimensional precision and a good surface finish. It supplies spring wire and cold-heading wire, special profiles and stainless steel welding material to the automotive, aerospace, medical, oil, chemical, energy and construction industries.'],
+    resumen: ['Alambre y barras de acero inoxidable y aleaciones de níquel fabricados en Huamantla, Tlaxcala, por la planta mexicana del grupo italiano Cogne. Exporta a Estados Unidos y Europa.',
+              'Stainless steel and nickel alloy wire and bars made in Huamantla, Tlaxcala, by the Mexican plant of Italy\'s Cogne Group. Exports to the United States and Europe.'],
+    descripcion: ['COGNE México —antes Trefilados Inoxidables de México (TIM)— es la planta mexicana del grupo Cogne Acciai Speciali, con sede en Aosta, Italia, y más de un siglo de historia, líder mundial en productos largos de acero inoxidable y aleaciones de níquel. Su planta en la Ciudad Industrial Xicohténcatl II de Huamantla, Tlaxcala, ocupa un terreno de 36,500 m² con 13,000 m² de naves, oficinas y laboratorios, y cuenta con certificaciones ISO 9001, IATF 16949 para la industria automotriz, ISO 14001 e Industria Limpia.\n\nFabrica alambre de acero inoxidable y de aleaciones de níquel de 0.15 a 10 mm —fino, para resortes, para forja en frío, planos y perfiles especiales— en rollos, botes y carretes; barras de acero inoxidable de 3 a 20 mm y barras rectificadas sin centros de 6 a 31.5 mm, con maquila de rectificado desde una tonelada e inspección por corrientes de Eddy y ultrasonido. También ofrece soldaduras especiales de acero inoxidable, níquel y aluminio, y acero para válvulas automotrices. Exporta a Estados Unidos, Europa y Centro y Sudamérica, y opera con los programas IMMEX, ALTEX y PROSEC y como Operador Económico Autorizado.',
+                  'COGNE México — formerly Trefilados Inoxidables de México (TIM) — is the Mexican plant of the Cogne Acciai Speciali group, headquartered in Aosta, Italy, with more than a century of history and a world leader in long stainless steel and nickel alloy products. Its plant in the Xicohténcatl II Industrial City in Huamantla, Tlaxcala, sits on a 36,500 m² site with 13,000 m² of production halls, offices and laboratories, and is certified to ISO 9001, IATF 16949 for the automotive industry, ISO 14001 and Mexico\'s Clean Industry programme.\n\nIt makes stainless steel and nickel alloy wire from 0.15 to 10 mm — fine, spring, cold-heading, flat and special-profile wire — on coils, drums and spools; stainless steel bars from 3 to 20 mm and centreless-ground bars from 6 to 31.5 mm, with toll grinding from one tonne and eddy-current and ultrasonic inspection. It also supplies special stainless steel, nickel and aluminium welding wire, and automotive valve steel. It exports to the United States, Europe and Central and South America, and operates under Mexico\'s IMMEX, ALTEX and PROSEC programmes and as an Authorised Economic Operator.'],
     oferta: [
-      'Barras de acero inoxidable trefiladas',
-      'Barras para válvulas de motor',
-      'Barras enderezadas y rectificadas (grueso y fino)',
+      'Alambre de acero inoxidable de 0.15 a 10 mm',
+      'Alambre de aleaciones de níquel',
       'Alambre para resortes',
       'Alambre para forja en frío',
-      'Perfiles especiales',
-      'Material de soldadura de acero inoxidable'
+      'Alambres planos y perfiles especiales',
+      'Barras de acero inoxidable de 3 a 20 mm',
+      'Barras rectificadas sin centros (6 a 31.5 mm)',
+      'Maquila de rectificado desde 1 tonelada',
+      'Soldaduras especiales de inoxidable, níquel y aluminio',
+      'Acero para válvulas automotrices'
     ]
   },
   {
@@ -436,7 +442,8 @@ const ACTUALIZAR = [
   ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026'],
   ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026'],
   ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026'],
-  ['14-ficha-cogne.sql', ['cogne-mexico'], 'directorio de socios COMCE y sitio del grupo cogne.com, sept. 2026']
+  // 14-ficha-cogne.sql ya se aplicó y queda como registro; la versión vigente de COGNE es la 15
+  ['15-ficha-cogne-catalogo.sql', ['cogne-mexico'], 'catálogo de productos de la empresa, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
