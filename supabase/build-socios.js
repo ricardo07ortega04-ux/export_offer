@@ -74,14 +74,27 @@ const SOCIOS = [
     ]
   },
   {
+    // Sin sitio propio accesible (cogne.com.mx tiene un certificado inválido). Fuentes:
+    // lo que Cogne entregó al directorio de socios de COMCE (procesos y productos de la planta)
+    // y el sitio oficial del grupo, cogne.com (México figura entre sus plantas productivas).
+    // Las certificaciones EN 9100 / NADCAP / IATF que cita metalica.com.mx son de la planta
+    // de Aosta: no se atribuyen a Huamantla. Sin foto (la de ese directorio es de terceros).
     slug: 'cogne-mexico', marca: 'COGNE México', estado: 'tlaxcala', municipio: 'Huamantla',
     sector: 'productos-metalicos', email: 'mcastillo@cogne.com.mx',
-    destacado: ['Acero inoxidable de precisión', 'Precision stainless steel'],
-    resumen: ['Barras y alambres de acero inoxidable y aleaciones especiales para aplicaciones industriales de alta exigencia.',
-              'Stainless steel and special alloy bars and wire for demanding industrial applications.'],
-    descripcion: ['COGNE México produce y transforma barras y alambres de acero inoxidable y aleaciones especiales. Sus procesos incluyen trefilado, fabricación de barras para válvulas de motores de combustión interna, enderezado y rectificado grueso y fino. Atiende a las industrias automotriz, aeroespacial, médica, petrolera, química, energética y de la construcción.',
-                  'COGNE México produces and processes stainless steel and special alloy bars and wire. Its processes include drawing, manufacturing bars for internal combustion engine valves, straightening, and rough and fine grinding. It serves the automotive, aerospace, medical, oil, chemical, energy and construction industries.'],
-    oferta: ['Barras de acero inoxidable', 'Barras para válvulas de motor', 'Alambre para resortes', 'Alambre para forja en frío', 'Perfiles especiales', 'Soldaduras de acero inoxidable']
+    destacado: ['Planta del grupo italiano Cogne', 'Plant of Italy\'s Cogne Group'],
+    resumen: ['Barras y alambres de acero inoxidable y aleaciones especiales, producidos en Tlaxcala por la filial mexicana del grupo italiano Cogne Acciai Speciali.',
+              'Stainless steel and special alloy bars and wire, produced in Tlaxcala by the Mexican subsidiary of Italy\'s Cogne Acciai Speciali group.'],
+    descripcion: ['COGNE México es la planta productiva en México del grupo Cogne Acciai Speciali, con sede en Aosta, Italia, y más de un siglo de historia, líder mundial en productos largos de acero inoxidable y aleaciones de níquel. Desde Huamantla, Tlaxcala, produce y transforma barras y alambres de acero inoxidable y aleaciones especiales para aplicaciones industriales de alta exigencia.\n\nSus procesos incluyen el trefilado de barras, la fabricación de barras para válvulas de motores de combustión interna, el enderezado y el rectificado grueso y fino, que dan precisión dimensional y buen acabado superficial. Ofrece alambre para resortes y para forja en frío, perfiles especiales y material de soldadura de acero inoxidable para las industrias automotriz, aeroespacial, médica, petrolera, química, energética y de la construcción.',
+                  'COGNE México is the Mexican production plant of the Cogne Acciai Speciali group, headquartered in Aosta, Italy, with more than a century of history and a world leader in long stainless steel and nickel alloy products. From Huamantla, Tlaxcala, it produces and processes stainless steel and special alloy bars and wire for demanding industrial applications.\n\nIts processes include bar drawing, manufacturing bars for internal combustion engine valves, straightening, and rough and fine grinding, which provide dimensional precision and a good surface finish. It supplies spring wire and cold-heading wire, special profiles and stainless steel welding material to the automotive, aerospace, medical, oil, chemical, energy and construction industries.'],
+    oferta: [
+      'Barras de acero inoxidable trefiladas',
+      'Barras para válvulas de motor',
+      'Barras enderezadas y rectificadas (grueso y fino)',
+      'Alambre para resortes',
+      'Alambre para forja en frío',
+      'Perfiles especiales',
+      'Material de soldadura de acero inoxidable'
+    ]
   },
   {
     slug: 'cslogix', marca: 'CsLogix', estado: 'puebla', municipio: 'Puebla',
@@ -422,7 +435,8 @@ const ACTUALIZAR = [
   ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026'],
   ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026'],
   ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026'],
-  ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026']
+  ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026'],
+  ['14-ficha-cogne.sql', ['cogne-mexico'], 'directorio de socios COMCE y sitio del grupo cogne.com, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
