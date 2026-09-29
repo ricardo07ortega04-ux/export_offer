@@ -163,7 +163,8 @@
       empresas: SE.empresas.length,
       mercados: unicos('mercados'),
       certs: unicos('certs'),
-      capacidad: SE.empresas.reduce(function (a, c) { return a + (c.capacidad || 0); }, 0)
+      // Total de productos y servicios que ofrecen las empresas publicadas
+      oferta: SE.empresas.reduce(function (a, c) { return a + c.productos.length; }, 0)
     };
     document.querySelectorAll('[data-stat]').forEach(function (el) {
       var v = valores[el.getAttribute('data-stat')];
