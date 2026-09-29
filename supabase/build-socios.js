@@ -103,14 +103,28 @@ const SOCIOS = [
     ]
   },
   {
-    slug: 'cslogix', marca: 'CsLogix', estado: 'puebla', municipio: 'Puebla',
-    sector: 'logistica-comercio-exterior', email: 'nohemi.camberos@cslogix.com',
-    destacado: ['Logística nacional e internacional', 'Domestic and international logistics'],
-    resumen: ['Estrategias y soluciones logísticas para comercio internacional y transporte nacional.',
-              'Logistics strategies and solutions for international trade and domestic transport.'],
-    descripcion: ['CsLogix diseña estrategias y soluciones para operaciones de comercio internacional y logística de transporte nacional. Su trabajo se centra en optimizar procesos, mejorar la coordinación de las cadenas de suministro y facilitar el movimiento eficiente de mercancías, con servicios adaptados a cada cliente.',
-                  'CsLogix designs strategies and solutions for international trade operations and domestic transport logistics. Its work focuses on optimising processes, improving supply chain coordination and moving goods efficiently, with services tailored to each client.'],
-    oferta: ['Logística internacional', 'Transporte nacional', 'Coordinación de cadena de suministro']
+    // Datos de su sitio oficial, cslogix.com (sept. 2026). Cifras tomadas de su sitio
+    // (+15 años, +8,500 operaciones, +1,200 clientes, +45 países). Sus fotos son de banco
+    // de imágenes: la ficha va sin foto.
+    slug: 'cslogix', marca: 'CSLogix', estado: 'puebla', municipio: 'Puebla',
+    sector: 'logistica-comercio-exterior', email: 'nohemi.camberos@cslogix.com', tel: '+52 222 156 0064',
+    destacado: ['Cruce fronterizo México–EUA', 'Mexico–US cross-border'],
+    resumen: ['Logística internacional de principio a fin: transporte marítimo, aéreo y terrestre —incluido el cruce México–Estados Unidos—, despacho aduanal, almacenaje y seguro de mercancías, con un solo ejecutivo por operación.',
+              'End-to-end international logistics: sea, air and road freight — including Mexico–US cross-border — customs clearance, warehousing and cargo insurance, with a single account executive per shipment.'],
+    descripcion: ['CSLogix coordina de principio a fin las operaciones de comercio internacional de sus clientes: transporte marítimo, aéreo y terrestre, despacho aduanal, almacenaje, distribución y seguro de mercancías, con un solo ejecutivo que da seguimiento en tiempo real a cada envío. Con más de 15 años de experiencia, suma más de 8,500 operaciones y 1,200 clientes, y una red de socios en América, Europa y Asia que la conecta con más de 45 países.\n\nEn transporte terrestre ofrece servicio nacional e internacional —incluido el cruce fronterizo México–Estados Unidos—, carga completa (FTL) y consolidada (LTL), seca, refrigerada y sobredimensionada; en marítimo y aéreo mueve contenedor completo (FCL), carga consolidada (LCL), carga general, urgente y de proyecto, con servicio puerta a puerta. Su área de comercio exterior se encarga de la clasificación arancelaria, la documentación, los permisos y el cumplimiento regulatorio, y su sitio publica tarifas de referencia por ruta para cotizar rápido.',
+                  'CSLogix coordinates its clients\' international trade operations end to end: sea, air and road freight, customs clearance, warehousing, distribution and cargo insurance, with a single account executive tracking every shipment in real time. With more than 15 years of experience, it has completed more than 8,500 operations for over 1,200 clients, and a partner network across the Americas, Europe and Asia connects it with more than 45 countries.\n\nBy road it offers domestic and international service — including Mexico–US cross-border — full truckload (FTL) and less-than-truckload (LTL), dry, refrigerated and oversized cargo; by sea and air it handles full container loads (FCL), less-than-container loads (LCL), general, urgent and project cargo, with door-to-door service. Its foreign trade team handles tariff classification, documentation, permits and regulatory compliance, and its website publishes reference rates by route for quick quotes.'],
+    oferta: [
+      'Flete marítimo FCL y LCL',
+      'Carga aérea general, consolidada y urgente',
+      'Transporte terrestre FTL y LTL',
+      'Cruce fronterizo México–Estados Unidos',
+      'Carga refrigerada y sobredimensionada',
+      'Despacho aduanal y clasificación arancelaria',
+      'Documentación, permisos y cumplimiento',
+      'Almacenaje y distribución',
+      'Seguro de mercancías',
+      'Servicio puerta a puerta'
+    ]
   },
   {
     slug: 'empacabados', marca: 'Empacabados', razon: 'Empacabados S.A. de C.V.', estado: 'puebla', municipio: 'Puebla',
@@ -443,7 +457,8 @@ const ACTUALIZAR = [
   ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026'],
   ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026'],
   // 14-ficha-cogne.sql ya se aplicó y queda como registro; la versión vigente de COGNE es la 15
-  ['15-ficha-cogne-catalogo.sql', ['cogne-mexico'], 'catálogo de productos de la empresa, sept. 2026']
+  ['15-ficha-cogne-catalogo.sql', ['cogne-mexico'], 'catálogo de productos de la empresa, sept. 2026'],
+  ['16-ficha-cslogix.sql', ['cslogix'], 'sitio oficial cslogix.com, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
