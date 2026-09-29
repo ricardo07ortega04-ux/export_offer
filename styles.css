@@ -590,6 +590,30 @@ button { cursor: pointer; }
 .card-note span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .card-foot .btn { position: relative; z-index: 1; flex: none; }
 
+/* Paginación del directorio */
+.pager {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 0.5rem; margin-top: var(--space-4);
+}
+.pager-list { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; }
+.pager-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem;
+  min-width: 44px; min-height: 44px; padding: 0 0.75rem;
+  background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radius-pill);
+  color: var(--noche); font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.pager-btn:hover:not(:disabled) { border-color: var(--cobalto); color: var(--cobalto); }
+.pager-btn[aria-current="page"] { background: var(--cobalto); border-color: var(--cobalto); color: #fff; }
+.pager-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pager-btn svg { width: 16px; height: 16px; flex: none; }
+.pager-gap { min-width: 24px; text-align: center; color: var(--pizarra); }
+/* En celular las flechas quedan solas, sin texto, para que todo quepa en una línea */
+@media (max-width: 480px) {
+  .pager-dir span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  .pager-dir { padding: 0; }
+}
+
 /* Vista de lista */
 @media (min-width: 720px) {
   .cards.is-list .card { flex-direction: row; align-items: stretch; }

@@ -319,8 +319,11 @@
     var filtersForm = document.getElementById('filters');
     var filtersToggle = document.querySelector('[data-filters-toggle]');
 
+    var pagerEl = document.querySelector('[data-pager]');
+    var POR_PAGINA = 10;
+
     var LISTAS = ['tipo', 'mercado', 'cert', 'sector', 'estado'];
-    var state = { q: '', tipo: [], mercado: [], cert: [], sector: [], estado: [], maquila: false, sort: 'relevance', view: 'grid' };
+    var state = { q: '', tipo: [], mercado: [], cert: [], sector: [], estado: [], maquila: false, sort: 'relevance', view: 'grid', page: 1 };
 
     /* --- Estado en la URL --- */
     function readURL() {
@@ -332,6 +335,7 @@
       state.maquila = p.get('maquila') === '1';
       state.sort = p.get('sort') || 'relevance';
       state.view = p.get('view') === 'list' ? 'list' : (store.get('se-view') === 'list' ? 'list' : 'grid');
+      state.page = Math.max(1, parseInt(p.get('page'), 10) || 1);
     }
     function writeURL() {
       var p = new URLSearchParams();
@@ -342,6 +346,7 @@
       if (state.maquila) p.set('maquila', '1');
       if (state.sort !== 'relevance') p.set('sort', state.sort);
       if (state.view === 'list') p.set('view', 'list');
+      if (state.page > 1) p.set('page', state.page);
       var qs = p.toString();
       history.replaceState(null, '', qs ? '?' + qs + location.hash : location.pathname + location.hash);
     }
@@ -539,14 +544,52 @@
         '<a class="btn btn-primary" href="#contacto">' + esc(t('emptyCta')) + '</a></div>';
     }
 
+    /* --- Paginación: 10 empresas por página --- */
+
+    // Páginas a mostrar: la primera, la última y las vecinas de la actual; '…' en los saltos
+    function paginasVisibles(actual, total) {
+      var out = [];
+      for (var i = 1; i <= total; i++) {
+        if (i === 1 || i === total || Math.abs(i - actual) <= 1) out.push(i);
+        else if (out[out.length - 1] !== '…') out.push('…');
+      }
+      return out;
+    }
+
+    function renderPager(total) {
+      if (!pagerEl) return;
+      if (total <= 1) { pagerEl.hidden = true; pagerEl.innerHTML = ''; return; }
+      pagerEl.hidden = false;
+      pagerEl.setAttribute('aria-label', t('pagerLabel'));
+      var p = state.page;
+      var html = '<button class="pager-btn pager-dir" type="button" data-page="' + (p - 1) + '"' + (p === 1 ? ' disabled' : '') + '>' +
+        svg('i-back') + '<span>' + esc(t('pagerPrev')) + '</span></button><ol class="pager-list">';
+      paginasVisibles(p, total).forEach(function (n) {
+        html += n === '…'
+          ? '<li class="pager-gap" aria-hidden="true">…</li>'
+          : '<li><button class="pager-btn pager-num" type="button" data-page="' + n + '"' +
+            ' aria-label="' + esc(t('pagerPage').replace('{n}', n)) + '"' + (n === p ? ' aria-current="page"' : '') + '>' + n + '</button></li>';
+      });
+      html += '</ol><button class="pager-btn pager-dir" type="button" data-page="' + (p + 1) + '"' + (p === total ? ' disabled' : '') + '>' +
+        '<span>' + esc(t('pagerNext')) + '</span>' + svg('i-arrow') + '</button>';
+      pagerEl.innerHTML = html;
+    }
+
     render = function () {
       var list = sorted(filtered());
+      var totalPaginas = Math.max(1, Math.ceil(list.length / POR_PAGINA));
+      state.page = Math.min(Math.max(1, state.page), totalPaginas);
+      var desde = (state.page - 1) * POR_PAGINA;
+      var pagina = list.slice(desde, desde + POR_PAGINA);
 
       cardsEl.classList.toggle('is-list', state.view === 'list');
-      cardsEl.innerHTML = list.length ? list.map(cardHTML).join('') : emptyHTML();
+      cardsEl.innerHTML = list.length ? pagina.map(cardHTML).join('') : emptyHTML();
+      renderPager(totalPaginas);
 
       resultsEl.textContent = list.length === 0 ? t('resultsNone')
-        : list.length === 1 ? t('resultsOne') : tp('resultsMany', list.length);
+        : list.length === 1 ? t('resultsOne')
+        : list.length <= POR_PAGINA ? tp('resultsMany', list.length)
+        : t('resultsRange').replace('{a}', fmt(desde + 1)).replace('{b}', fmt(desde + pagina.length)).replace('{n}', fmt(list.length));
 
       renderChips();
       if (sortEl) sortEl.value = state.sort;
@@ -558,9 +601,23 @@
 
     /* --- Eventos --- */
 
+    // Cambiar de página: se sube al inicio de los resultados para leer desde la primera tarjeta
+    if (pagerEl) {
+      pagerEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-page]');
+        if (!btn || btn.disabled) return;
+        state.page = parseInt(btn.getAttribute('data-page'), 10);
+        render();
+        var barra = document.querySelector('.results-bar');
+        if (barra) barra.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
+      });
+    }
+
+    // Cualquier cambio en filtros, búsqueda u orden vuelve a la primera página
     groupsEl.addEventListener('change', function (e) {
       var input = e.target.closest('input[data-facet]');
       if (!input) return;
+      state.page = 1;
       var key = input.getAttribute('data-facet');
       if (key === 'maquila') {
         state.maquila = input.checked;
@@ -585,6 +642,7 @@
       var btn = e.target.closest('[data-remove]');
       if (!btn) return;
       var key = btn.getAttribute('data-remove');
+      state.page = 1;
       if (key === 'q') { state.q = ''; syncSearchInputs(); }
       else if (key === 'maquila') state.maquila = false;
       else {
@@ -597,7 +655,7 @@
 
     if (clearAllBtn) {
       clearAllBtn.addEventListener('click', function () {
-        state.q = ''; state.maquila = false;
+        state.q = ''; state.maquila = false; state.page = 1;
         LISTAS.forEach(function (k) { state[k] = []; });
         syncSearchInputs();
         buildFilters();
@@ -605,7 +663,7 @@
       });
     }
 
-    if (sortEl) sortEl.addEventListener('change', function () { state.sort = sortEl.value; render(); });
+    if (sortEl) sortEl.addEventListener('change', function () { state.sort = sortEl.value; state.page = 1; render(); });
 
     document.querySelectorAll('[data-view]').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -647,6 +705,7 @@
         clearTimeout(debounce);
         debounce = setTimeout(function () {
           state.q = input.value;
+          state.page = 1;
           buildFilters();
           render();
         }, 220);
@@ -658,6 +717,7 @@
         clearTimeout(debounce);
         var input = form.querySelector('input[type="search"]');
         state.q = input ? input.value : '';
+        state.page = 1;
         buildFilters();
         render();
         document.getElementById('directorio').scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
