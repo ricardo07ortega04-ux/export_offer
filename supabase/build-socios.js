@@ -245,14 +245,25 @@ const SOCIOS = [
     oferta: ['Lima persa']
   },
   {
+    // Datos de su sitio oficial, recodding.com (sept. 2026): ahora se enfoca en agentes de
+    // automatización con IA; ya no menciona Odoo ni BI. Sus cifras están marcadas como
+    // «ejemplo ilustrativo» y su testimonio es un marcador de posición: no se usan.
+    // No se citan clientes (su lista incluye a COMCE Sur). Sin foto: solo tiene su logotipo.
     slug: 'recodding', marca: 'Recodding', estado: 'puebla', municipio: 'Puebla',
     sector: 'tecnologia', email: 'eduardo@recodding.com',
-    destacado: ['Implementación de Odoo', 'Odoo implementation'],
-    resumen: ['Transformación digital: inteligencia de negocios, automatización y ERP Odoo.',
-              'Digital transformation: business intelligence, automation and Odoo ERP.'],
-    descripcion: ['Recodding acompaña a las empresas en su transformación digital para hacerlas más rentables y eficientes. Combina automatización, análisis de datos e integración tecnológica: Business Intelligence, automatización de procesos, implementación de ERP Odoo, arquitectura en la nube e integración de bases de datos.',
-                  'Recodding supports companies through digital transformation to make them more profitable and efficient. It combines automation, data analysis and technology integration: business intelligence, process automation, Odoo ERP implementation, cloud architecture and database integration.'],
-    oferta: ['Business Intelligence', 'Automatización de procesos', 'Implementación de ERP Odoo', 'Arquitectura en la nube', 'Integración de bases de datos']
+    destacado: ['Agentes de IA con supervisión humana', 'AI agents with human oversight'],
+    resumen: ['Automatización con agentes de inteligencia artificial para los procesos operativos de las empresas: conciliación, aprobaciones, cotizaciones y reportes.',
+              'AI agent automation for companies\' operational processes: reconciliation, approvals, quotes and reporting.'],
+    descripcion: ['Recodding construye agentes de automatización a la medida que ejecutan los flujos de trabajo operativos de una empresa —aprobaciones, conciliación de facturas, reportes, cotizaciones, clasificación de solicitudes o el paso de pedidos entre sistemas—: el trabajo que antes se hacía a mano, para que se complete en minutos en lugar de días. Cada agente se diseña para un proceso específico y se conecta a los sistemas que la empresa ya usa.\n\nSu método avanza por etapas: primero mapea el proceso tal como lo ejecuta el equipo; después construye el agente y lo pone a trabajar en paralelo con revisión humana en cada decisión, y solo cuando su precisión se comprueba con volumen real asume el proceso completo, con registro de auditoría y una persona que puede intervenir ante cualquier excepción. Atiende a empresas de servicios financieros, manufactura, logística y cadena de suministro, comercio electrónico, salud, seguros y servicios profesionales.',
+                  'Recodding builds custom automation agents that run a company\'s operational workflows — approvals, invoice reconciliation, reporting, quotes, request triage or moving orders between systems: work that used to be done by hand, so it gets done in minutes instead of days. Each agent is designed for a specific process and connects to the systems the company already uses.\n\nIts method works in stages: first it maps the process as the team actually runs it; then it builds the agent and runs it in parallel with human review of every decision, and only once its accuracy is proven on real volume does it take over the whole process, with a full audit trail and a person who can step in on any exception. It serves companies in financial services, manufacturing, logistics and supply chain, e-commerce, healthcare, insurance and professional services.'],
+    oferta: [
+      'Agentes de automatización a la medida',
+      'Conciliación de facturas y cuentas por pagar',
+      'Flujo de pedidos entre sistemas',
+      'Cotizaciones y contratos desde el CRM',
+      'Clasificación y enrutamiento de solicitudes',
+      'Reportes y datos entre aplicaciones'
+    ]
   },
   {
     // Datos de su sitio oficial, saetaoc.com (sept. 2026). Oficina principal en
@@ -394,7 +405,8 @@ const ACTUALIZAR = [
   ['08-ficha-solferino.sql', ['solferino-native'], 'sitio oficial ginsolferino.com, sept. 2026'],
   ['09-ficha-saeta.sql', ['saeta'], 'sitio oficial saetaoc.com, sept. 2026'],
   ['10-ficha-cashabroad.sql', ['cashabroad'], 'sitio oficial cashabroad.one, sept. 2026'],
-  ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026']
+  ['11-ficha-amp.sql', ['amp-solutions'], 'sitio oficial grupoamp.mx, sept. 2026'],
+  ['12-ficha-recodding.sql', ['recodding'], 'sitio oficial recodding.com, sept. 2026']
 ];
 
 ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
