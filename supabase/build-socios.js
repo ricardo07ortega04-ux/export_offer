@@ -24,7 +24,13 @@ const ESTADOS = [
 const CERTIFICACIONES = [
   ['cofepris', 'COFEPRIS', 'COFEPRIS',
    'Cumplimiento sanitario ante la Comisión Federal para la Protección contra Riesgos Sanitarios.',
-   'Health compliance with Mexico\'s Federal Commission for the Protection against Sanitary Risks.']
+   'Health compliance with Mexico\'s Federal Commission for the Protection against Sanitary Risks.'],
+  ['c-tpat', 'C-TPAT', 'C-TPAT',
+   'Programa de seguridad de la cadena de suministro de la aduana de Estados Unidos (CBP).',
+   'US Customs and Border Protection (CBP) supply chain security programme.'],
+  ['smeta', 'SMETA', 'SMETA',
+   'Auditoría de comercio ético de Sedex: condiciones laborales, salud y seguridad, medio ambiente y ética empresarial.',
+   'Sedex Members Ethical Trade Audit: labour standards, health and safety, environment and business ethics.']
 ];
 
 const SOCIOS = [
@@ -127,14 +133,28 @@ const SOCIOS = [
     ]
   },
   {
+    // Datos de su sitio oficial, empacabados.com (sept. 2026): fundada en 1986 (la página de
+    // socios decía «más de 20 años»), exporta a EUA y Canadá, evaluada en C-TPAT y SMETA.
+    // Foto: sus líneas de costura (img-859 de su sitio, foto propia de la planta).
     slug: 'empacabados', marca: 'Empacabados', razon: 'Empacabados S.A. de C.V.', estado: 'puebla', municipio: 'Puebla',
-    sector: 'textil-y-confeccion', email: 'maru@empacabados.com', maquila: true,
-    destacado: ['20 años en maquila textil', '20 years in apparel manufacturing'],
-    resumen: ['Maquila textil con más de 20 años de experiencia en la confección de prendas de vestir.',
-              'Apparel contract manufacturer with more than 20 years of experience.'],
-    descripcion: ['Empacabados es una maquiladora textil mexicana con más de 20 años confeccionando prendas de vestir para distintos sectores. Cubre el proceso completo —corte, transfer, sublimado, costura, revisión y empaque— y trabaja para marcas y empresas que buscan manufactura textil confiable.',
-                  'Empacabados is a Mexican apparel contract manufacturer with more than 20 years of experience making garments for different sectors. It covers the whole process — cutting, heat transfer, sublimation, sewing, inspection and packing — for brands and companies looking for reliable textile manufacturing.'],
-    oferta: ['Confección de prendas', 'Corte', 'Transfer y sublimado', 'Costura', 'Revisión y empaque']
+    sector: 'textil-y-confeccion', email: 'maru@empacabados.com', tel: '+52 222 232 7232', maquila: true,
+    situacion: 'exportando', mercados: ['estados-unidos', 'canada'], certs: ['c-tpat', 'smeta'],
+    destacado: ['40 años confeccionando para EUA y Canadá', '40 years making apparel for the US and Canada'],
+    resumen: ['Maquila de ropa deportiva y de punto desde 1986 para marcas de Estados Unidos y Canadá, con corte, confección, estampado, bordado y sublimación en Puebla.',
+              'Contract manufacturer of sportswear and knitwear since 1986 for US and Canadian brands, with cutting, sewing, printing, embroidery and sublimation in Puebla.'],
+    descripcion: ['Empacabados, fundada en Puebla en 1986, confecciona prendas de punto y de tejido plano —en especial ropa deportiva— para marcas de Estados Unidos y Canadá. Empezó como taller de corte y confección, servicio que mantiene, y hoy ofrece paquete completo junto con empresas aliadas: teñido de prendas, serigrafía, bordado, elástico fruncido (shirring), transfer y sublimación.\n\nHa sido evaluada y aprobada como proveedora de marcas internacionales como Under Armour, Adidas, Puma y McDavid, y fabrica marca propia para cadenas como Target, Macy\'s, Kohl\'s y Walmart, a través de proveedores verticalmente integrados de Estados Unidos y Canadá. Ha sido evaluada en C-TPAT, el programa de seguridad de la cadena de suministro de la aduana de Estados Unidos, cuenta con la auditoría ética SMETA y ha aprobado auditorías de cumplimiento social de Intertek, Bureau Veritas, Elevate y UL.',
+                  'Empacabados, founded in Puebla in 1986, makes knit and woven garments — especially sportswear — for US and Canadian brands. It started as a cut-and-sew workshop, a service it still provides, and today offers full-package production with partner companies: garment dyeing, screen printing, embroidery, elastic shirring, heat transfer and sublimation.\n\nIt has been evaluated and approved as a supplier for international brands such as Under Armour, Adidas, Puma and McDavid, and makes private labels for retailers such as Target, Macy\'s, Kohl\'s and Walmart through vertically integrated US and Canadian vendors. It has been assessed under C-TPAT, US Customs and Border Protection\'s supply chain security programme, holds a SMETA ethical audit and has passed social compliance audits by Intertek, Bureau Veritas, Elevate and UL.'],
+    oferta: [
+      'Corte y confección (cut & sew)',
+      'Ropa deportiva de punto y tejido plano',
+      'Marca propia (private label)',
+      'Paquete completo (full package)',
+      'Teñido de prendas',
+      'Serigrafía',
+      'Bordado',
+      'Elástico fruncido (shirring)',
+      'Transfer y sublimación'
+    ]
   },
   {
     slug: 'impoexporta', marca: 'ImpoExporta', estado: 'quintana-roo', municipio: 'Benito Juárez',
@@ -458,15 +478,28 @@ const ACTUALIZAR = [
   ['13-ficha-calten.sql', ['calten-group'], 'sitio oficial caltengroup.com, sept. 2026'],
   // 14-ficha-cogne.sql ya se aplicó y queda como registro; la versión vigente de COGNE es la 15
   ['15-ficha-cogne-catalogo.sql', ['cogne-mexico'], 'catálogo de productos de la empresa, sept. 2026'],
-  ['16-ficha-cslogix.sql', ['cslogix'], 'sitio oficial cslogix.com, sept. 2026']
+  ['16-ficha-cslogix.sql', ['cslogix'], 'sitio oficial cslogix.com, sept. 2026'],
+  ['17-ficha-empacabados.sql', ['empacabados'], 'sitio oficial empacabados.com, sept. 2026', { catalogo: true }]
 ];
 
-ACTUALIZAR.forEach(([archivo, slugs, fuente]) => {
+// { catalogo: true }: el archivo también da de alta en el catálogo las certificaciones nuevas
+// que usa. Los archivos anteriores ya se aplicaron y se dejan como estaban.
+ACTUALIZAR.forEach(([archivo, slugs, fuente, opciones = {}]) => {
   const U = [];
   U.push(`-- Sur Exporta — ${archivo.slice(0, 2)} · Fichas de socios enriquecidas (${fuente})`);
   U.push('-- GENERADO por supabase/build-socios.js. Ejecutar después de 06-socios.sql.');
   U.push('-- Actualiza textos, oferta y contacto interno; no cambia el estatus de publicación.');
   U.push('');
+  // Certificaciones nuevas que usan estas empresas: se dan de alta antes de asignarlas
+  const usadas = new Set(SOCIOS.filter((s) => slugs.includes(s.slug)).flatMap((s) => s.certs || []));
+  const nuevas = opciones.catalogo ? CERTIFICACIONES.filter(([clave]) => usadas.has(clave)) : [];
+  if (nuevas.length) {
+    U.push('-- Certificaciones del catálogo');
+    nuevas.forEach(([clave, es, en, des, den]) => {
+      U.push(`insert into certificaciones (clave, nombre_es, nombre_en, descripcion_es, descripcion_en) values (${[clave, es, en, des, den].map(q).join(', ')}) on conflict (clave) do update set nombre_es = excluded.nombre_es, nombre_en = excluded.nombre_en, descripcion_es = excluded.descripcion_es, descripcion_en = excluded.descripcion_en;`);
+    });
+    U.push('');
+  }
   SOCIOS.filter((s) => slugs.includes(s.slug)).forEach((s) => {
     U.push(`-- ${s.marca}`);
     U.push(`update empresas set ${[
