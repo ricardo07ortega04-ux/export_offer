@@ -44,6 +44,11 @@
 
 <main class="admin-main">
 
+  <nav class="admin-wrap admin-tabs" aria-label="Secciones del panel" data-tabs hidden>
+    <button type="button" data-tab="lista" aria-current="page">Empresas</button>
+    <button type="button" data-tab="solicitudes">Solicitudes <span class="admin-badge" data-badge hidden></span></button>
+  </nav>
+
   <!-- Acceso -->
   <section class="admin-wrap admin-narrow" data-vista="acceso" hidden>
     <div class="panel">
@@ -139,6 +144,7 @@
       <h3>No se pudo guardar</h3>
       <ul></ul>
     </div>
+    <p class="admin-aviso" data-editor-origen hidden></p>
 
     <form data-editor-form novalidate>
       <div class="admin-cols">
@@ -252,6 +258,77 @@
         <span class="admin-actualizado" data-actualizado></span>
       </div>
     </form>
+  </section>
+
+  <!-- Solicitudes de registro -->
+  <section class="admin-wrap" data-vista="solicitudes" hidden>
+    <div class="admin-head">
+      <div>
+        <h1 class="admin-h1">Solicitudes de registro</h1>
+        <p class="admin-lede" data-sol-conteo>Empresas que llenaron el formulario de sur-exporta.com/registro.</p>
+      </div>
+      <a class="btn btn-outline" href="/registro" target="_blank" rel="noopener">Ver el formulario</a>
+    </div>
+
+    <div class="admin-filtros">
+      <div class="select-shell">
+        <label class="u-sr" for="s-estatus">Filtrar por estatus</label>
+        <select id="s-estatus" data-sol-filtro>
+          <option value="abiertas">Nuevas y en proceso</option>
+          <option value="">Todas</option>
+          <option value="nueva">Nuevas</option>
+          <option value="en_proceso">En proceso</option>
+          <option value="convertida">Convertidas en borrador</option>
+          <option value="descartada">Descartadas</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="admin-tabla-scroll">
+      <table class="admin-tabla">
+        <thead>
+          <tr>
+            <th>Recibida</th>
+            <th>Empresa</th>
+            <th>Contacto</th>
+            <th>Oferta</th>
+            <th>Estatus</th>
+            <th><span class="u-sr">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody data-sol-filas></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Detalle de una solicitud -->
+  <section class="admin-wrap" data-vista="solicitud" hidden>
+    <button class="p-back admin-volver" type="button" data-sol-volver>
+      <svg aria-hidden="true"><use href="#i-back"/></svg> Volver a las solicitudes
+    </button>
+
+    <div class="admin-head">
+      <div>
+        <h1 class="admin-h1" data-sol-titulo></h1>
+        <p class="admin-lede" data-sol-sub></p>
+      </div>
+      <div class="admin-sol-acciones">
+        <div class="select-shell">
+          <label class="u-sr" for="s-cambiar">Estatus de la solicitud</label>
+          <select id="s-cambiar" data-sol-estatus>
+            <option value="nueva">Nueva</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="convertida">Convertida en borrador</option>
+            <option value="descartada">Descartada</option>
+          </select>
+        </div>
+        <button class="btn btn-outline" type="button" data-sol-ver-empresa hidden>Abrir la empresa</button>
+        <button class="btn btn-gold" type="button" data-sol-convertir>Crear borrador en el directorio</button>
+      </div>
+    </div>
+
+    <p class="admin-aviso" data-sol-aviso hidden></p>
+    <div class="admin-cols" data-sol-detalle></div>
   </section>
 
   <!-- Publicación -->

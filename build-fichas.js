@@ -92,6 +92,7 @@ function footer() {
         ${i18('h4', 'backToComce')}
         <ul>
           <li><a href="https://www.comce-sur.org.mx/" rel="noopener">comce-sur.org.mx</a></li>
+          <li><a href="registro.html" data-es="Registra tu empresa" data-en="List your company">Registra tu empresa</a></li>
         </ul>
       </div>
     </div>

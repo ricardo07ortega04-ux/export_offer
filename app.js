@@ -786,6 +786,7 @@
       try {
         localStorage.removeItem('se-lang');
         localStorage.removeItem('se-view');
+        localStorage.removeItem('se-registro');
         estado.textContent = lang === 'en'
           ? 'Done. Your preferences were deleted from this browser.'
           : 'Listo. Tus preferencias se borraron de este navegador.';

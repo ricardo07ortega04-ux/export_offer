@@ -14,6 +14,9 @@
   var empresas = [];
   var actual = null;          // empresa en edición
   var quien = null;           // fila de personal
+  var solicitudes = [];
+  var solActual = null;       // solicitud abierta en el detalle
+  var origenSolicitud = null; // solicitud que se está convirtiendo en empresa
 
   var ETIQUETAS = {
     borrador: 'Borrador', en_revision: 'En revisión',
@@ -24,6 +27,13 @@
 
   function vista(nombre) {
     $$('[data-vista]').forEach(function (s) { s.hidden = s.getAttribute('data-vista') !== nombre; });
+    // Pestañas: visibles con sesión; la del detalle de solicitud cuenta como «Solicitudes»
+    var tab = { lista: 'lista', editor: 'lista', solicitudes: 'solicitudes', solicitud: 'solicitudes' }[nombre];
+    $('[data-tabs]').hidden = !tab;
+    $$('[data-tab]').forEach(function (b) {
+      if (b.getAttribute('data-tab') === tab) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
     window.scrollTo(0, 0);
   }
 
@@ -205,6 +215,8 @@
   async function abrirEditor(id) {
     $('[data-editor-error]').hidden = true;
     $('[data-guardado]').hidden = true;
+    $('[data-editor-origen]').hidden = true;
+    origenSolicitud = null;
     var f = $('[data-editor-form]');
     f.reset();
     $$('input[name="mercado"], input[name="certificacion"]').forEach(function (c) { c.checked = false; });
@@ -372,12 +384,286 @@
     await sb.from('empresa_certificaciones').delete().eq('empresa_id', id);
     if (certs.length) await sb.from('empresa_certificaciones').insert(certs);
 
+    // Si el borrador nació de una solicitud, esta queda ligada a la empresa
+    if (origenSolicitud) {
+      await sb.from('solicitudes').update({ estatus: 'convertida', empresa_id: id }).eq('id', origenSolicitud.id);
+      origenSolicitud = null;
+      $('[data-editor-origen]').hidden = true;
+      contarSolicitudes();
+    }
+
     boton.removeAttribute('aria-busy');
     boton.textContent = 'Guardar cambios';
     $('[data-guardado]').hidden = false;
     $('[data-editor-titulo]').textContent = actual.marca;
     $('[data-actualizado]').textContent = 'Última edición: ' + fecha(actual.actualizado_en);
     aviso('Cambios guardados. Recuerda publicar para que se vean en el sitio.');
+  });
+
+  /* ---------- solicitudes de registro ---------- */
+
+  var SOL_ETIQUETAS = {
+    nueva: 'Nueva', en_proceso: 'En proceso', convertida: 'Convertida', descartada: 'Descartada'
+  };
+  var SOL_PILL = { nueva: 'en_revision', en_proceso: 'borrador', convertida: 'publicado', descartada: 'suspendido' };
+  var SITUACION = {
+    exportando: 'Ya exporta / atiende clientes en el extranjero',
+    buscando_comprador: 'Busca compradores o clientes en el extranjero',
+    sin_exportar: 'Se prepara para exportar / atiende a exportadores'
+  };
+  var PADRON = { vigente: 'Sí, vigente', tramite: 'En trámite', no: 'No', no_se: 'No sabe' };
+  var SOCIO = { si: 'Sí', tramite: 'En trámite', no: 'No' };
+
+  function esc(v) {
+    return txt(v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function norm(s) { return txt(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); }
+  function slugDe(s) { return norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60); }
+  function nombreSector(clave) {
+    var s = catalogos.sectores.filter(function (x) { return x.clave === clave; })[0];
+    return s ? s.nombre_es : clave;
+  }
+
+  async function contarSolicitudes() {
+    var r = await sb.from('solicitudes').select('id', { count: 'exact', head: true }).eq('estatus', 'nueva');
+    var badge = $('[data-badge]');
+    // Si la tabla aún no existe (falta correr 19-solicitudes.sql) la pestaña se oculta
+    $('[data-tab="solicitudes"]').hidden = !!r.error;
+    badge.hidden = r.error || !r.count;
+    badge.textContent = r.count || '';
+  }
+
+  async function cargarSolicitudes() {
+    var r = await sb.from('solicitudes')
+      .select('id,creada_en,estatus,marca,estado,municipio,tipo,sector,sector_otro,contacto_nombre,contacto_email,empresa_id')
+      .order('creada_en', { ascending: false });
+    if (r.error) { aviso('No se pudieron cargar las solicitudes: ' + r.error.message, true); return; }
+    solicitudes = r.data || [];
+    pintarSolicitudes();
+  }
+
+  function pintarSolicitudes() {
+    var filtro = $('[data-sol-filtro]').value;
+    var lista = solicitudes.filter(function (s) {
+      if (filtro === 'abiertas') return s.estatus === 'nueva' || s.estatus === 'en_proceso';
+      return !filtro || s.estatus === filtro;
+    });
+    var nuevas = solicitudes.filter(function (s) { return s.estatus === 'nueva'; }).length;
+    $('[data-sol-conteo]').textContent = solicitudes.length + (solicitudes.length === 1 ? ' solicitud' : ' solicitudes') +
+      ' en total · ' + nuevas + (nuevas === 1 ? ' nueva' : ' nuevas');
+
+    $('[data-sol-filas]').innerHTML = lista.length ? lista.map(function (s) {
+      return '<tr>' +
+        '<td>' + esc(fecha(s.creada_en)) + '</td>' +
+        '<td><span class="marca">' + esc(s.marca) + '</span><span class="sub">' + esc([s.municipio, s.estado].filter(Boolean).join(', ')) + '</span></td>' +
+        '<td>' + esc(s.contacto_nombre) + '<span class="sub">' + esc(s.contacto_email) + '</span></td>' +
+        '<td>' + (s.tipo === 'servicio' ? 'Servicios' : 'Productos') + '<span class="sub">' + esc(s.sector_otro || nombreSector(s.sector)) + '</span></td>' +
+        '<td><span class="estado-pill estado-' + SOL_PILL[s.estatus] + '">' + SOL_ETIQUETAS[s.estatus] + '</span></td>' +
+        '<td class="num"><button class="btn btn-outline btn-sm" type="button" data-sol-abrir="' + s.id + '">Ver</button></td>' +
+        '</tr>';
+    }).join('') : '<tr><td colspan="6" class="admin-vacio">No hay solicitudes con este filtro.</td></tr>';
+  }
+
+  $('[data-sol-filtro]').addEventListener('change', pintarSolicitudes);
+  $('[data-sol-filas]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-sol-abrir]');
+    if (b) abrirSolicitud(b.getAttribute('data-sol-abrir'));
+  });
+
+  $$('[data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () { irA(b.getAttribute('data-tab')); });
+  });
+  $('[data-sol-volver]').addEventListener('click', function () { irA('solicitudes'); });
+
+  async function irA(tab) {
+    if (tab === 'solicitudes') {
+      history.replaceState(null, '', '#solicitudes');
+      vista('solicitudes');
+      await cargarSolicitudes();
+    } else {
+      history.replaceState(null, '', location.pathname);
+      vista('lista');
+      cargarEmpresas();
+    }
+  }
+
+  // Bloque de datos: [etiqueta, valor] se omite si el valor está vacío
+  function bloque(titulo, filas, extra) {
+    var dl = filas.filter(function (f) { return f[1] !== null && f[1] !== undefined && f[1] !== '' && !(Array.isArray(f[1]) && !f[1].length); })
+      .map(function (f) {
+        var v = Array.isArray(f[1]) ? f[1].map(esc).join('<br>') : esc(f[1]).replace(/\n/g, '<br>');
+        return '<div><dt>' + esc(f[0]) + '</dt><dd>' + v + '</dd></div>';
+      }).join('');
+    return '<div class="panel"><h2>' + titulo + '</h2>' + (dl ? '<dl class="admin-dl">' + dl + '</dl>' : (extra ? '' : '<p class="field-help">Sin datos.</p>')) + (extra || '') + '</div>';
+  }
+
+  async function abrirSolicitud(id) {
+    var r = await sb.from('solicitudes').select('*').eq('id', id).single();
+    if (r.error) { aviso('No se pudo abrir la solicitud: ' + r.error.message, true); return; }
+    var s = solActual = r.data;
+    var servicio = s.tipo === 'servicio';
+
+    $('[data-sol-titulo]').textContent = s.marca;
+    $('[data-sol-sub]').textContent = 'Recibida el ' + fecha(s.creada_en) + ' · ' + (servicio ? 'Servicios' : 'Productos');
+    $('[data-sol-estatus]').value = s.estatus;
+    $('[data-sol-ver-empresa]').hidden = !s.empresa_id;
+    $('[data-sol-convertir]').hidden = !!s.empresa_id;
+
+    var avisoSol = $('[data-sol-aviso]');
+    avisoSol.hidden = !s.empresa_id;
+    avisoSol.textContent = s.empresa_id ? 'Esta solicitud ya se convirtió en una empresa del directorio.' : '';
+
+    // Imágenes: enlaces firmados que vencen en una hora
+    var rutas = [s.logo_path].concat(s.fotos_paths || []).filter(Boolean);
+    var firmas = await Promise.all(rutas.map(function (ruta) {
+      var nombre = ruta.split('/').pop();
+      var archivo = slugDe(s.marca) + '-' + nombre;
+      return Promise.all([
+        sb.storage.from('solicitudes').createSignedUrl(ruta, 3600),
+        sb.storage.from('solicitudes').createSignedUrl(ruta, 3600, { download: archivo })
+      ]).then(function (x) {
+        return { ruta: ruta, ver: x[0].data && x[0].data.signedUrl, bajar: x[1].data && x[1].data.signedUrl, nombre: archivo };
+      });
+    }));
+    var galeria = firmas.length ? '<ul class="admin-galeria">' + firmas.map(function (f) {
+      return '<li><img src="' + esc(f.ver) + '" alt="' + esc(f.nombre) + '" class="' + (f.ruta === s.logo_path ? 'es-logo' : '') + '">' +
+        '<a class="btn btn-outline btn-sm" href="' + esc(f.bajar) + '">Descargar ' + (f.ruta === s.logo_path ? 'logotipo' : 'foto') + '</a></li>';
+    }).join('') + '</ul>' +
+      '<p class="field-help">' + (s.imagenes_propias ? 'La empresa declaró que las imágenes son suyas o tiene derecho a usarlas.' : 'La empresa no confirmó los derechos de las imágenes.') + '</p>'
+      : '';
+
+    var desdeEtq = servicio ? 'Opera desde' : 'Exporta desde';
+    var capacidad = s.capacidad_mensual !== null ? Number(s.capacidad_mensual).toLocaleString('es-MX') + ' ' + txt(s.capacidad_unidad) + ' al mes' : '';
+
+    $('[data-sol-detalle]').innerHTML = [
+      bloque('Empresa', [
+        ['Marca', s.marca], ['Razón social', s.razon_social], ['RFC', s.rfc],
+        ['Ubicación', [s.municipio, s.estado].filter(Boolean).join(', ')],
+        ['Sitio web', s.sitio_web], ['Socia de COMCE Sur', SOCIO[s.socio_comce]]
+      ]),
+      bloque('Oferta', [
+        ['Sector', s.sector_otro ? s.sector_otro + ' (sector nuevo)' : nombreSector(s.sector)],
+        [servicio ? 'Servicios' : 'Productos', s.productos],
+        ['Capacidad mensual', capacidad], ['Presentaciones', s.presentaciones],
+        ['Graduación', s.abv], ['Maquila', s.maquila === null ? '' : (s.maquila ? 'Sí' : 'No')]
+      ]),
+      bloque('Exportación', [
+        ['Situación', SITUACION[s.situacion]], [desdeEtq, s.exporta_desde],
+        ['Porcentaje exportado', s.porcentaje_exportado !== null ? s.porcentaje_exportado + ' %' : ''],
+        ['Padrón de exportadores', PADRON[s.padron]],
+        ['Vende hoy en', s.mercados], ['Otros países', s.mercados_otros],
+        ['Mercados de interés', s.mercados_interes]
+      ]),
+      bloque('Certificaciones', [
+        ['Declaradas', s.certificaciones], ['Otras', s.certificaciones_otras]
+      ]),
+      bloque('Textos', [
+        ['Resumen', s.resumen_es], ['Descripción', s.descripcion_es], ['Distintivo', s.destacado_es],
+        ['Resumen (inglés)', s.resumen_en], ['Descripción (inglés)', s.descripcion_en], ['Distintivo (inglés)', s.destacado_en]
+      ]),
+      bloque('Imágenes', [], galeria || '<p class="field-help">No envió imágenes.</p>'),
+      bloque('Contacto <span class="admin-privado">no se publica</span>', [
+        ['Nombre', s.contacto_nombre], ['Cargo', s.contacto_cargo],
+        ['Correo', s.contacto_email], ['Teléfono', s.contacto_tel],
+        ['Correo de ventas', s.comercial_email], ['Teléfono de ventas', s.comercial_tel]
+      ]),
+      bloque('Notas de la empresa', [['Comentarios', s.notas]])
+    ].join('');
+
+    vista('solicitud');
+  }
+
+  $('[data-sol-estatus]').addEventListener('change', async function () {
+    if (!solActual) return;
+    var nuevo = this.value;
+    var r = await sb.from('solicitudes').update({ estatus: nuevo }).eq('id', solActual.id);
+    if (r.error) { aviso('No se pudo cambiar el estatus: ' + r.error.message, true); this.value = solActual.estatus; return; }
+    solActual.estatus = nuevo;
+    aviso('Estatus actualizado: ' + SOL_ETIQUETAS[nuevo]);
+    contarSolicitudes();
+  });
+
+  $('[data-sol-ver-empresa]').addEventListener('click', function () {
+    if (solActual && solActual.empresa_id) abrirEditor(solActual.empresa_id);
+  });
+
+  // Prellena el editor con la solicitud. No guarda nada hasta que se da «Guardar cambios».
+  $('[data-sol-convertir]').addEventListener('click', async function () {
+    var s = solActual;
+    if (!s) return;
+    await abrirEditor(null);
+    var f = $('[data-editor-form]');
+    var notas = [];
+    var poner = function (campo, v) { if (f.elements[campo] && v !== null && v !== undefined) f.elements[campo].value = v; };
+
+    poner('marca', s.marca);
+    poner('slug', slugDe(s.marca));
+    poner('razon_social', s.razon_social);
+    poner('municipio', s.municipio);
+    poner('sitio_web', s.sitio_web);
+
+    var estado = catalogos.estados.filter(function (e) { return norm(e.nombre) === norm(s.estado); })[0];
+    if (estado) poner('estado', estado.clave);
+    else notas.push('Estado «' + s.estado + '» no está en el catálogo: agrégalo en la tabla estados y elígelo aquí.');
+
+    if (s.sector && catalogos.sectores.some(function (x) { return x.clave === s.sector; })) poner('sector', s.sector);
+    else notas.push('Sector propuesto por la empresa: «' + (s.sector_otro || s.sector) + '». Elige uno existente o crea el sector.');
+    ajustarTipo();
+
+    ['resumen_es', 'resumen_en', 'descripcion_es', 'descripcion_en', 'destacado_es', 'destacado_en', 'abv', 'exporta_desde', 'porcentaje_exportado']
+      .forEach(function (c) { poner(c, s[c]); });
+    f.elements.productos.value = (s.productos || []).join('\n');
+    f.elements.situacion.value = { exportando: 'exportando', buscando_comprador: 'buscando_comprador' }[s.situacion] || 'sin_dato';
+    f.elements.padron.value = { vigente: 'vigente', tramite: 'pendiente_actualizar' }[s.padron] || 'sin_dato';
+    f.elements.maquila.checked = s.maquila === true;
+
+    if (s.capacidad_mensual !== null) {
+      if (s.capacidad_unidad === 'litros') {
+        poner('capacidad_mensual_l', Math.round(s.capacidad_mensual));
+        if (s.porcentaje_exportado !== null) poner('capacidad_exportada_l', Math.round(s.capacidad_mensual * s.porcentaje_exportado / 100));
+      } else {
+        notas.push('Capacidad declarada: ' + s.capacidad_mensual + ' ' + txt(s.capacidad_unidad) + ' al mes (el directorio solo registra litros).');
+      }
+    }
+    if (s.presentaciones) {
+      var ml = (s.presentaciones.match(/\d{2,5}/g) || []).map(Number).filter(function (n) { return n >= 50 && n <= 20000; });
+      if (s.abv && ml.length) f.elements.presentaciones_ml.value = ml.join(', ');
+      else notas.push('Presentaciones: ' + s.presentaciones);
+    }
+
+    var marcar = function (nombre, lista, catalogo) {
+      (lista || []).forEach(function (n) {
+        var item = catalogo.filter(function (x) { return norm(x.nombre_es) === norm(n); })[0];
+        var c = item && $('input[name="' + nombre + '"][value="' + item.clave + '"]');
+        if (c) c.checked = true;
+      });
+    };
+    marcar('mercado', s.mercados, catalogos.paises);
+    marcar('certificacion', s.certificaciones, catalogos.certificaciones);
+
+    poner('contacto_email', s.comercial_email || s.contacto_email);
+    poner('contacto_tel', s.comercial_tel || s.contacto_tel);
+    poner('fuente', 'Formulario de registro en sur-exporta.com (' + new Date(s.creada_en).toLocaleDateString('es-MX') + ')');
+
+    notas.unshift('Solicitud de ' + s.contacto_nombre + (s.contacto_cargo ? ' (' + s.contacto_cargo + ')' : '') + ' · ' + s.contacto_email + ' · ' + txt(s.contacto_tel));
+    if (s.rfc) notas.push('RFC: ' + s.rfc);
+    if (s.socio_comce) notas.push('Socia de COMCE Sur: ' + SOCIO[s.socio_comce]);
+    if (s.mercados_otros) notas.push('Otros países donde vende: ' + s.mercados_otros);
+    if (s.mercados_interes) notas.push('Mercados de interés: ' + s.mercados_interes);
+    if ((s.certificaciones || []).length || s.certificaciones_otras) notas.push('Pedir copia de certificados vigentes' + (s.certificaciones_otras ? '. Otras declaradas: ' + s.certificaciones_otras : '') + '.');
+    if (!s.resumen_en || !s.descripcion_en) notas.push('Traducir los textos al inglés.');
+    if (s.logo_path || (s.fotos_paths || []).length) notas.push('Descargar logotipo y fotos de la solicitud y subirlos como logo-' + slugDe(s.marca) + '.webp / foto-' + slugDe(s.marca) + '.webp.');
+    if (s.notas) notas.push('Comentario de la empresa: ' + s.notas.replace(/\s+/g, ' '));
+    f.elements.notas_revision.value = notas.join('\n');
+
+    if (!esServicio()) revisarAritmetica();
+    origenSolicitud = s;
+    var origen = $('[data-editor-origen]');
+    origen.textContent = 'Borrador prellenado con la solicitud de ' + s.marca + '. Revisa los datos y las notas de revisión; al guardar, la solicitud queda marcada como convertida.';
+    origen.hidden = false;
+    $('[data-editor-titulo]').textContent = 'Nueva empresa: ' + s.marca;
   });
 
   /* ---------- publicar ---------- */
@@ -433,6 +719,8 @@
     $('[data-publicar]').hidden = quien.rol !== 'vinculacion';
 
     await cargarCatalogos();
+    contarSolicitudes();
+    if (location.hash === '#solicitudes') { irA('solicitudes'); return; }
     await cargarEmpresas();
     vista('lista');
   }
