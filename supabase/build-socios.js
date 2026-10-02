@@ -157,14 +157,28 @@ const SOCIOS = [
     ]
   },
   {
+    // Datos de su sitio oficial, impoexporta.com (oct. 2026; el pie del sitio dice © 2020, así
+    // que rutas y redes conviene confirmarlas). Teléfono: su WhatsApp, lada 998 de Cancún.
+    // Su única foto es un fondo genérico: la ficha va sin foto.
     slug: 'impoexporta', marca: 'ImpoExporta', estado: 'quintana-roo', municipio: 'Benito Juárez',
-    sector: 'logistica-comercio-exterior', email: 'admincun2@impoexporta.com',
-    destacado: ['15 años en logística', '15 years in logistics'],
-    resumen: ['Proveedor logístico y asesor en importación y exportación con más de 15 años de experiencia.',
-              'Logistics provider and import-export adviser with more than 15 years of experience.'],
-    descripcion: ['ImpoExporta (Empresa Importadora de Carga) es un proveedor logístico con más de 15 años de experiencia en operaciones de importación y exportación. Brinda asesoría, consultoría y acompañamiento entre importadores, exportadores y los demás actores de la cadena de comercio internacional, con un lenguaje práctico y soluciones a la medida.',
-                  'ImpoExporta (Empresa Importadora de Carga) is a logistics provider with more than 15 years of experience in import and export operations. It offers advice, consulting and hands-on support between importers, exporters and the other players in the international trade chain, in plain language and with tailored solutions.'],
-    oferta: ['Logística de importación y exportación', 'Asesoría en comercio exterior', 'Consultoría']
+    sector: 'logistica-comercio-exterior', email: 'admincun2@impoexporta.com', tel: '+52 998 260 5438',
+    destacado: ['Consolidados desde China, España y Miami', 'Consolidated freight from China, Spain and Miami'],
+    resumen: ['Logística de importación y exportación desde Cancún: despacho aduanal, carga consolidada desde China, España y Miami hacia Quintana Roo y Yucatán, permisos sanitarios e importaciones temporales con carnet ATA.',
+              'Import and export logistics from Cancún: customs clearance, consolidated freight from China, Spain and Miami to Quintana Roo and Yucatán, health permits and temporary imports under ATA Carnet.'],
+    descripcion: ['ImpoExporta (Empresa Importadora de Carga) es un proveedor logístico con base en Cancún y más de 15 años de experiencia, que acompaña a importadores y exportadores en todo el movimiento de comercio exterior y se los explica en un lenguaje práctico. Una sola empresa se hace responsable de todo el proceso: revisión previa de documentos y requisitos aduanales, cotización exacta sin cobros sorpresa, despacho aduanal con agentes aduanales nacionales e internacionales, clasificación arancelaria, cálculo de aranceles y cuotas compensatorias, y trámite de permisos sanitarios y fitosanitarios ante COFEPRIS, la Secretaría de Salud y la Secretaría de Agricultura en México, y ante la FDA en Estados Unidos. Reporta el estado de cada embarque tres veces por semana.\n\nMueve carga marítima, aérea, terrestre, ferroviaria y multimodal, incluida carga refrigerada y peligrosa, con rutas de carga consolidada desde China, Valencia (España) y Miami hacia Puerto Morelos, Quintana Roo, y Progreso, Yucatán, y desde y hacia Manzanillo y Veracruz. Recolecta mercancía en cualquier parte del mundo, ofrece almacenaje y distribución en México, Estados Unidos y otros países, y opera un centro de distribución en Miami. Con el carnet ATA realiza importaciones y exportaciones temporales para ferias, congresos y eventos; además busca y verifica proveedores en China —con visita física a sus instalaciones e inspección antes del embarque— y se especializa en la importación de textiles, calzado y accesorios. Forma parte de redes internacionales de agentes de carga como WCA y es miembro de COMCE.',
+                  'ImpoExporta (Empresa Importadora de Carga) is a Cancún-based logistics provider with more than 15 years of experience that supports importers and exporters through every foreign trade shipment and explains it in plain language. A single company takes responsibility for the whole process: upfront review of documents and customs requirements, exact quotes with no surprise charges, customs clearance through Mexican and international customs brokers, tariff classification, calculation of duties and countervailing duties, and health and phytosanitary permits from COFEPRIS, the Ministry of Health and the Ministry of Agriculture in Mexico, and from the FDA in the United States. It reports the status of every shipment three times a week.\n\nIt moves sea, air, road, rail and multimodal freight, including refrigerated and dangerous goods, with consolidated freight routes from China, Valencia (Spain) and Miami to Puerto Morelos, Quintana Roo, and Progreso, Yucatán, and to and from Manzanillo and Veracruz. It collects goods anywhere in the world, offers warehousing and distribution in Mexico, the United States and other countries, and runs a distribution centre in Miami. With the ATA Carnet it handles temporary imports and exports for trade fairs, conferences and events; it also sources and vets suppliers in China — with on-site visits and pre-shipment inspection — and specialises in importing textiles, footwear and accessories. It belongs to international freight forwarder networks such as WCA and is a member of COMCE.'],
+    oferta: [
+      'Despacho aduanal de importación y exportación',
+      'Carga consolidada China, España y Miami – Quintana Roo y Yucatán',
+      'Transporte marítimo, aéreo, terrestre, ferroviario y multimodal',
+      'Importación y exportación temporal con carnet ATA',
+      'Permisos sanitarios y fitosanitarios (COFEPRIS, FDA)',
+      'Clasificación arancelaria y cálculo de contribuciones',
+      'Búsqueda y verificación de proveedores en China',
+      'Importación de textiles y calzado',
+      'Almacenaje y distribución, con CEDI en Miami',
+      'Recolección de mercancía en cualquier parte del mundo'
+    ]
   },
   {
     slug: 'fairwind-group', marca: 'FairWind Group', estado: 'puebla', municipio: 'Puebla',
@@ -518,7 +532,8 @@ const ACTUALIZAR = [
   ['17-ficha-empacabados.sql', ['empacabados'], 'sitio oficial empacabados.com, sept. 2026', { catalogo: true }],
   // 18 y 19 son del panel (personal y solicitudes)
   ['20-ficha-geamex.sql', ['geamex'], 'sitio oficial geamex.mx y catálogo de la empresa, oct. 2026'],
-  ['21-ficha-ravara.sql', ['grupo-ravara'], 'sitio oficial gruporavara.com, oct. 2026', { catalogo: true }]
+  ['21-ficha-ravara.sql', ['grupo-ravara'], 'sitio oficial gruporavara.com, oct. 2026', { catalogo: true }],
+  ['22-ficha-impoexporta.sql', ['impoexporta'], 'sitio oficial impoexporta.com, oct. 2026']
 ];
 
 // { catalogo: true }: el archivo también da de alta en el catálogo las certificaciones nuevas
