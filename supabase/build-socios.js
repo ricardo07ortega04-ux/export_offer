@@ -177,14 +177,31 @@ const SOCIOS = [
     oferta: ['Logística nacional e internacional', 'Consultoría en exportación e importación', 'Búsqueda de proveedores y clientes', 'Gestión aduanera', 'Capacitación', 'Software de comercio exterior']
   },
   {
+    // Datos de su sitio oficial, geamex.mx, y de su catálogo de servicios (entregado por COMCE,
+    // oct. 2026); ambos coinciden. Su sitio señala Latinoamérica, Norteamérica y Asia como
+    // regiones, sin países concretos, así que no se marcan mercados. El catálogo trae precios
+    // por servicio «sujetos a previo análisis»: no se publican. Todas sus imágenes son de banco
+    // (barcos, trenes, aviones): la ficha va sin foto.
     slug: 'geamex', marca: 'GEAMEX Comercializadora', estado: 'puebla', municipio: 'Puebla',
     sector: 'logistica-comercio-exterior', email: 'anaid@geamex.mx', desde: 2014,
-    destacado: ['Comercialización internacional', 'International trading'],
-    resumen: ['Comercializadora poblana que lleva productos mexicanos a mercados nacionales e internacionales.',
-              'Puebla-based trading company that takes Mexican products to domestic and international markets.'],
-    descripcion: ['GEAMEX Comercializadora, fundada en Puebla en 2014, comercializa productos mexicanos en México y el extranjero e impulsa a las pymes a abrir nuevos mercados. Ofrece asesoría y gestión de comercio exterior, logística internacional, despacho aduanal, planes de negocio y acompañamiento en procesos de internacionalización.',
-                  'GEAMEX Comercializadora, founded in Puebla in 2014, sells Mexican products in Mexico and abroad and helps SMEs open new markets. It offers foreign trade advice and management, international logistics, customs clearance, business plans and support for internationalisation.'],
-    oferta: ['Comercialización internacional', 'Asesoría en comercio exterior', 'Logística internacional', 'Despacho aduanal', 'Planes de negocio e internacionalización']
+    destacado: ['Acompañamiento para exportar en 8 pasos', '8-step export support'],
+    resumen: ['Comercializadora poblana que lleva productos de pymes mexicanas a mercados de Latinoamérica, Norteamérica y Asia, y las acompaña en todo el proceso de exportación, del estudio de mercado al despacho aduanal.',
+              'Puebla-based trading company that takes products from Mexican SMEs to markets in Latin America, North America and Asia, and supports them through the whole export process, from market research to customs clearance.'],
+    descripcion: ['GEAMEX Comercializadora nació en Puebla en 2014 para impulsar a los sectores en desarrollo y a cualquier pyme con producción mexicana, mediante la comercialización nacional e internacional de sus productos. Busca constantemente nuevos mercados para el producto mexicano —trabaja con Latinoamérica, Norteamérica y Asia— y aprovecha los tratados de libre comercio y acuerdos comerciales de México.\n\nSu proceso de internacionalización acompaña a la empresa en ocho pasos: investigación de mercados internacionales, detección de compradores potenciales, análisis de capacidad y viabilidad de exportación, identificación de barreras arancelarias y no arancelarias y su cumplimiento, contrato de compraventa internacional, despacho de la mercancía y seguimiento. Antes de iniciar cualquier servicio aplica un cuestionario para saber en qué etapa está la empresa y por dónde le conviene empezar. También ofrece asesoría y gestión de comercio exterior, operación logística internacional, planes de negocios internacionales, despacho aduanal, servicios de bróker y capacitación.',
+                  'GEAMEX Comercializadora was founded in Puebla in 2014 to support developing sectors and any SME with Mexican production by selling its products in Mexico and abroad. It constantly looks for new markets for Mexican products — working with Latin America, North America and Asia — and makes the most of Mexico\'s free trade and commercial agreements.\n\nIts internationalisation process takes a company through eight steps: international market research, identifying potential buyers, export capacity and feasibility analysis, identifying tariff and non-tariff barriers and complying with them, the international sales contract, shipping the goods, and follow-up. Before starting any service, it uses a questionnaire to find out what stage the company is at and where it should begin. It also offers foreign trade advice and management, international logistics operations, international business plans, customs clearance, brokerage and training.'],
+    oferta: [
+      'Comercialización nacional e internacional de productos mexicanos',
+      'Proceso de internacionalización en 8 etapas',
+      'Investigación de mercados y detección de compradores',
+      'Análisis de capacidad y viabilidad de exportación',
+      'Barreras arancelarias y no arancelarias',
+      'Contrato de compraventa internacional',
+      'Operación logística internacional',
+      'Despacho aduanal',
+      'Planes de negocios internacionales',
+      'Bróker',
+      'Asesoría, gestión y capacitación en comercio exterior'
+    ]
   },
   {
     // Datos de su sitio oficial, grupoamp.mx (sept. 2026). Oficina en Av. Insurgentes Centro,
@@ -479,7 +496,9 @@ const ACTUALIZAR = [
   // 14-ficha-cogne.sql ya se aplicó y queda como registro; la versión vigente de COGNE es la 15
   ['15-ficha-cogne-catalogo.sql', ['cogne-mexico'], 'catálogo de productos de la empresa, sept. 2026'],
   ['16-ficha-cslogix.sql', ['cslogix'], 'sitio oficial cslogix.com, sept. 2026'],
-  ['17-ficha-empacabados.sql', ['empacabados'], 'sitio oficial empacabados.com, sept. 2026', { catalogo: true }]
+  ['17-ficha-empacabados.sql', ['empacabados'], 'sitio oficial empacabados.com, sept. 2026', { catalogo: true }],
+  // 18 y 19 son del panel (personal y solicitudes)
+  ['20-ficha-geamex.sql', ['geamex'], 'sitio oficial geamex.mx y catálogo de la empresa, oct. 2026']
 ];
 
 // { catalogo: true }: el archivo también da de alta en el catálogo las certificaciones nuevas
