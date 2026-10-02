@@ -30,7 +30,16 @@ const CERTIFICACIONES = [
    'US Customs and Border Protection (CBP) supply chain security programme.'],
   ['smeta', 'SMETA', 'SMETA',
    'Auditoría de comercio ético de Sedex: condiciones laborales, salud y seguridad, medio ambiente y ética empresarial.',
-   'Sedex Members Ethical Trade Audit: labour standards, health and safety, environment and business ethics.']
+   'Sedex Members Ethical Trade Audit: labour standards, health and safety, environment and business ethics.'],
+  ['primus-gfs', 'PrimusGFS', 'PrimusGFS',
+   'Certificación de inocuidad alimentaria para productos agrícolas, reconocida por la Iniciativa Global de Inocuidad Alimentaria (GFSI).',
+   'Food safety certification for agricultural products, benchmarked by the Global Food Safety Initiative (GFSI).'],
+  ['globalgap', 'GLOBALG.A.P.', 'GLOBALG.A.P.',
+   'Norma internacional de buenas prácticas agrícolas en campo: inocuidad, trazabilidad, medio ambiente y bienestar de los trabajadores.',
+   'International standard for good agricultural practice on the farm: food safety, traceability, environment and worker welfare.'],
+  ['haccp', 'HACCP', 'HACCP',
+   'Sistema de análisis de peligros y puntos críticos de control para la inocuidad de los alimentos.',
+   'Hazard Analysis and Critical Control Points system for food safety.']
 ];
 
 const SOCIOS = [
@@ -366,15 +375,27 @@ const SOCIOS = [
     oferta: ['Uniformes industriales', 'Uniformes institucionales']
   },
   {
+    // Datos de su sitio oficial, lasvegaslimes.com, y de su presentación (entregada por COMCE),
+    // oct. 2026. Mercados: el sitio nombra Estados Unidos, Canadá, Europa y Japón (Europa no es
+    // un país del catálogo). La presentación dice que GLOBALG.A.P. es certificación de huertas.
+    // Foto: su línea de empaque con cajas de 40 lb, de su propio sitio (740 px, no se amplía).
     slug: 'las-vegas-premium-limes', marca: 'Las Vegas Premium Limes', razon: 'Productos Men-Frut S.A. de C.V.',
     estado: 'veracruz', municipio: 'Martínez de la Torre',
-    sector: 'frutas-y-hortalizas', email: 'hugo.mendez@citru-mex.com.mx', situacion: 'exportando',
-    destacado: ['Lima persa todo el año', 'Persian limes all year round'],
-    resumen: ['Empaque y exportación de lima persa de alta calidad durante todo el año.',
-              'Packing and export of high-quality Persian limes all year round.'],
-    descripcion: ['Productos Men-Frut empaca y exporta lima persa bajo la marca Las Vegas Premium Limes desde Martínez de la Torre, Veracruz, una de las regiones citrícolas más importantes de México. Ofrece producto fresco todo el año y cumple estándares internacionales para abastecer mercados alrededor del mundo.',
-                  'Productos Men-Frut packs and exports Persian limes under the Las Vegas Premium Limes brand from Martínez de la Torre, Veracruz, one of Mexico\'s leading citrus regions. It supplies fresh product all year round and meets international standards to serve markets around the world.'],
-    oferta: ['Lima persa']
+    sector: 'frutas-y-hortalizas', email: 'hugo.mendez@citru-mex.com.mx', tel: '+52 232 324 5010', situacion: 'exportando',
+    mercados: ['estados-unidos', 'canada', 'japon'], certs: ['primus-gfs', 'globalgap', 'haccp'],
+    destacado: ['Lima persa todo el año, certificada PrimusGFS', 'Year-round Persian limes, PrimusGFS certified'],
+    resumen: ['Empacadora de limón persa de Martínez de la Torre, Veracruz: abasto todo el año de más de 2,500 pequeños productores, clasificación computarizada y certificación PrimusGFS para Estados Unidos, Canadá, Europa y Japón.',
+              'Persian lime packing house in Martínez de la Torre, Veracruz: year-round supply from more than 2,500 small growers, computerised grading and PrimusGFS certification for the United States, Canada, Europe and Japan.'],
+    descripcion: ['Las Vegas Premium Limes es la línea empacadora de limón persa de Productos Men-Frut, del Grupo Murrieta, que trabaja con cítricos desde hace más de 35 años —producción en campo, pesado, selección, lavado y encerado de fruta para el mercado nacional y jugo concentrado— y sumó el empaque de exportación como complemento natural. Está en Martínez de la Torre, Veracruz, la principal región productora de limón persa del país, y tiene alianzas con más de 2,500 pequeños productores de la zona, lo que le permite empacar y exportar todo el año, con las variaciones propias de la temporada.\n\nSu línea, renovada para cumplir las normas de exportación, cuenta con una clasificadora computarizada que separa la fruta por tamaño, color y defectos, y con dosificadores automáticos que controlan con precisión la sanitización y el encerado. El proceso va de la recepción y selección al lavado, secado, encerado, clasificación, empaque, flejado y embarque. Empaca principalmente en cajas de 40 y 10 libras, y en otras presentaciones a pedido, con marcas propias como Fryda. Opera con un sistema de calidad certificado PrimusGFS, buenas prácticas de manufactura y HACCP, registros ante USDA y SENASICA y huertas certificadas GLOBALG.A.P., y exporta a Estados Unidos, Canadá, Europa y Japón.',
+                  'Las Vegas Premium Limes is the Persian lime packing line of Productos Men-Frut, part of Grupo Murrieta, which has worked with citrus for more than 35 years — field production, fruit weighing, sorting, washing and waxing for the domestic market, and concentrated juice — and added export packing as a natural complement. It is located in Martínez de la Torre, Veracruz, Mexico\'s leading Persian lime region, and has partnerships with more than 2,500 small local growers, which allows it to pack and export all year round, with normal seasonal variation.\n\nIts line, refurbished to meet export standards, has a computerised grader that sorts fruit by size, colour and defects, and automatic dosing systems that precisely control sanitising and waxing. The process runs from receiving and sorting to washing, drying, waxing, grading, packing, strapping and shipping. It packs mainly in 40 and 10 lb cartons, and in other formats on request, under its own brands such as Fryda. It operates under a PrimusGFS-certified quality system, good manufacturing practices and HACCP, with USDA and SENASICA registrations and GLOBALG.A.P.-certified orchards, and exports to the United States, Canada, Europe and Japan.'],
+    oferta: [
+      'Limón persa (lima persa) fresco todo el año',
+      'Caja de 40 libras',
+      'Caja de 10 libras',
+      'Empaques a la medida del cliente',
+      'Marca Fryda',
+      'Clasificación por tamaño, color y defectos'
+    ]
   },
   {
     // Datos de su sitio oficial, recodding.com (sept. 2026): ahora se enfoca en agentes de
@@ -548,7 +569,8 @@ const ACTUALIZAR = [
   ['20-ficha-geamex.sql', ['geamex'], 'sitio oficial geamex.mx y catálogo de la empresa, oct. 2026'],
   ['21-ficha-ravara.sql', ['grupo-ravara'], 'sitio oficial gruporavara.com, oct. 2026', { catalogo: true }],
   ['22-ficha-impoexporta.sql', ['impoexporta'], 'sitio oficial impoexporta.com, oct. 2026'],
-  ['23-ficha-lari-moda.sql', ['lari-moda'], 'sitio oficial larimoda.mx y catálogo de mayoreo, oct. 2026']
+  ['23-ficha-lari-moda.sql', ['lari-moda'], 'sitio oficial larimoda.mx y catálogo de mayoreo, oct. 2026'],
+  ['24-ficha-las-vegas.sql', ['las-vegas-premium-limes'], 'sitio oficial lasvegaslimes.com y presentación de la empresa, oct. 2026', { catalogo: true }]
 ];
 
 // { catalogo: true }: el archivo también da de alta en el catálogo las certificaciones nuevas
