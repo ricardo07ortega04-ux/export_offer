@@ -272,14 +272,28 @@ const SOCIOS = [
     ]
   },
   {
+    // Datos de su sitio oficial, larimoda.mx, y de su catálogo de mayoreo (flipbook de 56
+    // páginas), oct. 2026. No menciona países de exportación concretos: no se marcan mercados.
+    // Teléfono: su WhatsApp. Foto: artesana en telar de pedal, de su propio sitio.
     slug: 'lari-moda', marca: 'LARI MODA', estado: 'oaxaca', municipio: null,
-    sector: 'textil-y-confeccion', email: 'oly@larimoda.mx',
-    destacado: ['Bordado artesanal', 'Hand embroidery'],
-    resumen: ['Prendas bordadas a mano por mujeres artesanas, con telas y procesos conscientes.',
-              'Garments hand-embroidered by women artisans, using mindful fabrics and processes.'],
-    descripcion: ['LARI MODA crea prendas bordadas a mano por mujeres artesanas en pequeños talleres comunitarios, con telas más amigables con la naturaleza. Su modelo impulsa el empoderamiento económico de las mujeres, preserva técnicas tradicionales de bordado y promueve una moda ética, con piezas atemporales pensadas para durar.',
-                  'LARI MODA makes garments hand-embroidered by women artisans in small community workshops, using more environmentally friendly fabrics. Its model supports women\'s economic empowerment, preserves traditional embroidery techniques and promotes ethical fashion, with timeless pieces made to last.'],
-    oferta: ['Prendas bordadas a mano', 'Moda sostenible']
+    sector: 'textil-y-confeccion', email: 'oly@larimoda.mx', tel: '+52 951 360 5209',
+    destacado: ['Más de 20 años con artesanas de Oaxaca', '20+ years with Oaxacan women artisans'],
+    resumen: ['Blusas, vestidos, huipiles y rebozos bordados y tejidos a mano por mujeres artesanas de Oaxaca, con más de 20 años de trayectoria y catálogo de mayoreo para boutiques y distribuidores.',
+              'Blouses, dresses, huipiles and rebozos hand-embroidered and hand-woven by women artisans in Oaxaca, with more than 20 years of experience and a wholesale catalogue for boutiques and distributors.'],
+    descripcion: ['Lari Moda colabora desde hace más de 20 años con mujeres artesanas de comunidades de Oaxaca para crear prendas únicas y atemporales, bordadas y tejidas a mano, respetando sus saberes, sus tiempos y la identidad de cada técnica. Su propuesta de moda consciente busca que el trabajo permanezca en las comunidades y que el oficio pase a nuevas generaciones: produce a escala humana, prefiere siluetas atemporales y cortes amplios para distintos cuerpos, y usa algodón, bambú y mezclas de lino con bambú en modelos seleccionados.\n\nSu catálogo de mayoreo reúne más de 50 modelos: blusas bordadas y de telar, vestidos y minivestidos, vestidos de niña, huipiles hechos en telar de cintura, rebozos de telar de cintura o de pedal, faldas, caminos de mesa personalizables, monederos y bolsas bordadas. Atiende a boutiques, tiendas de diseño y distribuidores con pedidos por volumen —confirma tallas, colores y disponibilidad en cada pedido, porque cada pieza es irrepetible— y vende al menudeo en su tienda en línea.',
+                  'Lari Moda has worked for more than 20 years with women artisans from communities in Oaxaca to create unique, timeless garments, hand-embroidered and hand-woven, respecting their knowledge, their pace and the identity of each technique. Its mindful-fashion approach aims to keep the work in the communities and pass the craft on to new generations: it produces at a human scale, favours timeless silhouettes and relaxed cuts for different bodies, and uses cotton, bamboo and linen-bamboo blends in selected styles.\n\nIts wholesale catalogue includes more than 50 styles: embroidered and loom-woven blouses, dresses and mini dresses, girls\' dresses, backstrap-loom huipiles, backstrap and treadle-loom rebozos, skirts, customisable table runners, coin purses and embroidered bags. It serves boutiques, design stores and distributors with volume orders — confirming sizes, colours and availability for each order, since every piece is one of a kind — and sells individual pieces in its online store.'],
+    oferta: [
+      'Blusas bordadas a mano',
+      'Blusas de telar',
+      'Vestidos y minivestidos bordados',
+      'Vestidos de niña',
+      'Huipiles en telar de cintura',
+      'Rebozos de telar',
+      'Faldas',
+      'Bolsas y monederos bordados',
+      'Caminos de mesa personalizables',
+      'Mayoreo para boutiques y distribuidores'
+    ]
   },
   {
     slug: 'licorera-del-sur', marca: 'Licorera del Sur', estado: 'oaxaca', municipio: 'Santiago Matatlán',
@@ -533,7 +547,8 @@ const ACTUALIZAR = [
   // 18 y 19 son del panel (personal y solicitudes)
   ['20-ficha-geamex.sql', ['geamex'], 'sitio oficial geamex.mx y catálogo de la empresa, oct. 2026'],
   ['21-ficha-ravara.sql', ['grupo-ravara'], 'sitio oficial gruporavara.com, oct. 2026', { catalogo: true }],
-  ['22-ficha-impoexporta.sql', ['impoexporta'], 'sitio oficial impoexporta.com, oct. 2026']
+  ['22-ficha-impoexporta.sql', ['impoexporta'], 'sitio oficial impoexporta.com, oct. 2026'],
+  ['23-ficha-lari-moda.sql', ['lari-moda'], 'sitio oficial larimoda.mx y catálogo de mayoreo, oct. 2026']
 ];
 
 // { catalogo: true }: el archivo también da de alta en el catálogo las certificaciones nuevas
