@@ -787,7 +787,8 @@ button { cursor: pointer; }
 .panel p { color: var(--pizarra); }
 
 .p-photo { border-radius: var(--radius-md); overflow: hidden; background: var(--niebla-2); margin-bottom: var(--space-2); }
-.p-photo img { width: 100%; height: auto; }
+/* Las fotos verticales (botellas) no deben ocupar más de una pantalla: se ajustan sin recortarse */
+.p-photo img { width: 100%; height: auto; max-height: 34rem; object-fit: contain; }
 
 .dl { display: grid; gap: 0.875rem var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
 .dl > div { min-width: 0; }

@@ -115,8 +115,8 @@ function tagList(values, fn, cls) {
 
 /* Productos o servicios, según el tipo del sector (05-tipos-sectores.sql) */
 const esServicio = (c) => (SE.sectores[c.sector] || {}).tipo === 'servicio';
-// Sin logotipo en el repositorio (o con uno de baja resolución) se usa la inicial
-const monograma = (c) => c.logo === false || c.slug === 'mezcal-lyobaa';
+// Sin logotipo en el repositorio se usa la inicial
+const monograma = (c) => c.logo === false;
 const inicial = (c) => c.marca.replace(/^Mezcal\s+/i, '').trim().charAt(0).toUpperCase();
 // Una línea en blanco en la descripción separa párrafos (si ES y EN tienen los mismos)
 function parrafos(esTxt, enTxt) {

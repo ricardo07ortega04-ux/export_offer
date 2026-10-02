@@ -502,7 +502,7 @@
       var href = 'empresa-' + c.slug + '.html';
       var servicio = tipoDe(c) === 'servicio';
       var logo = 'logo-' + c.slug + '.webp';
-      var monograma = c.logo === false || c.slug === 'mezcal-lyobaa';
+      var monograma = c.logo === false;
       var lugar = [c.municipio, c.estado].filter(Boolean).map(esc).join(' · ');
 
       // Productos con capacidad registrada: litros y año. Servicios, o productos
