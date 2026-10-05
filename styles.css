@@ -1228,6 +1228,39 @@ button { cursor: pointer; }
 .rg-listo h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); color: var(--noche); margin-bottom: var(--space-2); }
 .rg-listo p { max-width: 32rem; margin: 0 auto var(--space-3); color: var(--pizarra); }
 
+/* ---------- Página de contacto ---------- */
+
+.ct-hero-texto { max-width: calc(var(--container) - 2 * var(--gutter)); }
+.ct-grid { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr) 22rem; align-items: start; }
+@media (max-width: 900px) { .ct-grid { grid-template-columns: minmax(0, 1fr); } }
+.ct-titulo { font-size: clamp(1.4rem, 1.15rem + 0.8vw, 1.85rem); color: var(--noche); margin-bottom: var(--space-3); }
+.field.has-error select { border-color: #b4232a; }
+
+.ct-aside { display: grid; gap: var(--space-2); }
+.ct-via {
+  display: grid; grid-template-columns: 44px 1fr; gap: var(--space-2); align-items: start;
+  padding: var(--space-3); background: var(--blanco); border: 1px solid var(--linea-2); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1); color: var(--tinta); text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.ct-via:hover { border-color: var(--cobalto); box-shadow: var(--shadow-2); transform: translateY(-2px); color: var(--tinta); }
+.ct-via-icono { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--cobalto-100); color: var(--cobalto); }
+.ct-via-icono svg { width: 22px; height: 22px; }
+.ct-via-texto { display: grid; gap: 0.375rem; font-size: var(--fs-sm); line-height: 1.5; color: var(--pizarra); }
+.ct-via-texto strong { font-size: var(--fs-base); color: var(--noche); line-height: 1.35; }
+.ct-via-accion { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.25rem; font-weight: 600; color: var(--cobalto); }
+.ct-via-accion svg { width: 16px; height: 16px; transition: transform var(--dur-fast) var(--ease-out); }
+.ct-via:hover .ct-via-accion svg { transform: translateX(3px); }
+
+.ct-correos { padding: var(--space-3); background: var(--blanco); border: 1px solid var(--linea-2); border-radius: var(--radius-lg); }
+.ct-correos[hidden] { display: none; }
+.ct-correos-titulo { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-text); font-size: var(--fs-base); font-weight: 700; color: var(--noche); margin-bottom: var(--space-2); }
+.ct-correos-titulo svg { width: 18px; height: 18px; color: var(--ocre-texto); }
+.ct-correos ul { display: grid; gap: 0.75rem; }
+.ct-correos li { display: grid; gap: 0.125rem; font-size: var(--fs-sm); }
+.ct-area { color: var(--pizarra); font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.ct-correos a { overflow-wrap: anywhere; font-weight: 600; }
+
 /* Llamado a registrarse en el inicio */
 .prog-cta { margin-top: var(--space-3); display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
 .prog-cta p { margin: 0; font-weight: 600; color: var(--noche); }

@@ -208,13 +208,20 @@
     var submit = form.querySelector('button[type="submit"]');
     var cargado = Date.now();
 
+    // La página de contacto reutiliza este formulario con sus propios textos de error
+    var errNeed = form.getAttribute('data-err-need') || 'formErrNeed';
+    var failKey = form.getAttribute('data-fail') || 'formFail';
+
     function checks() {
       return [
-        { el: form.querySelector('[name="need"]'), key: 'formErrNeed', test: function (el) { return el.value.trim().length > 0; } },
+        { el: form.querySelector('[name="motivo"]'), key: 'formErrMotivo', test: function (el) { return el.value !== ''; } },
+        { el: form.querySelector('[name="need"]'), key: errNeed, test: function (el) { return el.value.trim().length > 0; } },
         { el: form.querySelector('[name="name"]'), key: 'formErrName', test: function (el) { return el.value.trim().length > 0; } },
         { el: form.querySelector('[name="email"]'), key: 'formErrEmail', test: function (el) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim()); } },
         { el: form.querySelector('[name="consent"]'), key: 'formErrConsent', test: function (el) { return el.checked; } }
-      ].filter(function (c) { return c.el; });
+      ].filter(function (c) { return c.el; })
+        // Los errores se listan en el mismo orden en que aparecen los campos
+        .sort(function (a, b) { return a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
     }
 
     function mark(c, bad) {
@@ -274,6 +281,7 @@
         country: (form.querySelector('[name="country"]') || {}).value || '',
         timeline: (form.querySelector('[name="timeline"]') || {}).value || '',
         company_slug: (form.querySelector('[name="company_slug"]') || {}).value || '',
+        motivo: (form.querySelector('[name="motivo"]') || {}).value || '',
         website: (form.querySelector('[name="website"]') || {}).value || '',
         consent: true,
         lang: lang,
@@ -297,7 +305,7 @@
         form.querySelectorAll('.field.has-error').forEach(function (f) { f.classList.remove('has-error'); });
         if (ok) { ok.hidden = false; ok.focus(); }
       }).catch(function () {
-        mostrarError(t('formFail'), t('formFailBody'));
+        mostrarError(t(failKey), t('formFailBody'));
       }).then(function () {
         if (submit) { submit.removeAttribute('aria-busy'); submit.textContent = etiquetaOriginal || t('formSubmit'); }
       });

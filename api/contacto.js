@@ -27,6 +27,31 @@ const TEXTOS = {
   }
 };
 
+// Motivos del formulario de la página /contacto. Si llega un motivo, el correo
+// se trata como mensaje de contacto y no como requerimiento de compra.
+const MOTIVOS = {
+  comprador: { es: 'Busco proveedores o productos', en: 'Looking for suppliers or products' },
+  empresa: { es: 'Mi empresa quiere exportar o estar en el directorio', en: 'My company wants to export or join the directory' },
+  prensa: { es: 'Prensa y medios', en: 'Press and media' },
+  alianzas: { es: 'Alianzas e instituciones', en: 'Partnerships and institutions' },
+  otro: { es: 'Otro', en: 'Other' }
+};
+
+const CONTACTO = {
+  es: {
+    asunto: (motivo) => `Mensaje de contacto: ${motivo}`,
+    need: 'Mensaje', motivo: 'Motivo',
+    acuseAsunto: 'Recibimos tu mensaje — Sur Exporta',
+    acuseCuerpo: (nombre) => `Hola ${nombre}:<br><br>Recibimos tu mensaje en Sur Exporta. El equipo de COMCE Región Sur lo revisará y te responderá en los próximos días hábiles.<br><br>Este mensaje es automático, no es necesario responderlo.`
+  },
+  en: {
+    asunto: (motivo) => `Contact message: ${motivo}`,
+    need: 'Message', motivo: 'Reason',
+    acuseAsunto: 'We received your message — Sur Exporta',
+    acuseCuerpo: (nombre) => `Hello ${nombre},<br><br>We received your message on Sur Exporta. The COMCE Southern Region team will review it and reply within the next business days.<br><br>This is an automated message; there is no need to reply.`
+  }
+};
+
 const PLAZOS = {
   asap: { es: 'Lo antes posible', en: 'As soon as possible' },
   '3m': { es: 'En los próximos 3 meses', en: 'Within 3 months' },
@@ -83,7 +108,10 @@ module.exports = async function handler(req, res) {
   }
 
   const lang = body.lang === 'en' ? 'en' : 'es';
-  const t = TEXTOS[lang];
+  const motivo = MOTIVOS[limpiar(body.motivo, 20)] || null;
+  // Mensaje de contacto: mismos textos base, con asunto, etiquetas y acuse propios
+  const t = motivo ? Object.assign({}, TEXTOS[lang], CONTACTO[lang]) : TEXTOS[lang];
+  const asunto = motivo ? t.asunto(motivo[lang]) : null;
 
   const datos = {
     need: String(body.need == null ? '' : body.need).trim().slice(0, LIMITES.need),
@@ -108,9 +136,10 @@ module.exports = async function handler(req, res) {
   const html = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px">
   <div style="background:#04162b;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
     <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e0a63a">Sur Exporta</div>
-    <div style="font-size:19px;font-weight:bold;margin-top:4px">${esc(t.asunto(datos.empresa))}</div>
+    <div style="font-size:19px;font-weight:bold;margin-top:4px">${esc(asunto || t.asunto(datos.empresa))}</div>
   </div>
   <table style="width:100%;border-collapse:collapse;border:1px solid #e7edf3;border-top:0">
+    ${motivo ? fila(t.motivo, motivo[lang]) : ''}
     ${fila(t.need, datos.need)}
     ${fila(t.name, datos.name)}
     ${fila(t.company, datos.company)}
@@ -140,7 +169,7 @@ module.exports = async function handler(req, res) {
       from: remitente,
       to: destino.split(',').map((s) => s.trim()).filter(Boolean),
       reply_to: datos.email,
-      subject: t.asunto(datos.empresa),
+      subject: asunto || t.asunto(datos.empresa),
       html
     });
   } catch (err) {

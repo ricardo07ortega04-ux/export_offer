@@ -53,7 +53,7 @@ function header() {
         ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
         <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
         ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-        ${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}
+        ${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}
       </nav>
       <button class="lang-btn" type="button" data-lang-toggle aria-label="${esc(es('switchLabel'))}" data-i18n-attr="aria-label:switchLabel">
         ${icon('i-lang')}<span class="lang-long" data-i18n="switchTo">${esc(es('switchTo'))}</span>
@@ -67,7 +67,7 @@ function header() {
       ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
       <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
       ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-      ${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}
+      ${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}
     </nav>
   </div>
 </header>`;
@@ -87,7 +87,7 @@ function footer() {
           <li>${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}</li>
           <li>${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}</li>
           <li>${i18('a', 'navPrograma').replace('<a ', '<a href="index.html#programa" ')}</li>
-          <li>${i18('a', 'navContacto').replace('<a ', '<a href="index.html#contacto" ')}</li>
+          <li>${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}</li>
         </ul>
       </div>
       <div>
@@ -389,6 +389,7 @@ const PAGINAS = [
   ['/', '1.0'],
   ['/nosotros', '0.6'],
   ['/registro', '0.6'],
+  ['/contacto', '0.5'],
   ['/aviso-de-privacidad', '0.2'],
   ['/politica-de-cookies', '0.2']
 ];
