@@ -7,6 +7,8 @@ const fs = require('fs');
 const path = require('path');
 
 const DIR = __dirname;
+// Dominio público: base de las direcciones canónicas y del sitemap
+const SITIO = 'https://www.sur-exporta.com';
 global.window = {};
 new Function(fs.readFileSync(path.join(DIR, 'data.js'), 'utf8')).call(global);
 const SE = global.window.SE;
@@ -212,7 +214,9 @@ function page(c) {
 <title data-title-es="${esc(titleEs)}" data-title-en="${esc(titleEn)}">${esc(titleEs)}</title>
 <meta name="description" content="${esc(c.resumen.es)}">
 <meta name="theme-color" content="#04162b">
+<link rel="canonical" href="${SITIO}/empresa-${c.slug}">
 <meta property="og:type" content="profile">
+<meta property="og:url" content="${SITIO}/empresa-${c.slug}">
 <meta property="og:title" content="${esc(c.marca)} | Sur Exporta">
 <meta property="og:description" content="${esc(c.resumen.es)}">
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -378,3 +382,21 @@ SE.empresas.forEach((c) => {
   console.log(`  escrito  empresa-${c.slug}.html  (${(fs.statSync(file).size / 1024).toFixed(1)} KB)`);
 });
 console.log(`\n${n} fichas generadas.`);
+
+// Sitemap para Google Search Console: páginas fijas + una ficha por empresa publicada.
+// Las direcciones van sin «.html» porque Vercel sirve el sitio con cleanUrls.
+const PAGINAS = [
+  ['/', '1.0'],
+  ['/nosotros', '0.6'],
+  ['/registro', '0.6'],
+  ['/aviso-de-privacidad', '0.2'],
+  ['/politica-de-cookies', '0.2']
+];
+const urls = PAGINAS.map(([ruta, prioridad]) => ({ loc: SITIO + ruta, prioridad }))
+  .concat(SE.empresas.map((c) => ({ loc: `${SITIO}/empresa-${c.slug}`, prioridad: '0.8' })));
+fs.writeFileSync(path.join(DIR, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map((u) => `  <url><loc>${esc(u.loc)}</loc><priority>${u.prioridad}</priority></url>`).join('\n')}
+</urlset>
+`, 'utf8');
+console.log(`sitemap.xml: ${urls.length} direcciones.`);
