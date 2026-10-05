@@ -100,6 +100,7 @@ function footer() {
     </div>
     <div class="footer-bottom">
       ${i18('p', 'footerSource')}
+      ${bi('p', 'Sitio desarrollado con apoyo de IA', 'Site developed with AI assistance', 'footer-credito')}
       <span class="footer-legal">
         ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="aviso-de-privacidad.html" ')}
         ${bi('a', 'Política de cookies', 'Cookie policy').replace('<a ', '<a href="politica-de-cookies.html" ')}

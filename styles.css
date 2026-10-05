@@ -1072,6 +1072,16 @@ button { cursor: pointer; }
 .lg-borrar-estado:empty { display: none; }
 
 .footer-legal { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+/* Con el crédito de IA la franja tiene tres partes: fuente a la izquierda,
+   crédito al centro y enlaces legales a la derecha */
+.footer-bottom:has(.footer-credito) { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.footer-bottom .footer-legal { justify-self: end; }
+.footer-bottom .footer-credito { text-align: center; }
+@media (max-width: 760px) {
+  .footer-bottom:has(.footer-credito) { grid-template-columns: 1fr; justify-items: start; }
+  .footer-bottom .footer-legal { justify-self: start; }
+  .footer-bottom .footer-credito { text-align: left; }
+}
 
 /* Enlace al aviso junto a la casilla de consentimiento (fuera del <label> para no marcarla) */
 .consent-link { display: inline-block; margin: 0.375rem 0 0 1.875rem; font-size: var(--fs-xs); }
