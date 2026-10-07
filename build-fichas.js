@@ -41,7 +41,7 @@ function header() {
 <header class="header">
   <div class="wrap">
     <div class="header-inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/">
         <img src="comce-sur-logo.webp" width="286" height="131" alt="COMCE Región Sur">
         <span class="brand-divider" aria-hidden="true"></span>
         <span class="brand-text">
@@ -50,10 +50,10 @@ function header() {
         </span>
       </a>
       <nav class="nav" aria-label="Principal">
-        ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
-        <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
-        ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-        ${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}
+        ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
+        <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
+        ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
+        ${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}
       </nav>
       <button class="lang-btn" type="button" data-lang-toggle aria-label="${esc(es('switchLabel'))}" data-i18n-attr="aria-label:switchLabel">
         ${icon('i-lang')}<span class="lang-long" data-i18n="switchTo">${esc(es('switchTo'))}</span>
@@ -64,10 +64,10 @@ function header() {
       </button>
     </div>
     <nav class="nav-mobile" id="nav-mobile" hidden aria-label="Principal (móvil)">
-      ${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}
-      <a href="nosotros.html" data-es="Nosotros" data-en="About us">Nosotros</a>
-      ${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}
-      ${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}
+      ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
+      <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
+      ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
+      ${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}
     </nav>
   </div>
 </header>`;
@@ -84,17 +84,17 @@ function footer() {
       <div>
         ${i18('h4', 'footerNav')}
         <ul>
-          <li>${i18('a', 'navDirectorio').replace('<a ', '<a href="index.html#directorio" ')}</li>
-          <li>${i18('a', 'navComo').replace('<a ', '<a href="index.html#como" ')}</li>
-          <li>${i18('a', 'navPrograma').replace('<a ', '<a href="index.html#programa" ')}</li>
-          <li>${i18('a', 'navContacto').replace('<a ', '<a href="contacto.html" ')}</li>
+          <li>${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}</li>
+          <li>${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}</li>
+          <li>${i18('a', 'navPrograma').replace('<a ', '<a href="/#programa" ')}</li>
+          <li>${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}</li>
         </ul>
       </div>
       <div>
         ${i18('h4', 'backToComce')}
         <ul>
           <li><a href="https://www.comce-sur.org.mx/" rel="noopener">comce-sur.org.mx</a></li>
-          <li><a href="registro.html" data-es="Registra tu empresa" data-en="List your company">Registra tu empresa</a></li>
+          <li><a href="/registro" data-es="Registra tu empresa" data-en="List your company">Registra tu empresa</a></li>
         </ul>
       </div>
     </div>
@@ -102,8 +102,8 @@ function footer() {
       ${i18('p', 'footerSource')}
       ${bi('p', 'Sitio desarrollado con apoyo de IA', 'Site developed with AI assistance', 'footer-credito')}
       <span class="footer-legal">
-        ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="aviso-de-privacidad.html" ')}
-        ${bi('a', 'Política de cookies', 'Cookie policy').replace('<a ', '<a href="politica-de-cookies.html" ')}
+        ${bi('a', 'Aviso de privacidad', 'Privacy notice').replace('<a ', '<a href="/aviso-de-privacidad" ')}
+        ${bi('a', 'Política de cookies', 'Cookie policy').replace('<a ', '<a href="/politica-de-cookies" ')}
       </span>
     </div>
   </div>
@@ -140,7 +140,7 @@ function otherCard(c) {
   </div>
   <div class="card-body">
     <p class="card-place">${icon('i-pin')}${esc(c.municipio || c.estado)}</p>
-    <h3 class="card-title"><a href="empresa-${c.slug}.html">${esc(c.marca)}</a></h3>
+    <h3 class="card-title"><a href="/empresa-${c.slug}">${esc(c.marca)}</a></h3>
     ${c.destacado.es ? bi('p', c.destacado.es, c.destacado.en || c.destacado.es, 'card-sum') : ''}
   </div>
 </article>`;
@@ -252,7 +252,7 @@ ${header()}
 
   <section class="p-hero">
     <div class="wrap">
-      <a class="p-back" href="index.html#directorio">${icon('i-back')}<span data-i18n="profileBack">${esc(es('profileBack'))}</span></a>
+      <a class="p-back" href="/#directorio">${icon('i-back')}<span data-i18n="profileBack">${esc(es('profileBack'))}</span></a>
 
       <div class="p-head">
         <div>
@@ -341,7 +341,7 @@ ${header()}
                   <input id="p-consent" name="consent" type="checkbox" required aria-describedby="p-consent-err">
                   <span data-i18n="formConsent">${esc(es('formConsent'))}</span>
                 </label>
-                ${bi('a', 'Consulta el aviso de privacidad', 'Read the privacy notice', 'consent-link').replace('<a ', '<a href="aviso-de-privacidad.html" target="_blank" rel="noopener" ')}
+                ${bi('a', 'Consulta el aviso de privacidad', 'Read the privacy notice', 'consent-link').replace('<a ', '<a href="/aviso-de-privacidad" target="_blank" rel="noopener" ')}
                 <p class="field-error" id="p-consent-err">${icon('i-alert')}<span data-i18n="formErrConsent">${esc(es('formErrConsent'))}</span></p>
               </div>
               <div class="hp" aria-hidden="true">
@@ -383,6 +383,21 @@ SE.empresas.forEach((c) => {
   console.log(`  escrito  empresa-${c.slug}.html  (${(fs.statSync(file).size / 1024).toFixed(1)} KB)`);
 });
 console.log(`\n${n} fichas generadas.`);
+
+// Lista de respaldo del inicio: enlaces a todas las fichas en el HTML fijo, para que
+// Google y los visitantes sin JavaScript las encuentren sin esperar al directorio dinámico.
+const rutaInicio = path.join(DIR, 'index.html');
+const inicio = fs.readFileSync(rutaInicio, 'utf8');
+const marcas = /(<!-- fichas:inicio[^>]*-->)([\s\S]*?)(\s*<!-- fichas:fin -->)/;
+if (marcas.test(inicio)) {
+  const nl = inicio.includes('\r\n') ? '\r\n' : '\n';
+  const items = SE.empresas
+    .map((c) => `${nl}                <li><a href="/empresa-${c.slug}">${esc(c.marca)}</a></li>`).join('');
+  fs.writeFileSync(rutaInicio, inicio.replace(marcas, (_, a, __, b) => a + items + b), 'utf8');
+  console.log(`index.html: lista de respaldo con ${SE.empresas.length} empresas.`);
+} else {
+  console.log('AVISO: index.html no tiene los marcadores fichas:inicio / fichas:fin.');
+}
 
 // Sitemap para Google Search Console: páginas fijas + una ficha por empresa publicada.
 // Las direcciones van sin «.html» porque Vercel sirve el sitio con cleanUrls.

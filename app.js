@@ -507,7 +507,7 @@
     }
 
     function cardHTML(c, i) {
-      var href = 'empresa-' + c.slug + '.html';
+      var href = '/empresa-' + c.slug;
       var servicio = tipoDe(c) === 'servicio';
       var logo = 'logo-' + c.slug + '.webp';
       var monograma = c.logo === false;
