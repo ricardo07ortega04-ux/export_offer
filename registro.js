@@ -207,7 +207,8 @@
   // Se reducen en el navegador antes de enviarlas: la función de Vercel
   // acepta hasta 4.5 MB por solicitud.
   var imagenes = { logo: [], fotos: [] };
-  var LIMITES = { logo: { lado: 1200, max: 1 }, fotos: { lado: 1800, max: 3 } };
+  // Las fotos se publican en 16:9; 1920 px conserva una foto de 1920 × 1080 tal cual
+  var LIMITES = { logo: { lado: 1200, max: 1 }, fotos: { lado: 1920, max: 3 } };
   var MAX_ORIGINAL = 10 * 1024 * 1024;
   var soportaWebp = (function () {
     try { return document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0; }
@@ -250,8 +251,9 @@
       datos = reducir(r.img, LIMITES[grupo].lado, tipo, calidad);
     }
     var aviso = '';
-    if (grupo === 'fotos' && r.img.naturalWidth < 900) aviso = 'Una de las fotos es pequeña y podría verse borrosa. Si tienes una versión más grande, úsala.';
-    else if (grupo === 'fotos' && r.img.naturalHeight > r.img.naturalWidth) aviso = 'Las fotos horizontales se ven mejor en la ficha.';
+    var proporcion = r.img.naturalWidth / r.img.naturalHeight;
+    if (grupo === 'fotos' && (proporcion < 1.3 || proporcion > 2)) aviso = 'Las fichas usan fotos horizontales en formato 16:9. Esta se mostrará completa, pero una foto horizontal se verá mejor.';
+    else if (grupo === 'fotos' && r.img.naturalWidth < 1600) aviso = 'Una de las fotos mide menos de 1600 px de ancho y podría verse borrosa. Si tienes una versión más grande (ideal 1920 × 1080), úsala.';
     return { tipo: tipo, data: datos.split(',')[1], vista: r.url, aviso: aviso };
   }
 

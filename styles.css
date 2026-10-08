@@ -786,9 +786,20 @@ button { cursor: pointer; }
 .panel > h2 { font-family: var(--font-text); font-size: var(--fs-h4); font-weight: 700; margin-bottom: var(--space-2); }
 .panel p { color: var(--pizarra); }
 
-.p-photo { border-radius: var(--radius-md); overflow: hidden; background: var(--niebla-2); margin-bottom: var(--space-2); }
-/* Las fotos verticales (botellas) no deben ocupar más de una pantalla: se ajustan sin recortarse */
-.p-photo img { width: 100%; height: auto; max-height: 34rem; object-fit: contain; }
+/* Foto de la ficha: siempre en 16:9 (estándar: 1920 × 1080, se publica a 1600 × 900) */
+.p-photo {
+  position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: var(--radius-md); background: var(--niebla-2); margin-bottom: var(--space-2);
+}
+/* El recorte se ancla al 30 % desde arriba: conserva cabezas y tapas de botellas */
+.p-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+/* Verticales o muy panorámicas: completas, sobre la misma imagen difuminada */
+.p-photo--completa::before {
+  content: ""; position: absolute; inset: -2rem;
+  background: var(--foto) center / cover no-repeat;
+  filter: blur(24px) saturate(1.1); opacity: 0.55;
+}
+.p-photo--completa img { object-fit: contain; }
 
 .dl { display: grid; gap: 0.875rem var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
 .dl > div { min-width: 0; }

@@ -118,6 +118,34 @@ function tagList(values, fn, cls) {
 
 /* Productos o servicios, según el tipo del sector (05-tipos-sectores.sql) */
 const esServicio = (c) => (SE.sectores[c.sector] || {}).tipo === 'servicio';
+// Medidas de una imagen WebP leyendo su cabecera (sin dependencias)
+function medidasWebp(archivo) {
+  try {
+    const b = fs.readFileSync(archivo);
+    const tipo = b.toString('ascii', 12, 16);
+    if (tipo === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+    if (tipo === 'VP8L') { const v = b.readUInt32LE(21); return [(v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1]; }
+    if (tipo === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+  } catch (e) { /* sin foto legible: se trata como horizontal */ }
+  return null;
+}
+
+// Foto de la ficha en un recuadro 16:9. Las horizontales (proporción 1.3 a 2) lo llenan con
+// un recorte suave; las verticales y las muy panorámicas se muestran completas sobre un fondo
+// difuminado de la misma imagen, para no cortar el producto.
+// Fotos horizontales en las que cualquier recorte corta el producto: se muestran completas
+const FOTO_COMPLETA = ['solferino-native', 'mezcal-elixir-de-agave'];
+
+function foto(c) {
+  const archivo = `foto-${c.slug}.webp`;
+  const m = medidasWebp(path.join(DIR, archivo));
+  const proporcion = m ? m[0] / m[1] : 16 / 9;
+  const completa = proporcion < 1.3 || proporcion > 2 || FOTO_COMPLETA.includes(c.slug);
+  const tam = m ? ` width="${m[0]}" height="${m[1]}"` : '';
+  return `<div class="p-photo${completa ? ' p-photo--completa' : ''}" style="--foto:url('${archivo}')">` +
+    `<img src="${archivo}" alt="${esc(c.marca)}"${tam} loading="lazy" decoding="async"></div>`;
+}
+
 // Sin logotipo en el repositorio se usa la inicial
 const monograma = (c) => c.logo === false;
 const inicial = (c) => c.marca.replace(/^Mezcal\s+/i, '').trim().charAt(0).toUpperCase();
@@ -279,7 +307,7 @@ ${header()}
         <div>
 
           <div class="panel" data-reveal>
-            ${c.foto !== false ? `<div class="p-photo"><img src="foto-${c.slug}.webp" alt="${esc(c.marca)}" loading="lazy" decoding="async"></div>` : ''}
+            ${c.foto !== false ? foto(c) : ''}
             ${i18('h2', 'profileAbout')}
             ${parrafos(c.descripcion.es, c.descripcion.en)}
             <dl class="dl" style="margin-top:1.5rem">
