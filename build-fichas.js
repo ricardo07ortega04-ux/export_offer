@@ -412,6 +412,19 @@ SE.empresas.forEach((c) => {
 });
 console.log(`\n${n} fichas generadas.`);
 
+// Fichas de empresas que ya no están publicadas (borrador, en revisión o suspendidas):
+// se retiran para que su página deje de estar disponible. Si la empresa se vuelve a
+// publicar, su ficha se genera de nuevo. Con cero empresas no se borra nada: eso sería
+// un error al leer los datos, no una decisión de despublicar todo.
+if (SE.empresas.length) {
+  const vigentes = new Set(SE.empresas.map((c) => `empresa-${c.slug}.html`));
+  const retiradas = fs.readdirSync(DIR).filter((f) => /^empresa-[a-z0-9-]+\.html$/.test(f) && !vigentes.has(f));
+  retiradas.forEach((f) => fs.unlinkSync(path.join(DIR, f)));
+  if (retiradas.length) console.log(`Retiradas ${retiradas.length} fichas no publicadas: ${retiradas.join(', ')}`);
+} else {
+  console.log('AVISO: data.js no tiene empresas; no se retira ninguna ficha.');
+}
+
 // Lista de respaldo del inicio: enlaces a todas las fichas en el HTML fijo, para que
 // Google y los visitantes sin JavaScript las encuentren sin esperar al directorio dinámico.
 const rutaInicio = path.join(DIR, 'index.html');
