@@ -45,7 +45,7 @@ Para **agregar un estado o sector**: basta con que las empresas nuevas traigan o
 Para los correos se puede usar una liga con la empresa ya escrita y la referencia del correo:
 `https://www.sur-exporta.com/agenda?empresa=La%20Morena&ref=SE-2026-006`
 
-Cómo funciona: `/api/agenda` consulta los espacios libres del calendario de Google, guarda la cita en la tabla `citas` de Supabase (que impide dos citas en el mismo horario) y crea el evento con enlace de Meet; Google envía la invitación a la persona. Para bloquear un día, basta con marcarlo como ocupado en el calendario.
+Cómo funciona: `/api/agenda` consulta los espacios libres del calendario de Google, guarda la cita en la tabla `citas` de Supabase (que impide dos citas en el mismo horario) y crea el evento con enlace de Meet; Google envía la invitación a la persona. Además, con Resend se envían dos correos: la confirmación a quien agendó (en su idioma, con el enlace de Meet; sus respuestas llegan a `AGENDA_REPLY_TO`, por defecto ricardo_ortega@sur-exporta.com) y el aviso interno a `AGENDA_TO` (o `CONTACT_TO`). Para bloquear un día, basta con marcarlo como ocupado en el calendario; si se borra o cancela una cita en el calendario, su horario se libera.
 
 Puesta en marcha (una sola vez, con la cuenta ricardo_ortega@sur-exporta.com):
 

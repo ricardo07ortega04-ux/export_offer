@@ -182,6 +182,70 @@ const TEXTOS = {
   }
 };
 
+// Correo de confirmación para quien agenda
+const CONFIRMACION = {
+  es: {
+    locale: 'es-MX',
+    asunto: (fecha) => `Tu reunión con COMCE Región Sur quedó agendada · ${fecha}`,
+    titulo: 'Tu reunión quedó agendada',
+    saludo: (nombre) => `Hola ${nombre}:`,
+    intro: 'Gracias por agendar una reunión con COMCE Región Sur para platicar de Sur Exporta. Estos son los datos:',
+    fecha: 'Fecha', hora: 'Hora', horas: (a, b) => `De ${a} a ${b} (hora del centro de México)`,
+    tema: 'Tema', boton: 'Entrar a Google Meet',
+    calendario: 'También te llegará la invitación de Google Calendar para que la agregues a tu calendario.',
+    cambios: 'Si necesitas cambiar la fecha o cancelar, responde a este correo y lo vemos.',
+    firma: 'COMCE Región Sur · sur-exporta.com'
+  },
+  en: {
+    locale: 'en-US',
+    asunto: (fecha) => `Your meeting with COMCE Southern Region is booked · ${fecha}`,
+    titulo: 'Your meeting is booked',
+    saludo: (nombre) => `Hello ${nombre},`,
+    intro: 'Thank you for booking a meeting with COMCE Southern Region to talk about Sur Exporta. Here are the details:',
+    fecha: 'Date', hora: 'Time', horas: (a, b) => `${a}–${b} (Central Mexico time, UTC−6)`,
+    tema: 'Topic', boton: 'Join Google Meet',
+    calendario: 'You will also receive a Google Calendar invitation so you can add it to your calendar.',
+    cambios: 'If you need to reschedule or cancel, just reply to this email.',
+    firma: 'COMCE Southern Region · sur-exporta.com'
+  }
+};
+
+function confirmacion(cita, meet) {
+  const c = CONFIRMACION[cita.idioma];
+  const fecha = new Date(cita.inicio).toLocaleDateString(c.locale, { timeZone: ZONA, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const hora = (ms) => new Date(ms).toLocaleTimeString('es-MX', { timeZone: ZONA, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const Fecha = fecha.charAt(0).toUpperCase() + fecha.slice(1);
+  const fila = (etiqueta, valor) => `<tr>
+    <td style="padding:10px 14px;border-bottom:1px solid #e7edf3;color:#4a5a6b;font-size:13px;white-space:nowrap;vertical-align:top">${esc(etiqueta)}</td>
+    <td style="padding:10px 14px;border-bottom:1px solid #e7edf3;color:#0b1f33;font-size:15px;font-weight:bold">${esc(valor).replace(/\n/g, '<br>')}</td>
+  </tr>`;
+  return {
+    to: [cita.email],
+    reply_to: process.env.AGENDA_REPLY_TO || 'ricardo_ortega@sur-exporta.com',
+    subject: c.asunto(Fecha),
+    html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;color:#0b1f33;font-size:15px;line-height:1.6">
+      <div style="background:#04162b;color:#fff;padding:22px 24px;border-radius:10px 10px 0 0">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e0a63a">Sur Exporta · ${cita.idioma === 'en' ? 'Meeting' : 'Agenda'}</div>
+        <div style="font-size:22px;font-weight:bold;margin-top:6px">${esc(c.titulo)}</div>
+      </div>
+      <div style="background:#ffffff;border:1px solid #e7edf3;border-top:0;border-radius:0 0 10px 10px;padding:22px 24px">
+        <p style="margin:0 0 12px">${esc(c.saludo(cita.nombre))}</p>
+        <p style="margin:0 0 16px">${esc(c.intro)}</p>
+        <table style="width:100%;border-collapse:collapse;border:1px solid #e7edf3;border-bottom:0">
+          ${fila(c.fecha, Fecha)}
+          ${fila(c.hora, c.horas(hora(cita.inicio), hora(cita.fin)))}
+          ${cita.tema ? fila(c.tema, cita.tema) : ''}
+        </table>
+        ${meet ? `<p style="margin:22px 0"><a href="${esc(meet)}" style="display:inline-block;background:#e0a63a;color:#04162b;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:999px">${esc(c.boton)}</a></p>
+        <p style="margin:0 0 16px;font-size:13px;color:#4a5a6b"><a href="${esc(meet)}" style="color:#014476">${esc(meet)}</a></p>` : ''}
+        <p style="margin:0 0 8px">${esc(c.calendario)}</p>
+        <p style="margin:0">${esc(c.cambios)}</p>
+        <p style="margin:22px 0 0;font-size:12px;color:#4a5a6b">${esc(c.firma)}</p>
+      </div>
+    </div>`
+  };
+}
+
 function linea(v, max) {
   return String(v == null ? '' : v).replace(/[\r\n\t]+/g, ' ').trim().slice(0, max);
 }
@@ -333,8 +397,28 @@ async function handler(req, res) {
     console.error('No se pudo guardar el enlace de la cita:', err.message);
   }
 
-  // Aviso por correo: si falla, la cita ya está en el calendario
+  // Correos: si fallan, la cita ya está en el calendario
   const apiKey = process.env.RESEND_API_KEY;
+  const remitente = process.env.CONTACT_FROM || 'Sur Exporta <no-responder@sur-exporta.com>';
+  async function enviar(payload) {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ from: remitente }, payload))
+    });
+    if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
+  }
+
+  // Confirmación a quien agendó, en el idioma en que lo hizo
+  if (apiKey) {
+    try {
+      await enviar(confirmacion(cita, evento.meet));
+    } catch (err) {
+      console.error('No se pudo enviar la confirmación de la cita:', err.message);
+    }
+  }
+
+  // Aviso interno a COMCE
   const destino = process.env.AGENDA_TO || process.env.CONTACT_TO;
   if (apiKey && destino) {
     const cuando = new Date(cita.inicio).toLocaleString('es-MX', { timeZone: ZONA, dateStyle: 'full', timeStyle: 'short' });
@@ -345,24 +429,18 @@ async function handler(req, res) {
       `<tr><td style="padding:8px 14px;border-bottom:1px solid #e7edf3;color:#4a5a6b;font-size:13px;white-space:nowrap;vertical-align:top">${esc(f[0])}</td>` +
       `<td style="padding:8px 14px;border-bottom:1px solid #e7edf3;color:#0b1f33;font-size:14px">${esc(f[1]).replace(/\n/g, '<br>')}</td></tr>`).join('');
     try {
-      const r = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: process.env.CONTACT_FROM || 'Sur Exporta <no-responder@sur-exporta.com>',
-          to: destino.split(',').map((x) => x.trim()).filter(Boolean),
-          reply_to: cita.email,
-          subject: `Nueva cita: ${cita.empresa || cita.nombre} · ${cuando}`,
-          html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px">
-            <div style="background:#04162b;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
-              <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e0a63a">Sur Exporta · Agenda</div>
-              <div style="font-size:19px;font-weight:bold;margin-top:4px">${esc(cita.empresa || cita.nombre)}</div>
-            </div>
-            <table style="width:100%;border-collapse:collapse;border:1px solid #e7edf3;border-top:0">${filas}</table>
-          </div>`
-        })
+      await enviar({
+        to: destino.split(',').map((x) => x.trim()).filter(Boolean),
+        reply_to: cita.email,
+        subject: `Nueva cita: ${cita.empresa || cita.nombre} · ${cuando}`,
+        html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px">
+          <div style="background:#04162b;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
+            <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e0a63a">Sur Exporta · Agenda</div>
+            <div style="font-size:19px;font-weight:bold;margin-top:4px">${esc(cita.empresa || cita.nombre)}</div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;border:1px solid #e7edf3;border-top:0">${filas}</table>
+        </div>`
       });
-      if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
     } catch (err) {
       console.error('No se pudo avisar de la cita:', err.message);
     }
