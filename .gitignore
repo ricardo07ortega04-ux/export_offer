@@ -9,6 +9,9 @@ Desktop.ini
 # Prototipos de diseño: solo para revisión local
 prototipo-*.html
 
+# Plantillas de correo: se usan para enviar, no se publican en el sitio
+correos/
+
 # Vercel CLI
 .vercel/
 
