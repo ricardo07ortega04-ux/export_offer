@@ -447,6 +447,7 @@ const PAGINAS = [
   ['/nosotros', '0.6'],
   ['/registro', '0.6'],
   ['/contacto', '0.5'],
+  ['/agenda', '0.5'],
   ['/aviso-de-privacidad', '0.2'],
   ['/politica-de-cookies', '0.2']
 ];

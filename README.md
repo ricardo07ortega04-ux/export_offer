@@ -38,6 +38,25 @@ Para **agregar una empresa**: añade su objeto al arreglo `empresas` de `data.js
 
 Para **agregar un estado o sector**: basta con que las empresas nuevas traigan otro valor en `estado` o `sector`; el filtro correspondiente aparece automáticamente en cuanto hay más de un valor. Los sectores nuevos se declaran en `SE.sectores` con su nombre en ambos idiomas.
 
+## Agenda de reuniones
+
+`sur-exporta.com/agenda` permite apartar una reunión de 1 hora por Google Meet (lunes, martes, miércoles y viernes de 10:00 a 17:00, hora del centro de México, con 24 horas de anticipación y hasta 4 semanas adelante). El horario se cambia al inicio de `api/agenda.js`.
+
+Para los correos se puede usar una liga con la empresa ya escrita y la referencia del correo:
+`https://www.sur-exporta.com/agenda?empresa=La%20Morena&ref=SE-2026-006`
+
+Cómo funciona: `/api/agenda` consulta los espacios libres del calendario de Google, guarda la cita en la tabla `citas` de Supabase (que impide dos citas en el mismo horario) y crea el evento con enlace de Meet; Google envía la invitación a la persona. Para bloquear un día, basta con marcarlo como ocupado en el calendario.
+
+Puesta en marcha (una sola vez, con la cuenta ricardo_ortega@sur-exporta.com):
+
+1. En [Google Cloud Console](https://console.cloud.google.com/) crea un proyecto (p. ej. «Sur Exporta Agenda») y, en *APIs y servicios → Biblioteca*, habilita **Google Calendar API**.
+2. En *Google Auth Platform* (pantalla de consentimiento) elige el público **Externo** y, en *Público*, pulsa **Publicar app** para dejarla **En producción** (en modo «Prueba» el permiso caduca a los 7 días). Al autorizar, Google avisa que la app no está verificada: *Configuración avanzada → Ir a la app*; solo lo ve quien autoriza, una vez. (El público «Interno» solo sirve si la cuenta pertenece a la organización de Google Workspace; con esta cuenta da el error `org_internal`.) Si la organización no deja crear proyectos, date el rol **Creador de proyectos** en *IAM* de la organización.
+3. En *Clientes → Crear cliente* elige **App de escritorio** y copia el ID y el secreto.
+4. En la carpeta del proyecto ejecuta `node agenda-autorizar.js <ID> <SECRETO>`, abre la liga, acepta y copia el valor que aparece.
+5. En Vercel (*Settings → Environment Variables*) agrega `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` y `GOOGLE_REFRESH_TOKEN`. Opcional: `AGENDA_TO` para recibir un aviso por correo de cada cita (si falta, se usa `CONTACT_TO`).
+6. En el editor SQL de Supabase ejecuta `supabase/25-citas.sql`.
+7. Vuelve a desplegar el sitio.
+
 ## Notas técnicas
 
 - **Sin dependencias.** No hay build step salvo el generador de fichas.

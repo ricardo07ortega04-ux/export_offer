@@ -6,6 +6,9 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Prototipos de diseño: solo para revisión local
+prototipo-*.html
+
 # Vercel CLI
 .vercel/
 

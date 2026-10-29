@@ -128,6 +128,15 @@
     }
   };
 
+  // Fichas de empresa: un punto ilustrativo por país de SE.paises (no se rotula en pantalla)
+  var MERCADOS = {
+    'Alemania': P.berlin, 'Australia': P.sidney, 'Canadá': P.toronto, 'China': P.shanghai,
+    'España': P.madrid, 'Estados Unidos': P.nuevaYork, 'Francia': P.paris, 'Hong Kong': P.hongKong,
+    'Italia': P.milan, 'Japón': P.tokio, 'Países Bajos': P.rotterdam, 'Polonia': P.varsovia,
+    'Reino Unido': P.londres, 'Rusia': P.moscu, 'Singapur': P.singapur, 'Suecia': P.estocolmo,
+    'Suiza': P.zurich
+  };
+
   var REGIONS = {
     'africa': { lon: 18, lat: 6, destinations: [P.casablanca, P.lagos, P.elCairo, P.nairobi, P.johannesburgo] },
     'america-del-norte': { lon: -96, lat: 36, destinations: [P.vancouver, P.losAngeles, P.chicago, P.toronto, P.nuevaYork] },
@@ -167,8 +176,8 @@
   }
 
   // Great-circle arc from the origin, lifted above the surface
-  function buildRoute(dest) {
-    var a = toVec(ORIGIN.lat, ORIGIN.lon);
+  function buildRoute(dest, origin) {
+    var a = toVec(origin.lat, origin.lon);
     var b = toVec(dest.lat, dest.lon);
     var dot = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]));
     var omega = Math.acos(dot);
@@ -202,6 +211,7 @@
   function createGlobe(canvas, preset) {
     var ctx = canvas.getContext('2d', { alpha: true });
     var host = canvas.closest('section') || document.body;
+    var origin = preset.origin || ORIGIN;
 
     var s = {
       w: 0, h: 0, cx: 0, cy: 0, R: 0,
@@ -248,7 +258,7 @@
     // launch = true: arcs depart now, one after another; false: arcs already in flight
     function setRoutes(destinations, launch) {
       routes = destinations.map(function (d, idx) {
-        var r = buildRoute(d);
+        var r = buildRoute(d, origin);
         r.shift = launch
           ? idx * 240
           : -((idx / destinations.length) * ROUTE_PERIOD * 1.35 + (idx % 3) * 380);
@@ -426,7 +436,7 @@
         }
       }
 
-      var op = project(Math.sin(ORIGIN.lat * DEG), Math.cos(ORIGIN.lat * DEG), Math.sin(ORIGIN.lon * DEG), Math.cos(ORIGIN.lon * DEG), 0);
+      var op = project(Math.sin(origin.lat * DEG), Math.cos(origin.lat * DEG), Math.sin(origin.lon * DEG), Math.cos(origin.lon * DEG), 0);
       if (op.z > 0) {
         if (!staticMode) {
           var pulse = (now % 2400) / 2400;
@@ -559,7 +569,7 @@
     /* ---------- Public: rotate to a region (or back to the overview) ---------- */
 
     function focus(key) {
-      var target = (key && REGIONS[key]) || preset;
+      var target = (key && ((preset.regions && preset.regions[key]) || REGIONS[key])) || preset;
       var now = performance.now();
 
       setRoutes(target.destinations, true);
@@ -634,10 +644,36 @@
 
   /* ---------- Init ---------- */
 
+  // Ficha de empresa: rutas desde el municipio a cada mercado declarado, y una vista por mercado
+  //   <canvas data-globe="empresa" data-origen="20.07,-97.06" data-mercados="Canadá|Japón">
+  function empresaPreset(canvas) {
+    var o = (canvas.getAttribute('data-origen') || '').split(',').map(Number);
+    var origin = o.length === 2 && !isNaN(o[0]) && !isNaN(o[1]) ? place(o[0], o[1]) : ORIGIN;
+    var regions = {}, destinations = [], lats = [origin.lat], dMin = 0, dMax = 0;
+    (canvas.getAttribute('data-mercados') || '').split('|').forEach(function (m) {
+      var d = MERCADOS[m];
+      if (!d) return;
+      var dl = lonDelta(origin.lon, d.lon);
+      destinations.push(d);
+      lats.push(d.lat);
+      dMin = Math.min(dMin, dl);
+      dMax = Math.max(dMax, dl);
+      // Vista centrada a medio camino: se ven el origen y el destino
+      regions[m] = { lon: normalizeLon(origin.lon + dl / 2), lat: (origin.lat + d.lat) / 2, destinations: [d] };
+    });
+    var lat = lats.reduce(function (a, b) { return a + b; }, 0) / lats.length;
+    return {
+      origin: origin, regions: regions, destinations: destinations, sway: 10,
+      lon: normalizeLon(origin.lon + (dMin + dMax) / 2), lat: lat
+    };
+  }
+
   var globes = {};
   Array.prototype.forEach.call(document.querySelectorAll('canvas[data-globe]'), function (canvas, i) {
     if (!canvas.getContext) return;
-    var preset = PRESETS[canvas.getAttribute('data-globe')] || PRESETS.home;
+    var preset = canvas.getAttribute('data-globe') === 'empresa'
+      ? empresaPreset(canvas)
+      : PRESETS[canvas.getAttribute('data-globe')] || PRESETS.home;
     globes[canvas.id || 'globe-' + i] = createGlobe(canvas, preset);
   });
 

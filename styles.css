@@ -1282,6 +1282,62 @@ button { cursor: pointer; }
 .ct-area { color: var(--pizarra); font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
 .ct-correos a { overflow-wrap: anywhere; font-weight: 600; }
 
+/* ---------- Agenda de reuniones ---------- */
+
+.ag-paso + .ag-paso { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--linea-2); }
+.ag-paso-titulo {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: var(--space-2);
+  font-family: var(--font-text); font-size: var(--fs-h4); font-weight: 700; color: var(--noche);
+}
+.ag-num {
+  display: inline-grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 50%;
+  background: var(--noche); color: var(--ocre); font-size: var(--fs-sm);
+}
+.ag-estado { margin: 0; color: var(--pizarra); }
+.ag-nota { margin: -0.5rem 0 var(--space-2); font-size: var(--fs-sm); color: var(--pizarra); }
+
+.ag-dias { display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
+.ag-dia {
+  display: flex; flex-direction: column; align-items: center; gap: 0.125rem; padding: 0.625rem 0.25rem;
+  border: 1px solid var(--linea); border-radius: var(--radius-md); background: var(--blanco); color: var(--tinta);
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.ag-dia:hover:not(:disabled) { border-color: var(--cobalto); box-shadow: var(--shadow-1); }
+.ag-dia-sem, .ag-dia-mes { font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pizarra); }
+.ag-dia-num { font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ag-dia[aria-pressed="true"] { background: var(--noche); border-color: var(--noche); color: #fff; }
+.ag-dia[aria-pressed="true"] .ag-dia-sem, .ag-dia[aria-pressed="true"] .ag-dia-mes { color: var(--ocre); }
+.ag-dia:disabled { background: var(--niebla-2); border-style: dashed; color: var(--texto-claro-2); cursor: not-allowed; }
+.ag-dia:disabled .ag-dia-mes { text-transform: none; letter-spacing: 0; font-weight: 500; }
+
+.ag-horas { display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); }
+.ag-hora {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.125rem; min-height: 52px;
+  padding: 0.5rem 0.75rem; border: 1px solid var(--linea); border-radius: var(--radius-pill); background: var(--blanco);
+  font-weight: 600; color: var(--tinta); font-variant-numeric: tabular-nums;
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.ag-hora small { font-size: var(--fs-xs); font-weight: 500; color: var(--pizarra); }
+.ag-hora:hover { border-color: var(--cobalto); }
+.ag-hora[aria-pressed="true"] { background: var(--cobalto); border-color: var(--cobalto); color: #fff; }
+.ag-hora[aria-pressed="true"] small { color: var(--cobalto-100); }
+
+.ag-resumen {
+  display: flex; align-items: flex-start; gap: 0.625rem; margin-bottom: var(--space-3); padding: 0.875rem 1rem;
+  border-radius: var(--radius-md); background: var(--ocre-suave); border: 1px solid #f0e0bd;
+  font-weight: 600; color: var(--noche);
+}
+.ag-resumen:focus { outline: none; }
+.ag-resumen svg { width: 20px; height: 20px; flex: none; margin-top: 0.125rem; color: var(--ocre-texto); }
+.ag-listo-cuando { font-weight: 600; color: var(--noche) !important; }
+
+.ag-quien-nombre { margin: 0; font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--noche); }
+.ag-quien-org { margin: 0 0 var(--space-3); font-size: var(--fs-sm); color: var(--pizarra); }
+.ag-quien-sub { margin-bottom: 0.75rem; font-family: var(--font-text); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pizarra); }
+.ag-temas { display: grid; gap: 0.625rem; font-size: var(--fs-sm); }
+.ag-temas li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 0.5rem; align-items: start; }
+.ag-temas svg { width: 16px; height: 16px; margin-top: 0.2rem; color: var(--exito); }
+
 /* Llamado a registrarse en el inicio */
 .prog-cta { margin-top: var(--space-3); display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
 .prog-cta p { margin: 0; font-weight: 600; color: var(--noche); }
