@@ -12,6 +12,9 @@ prototipo-*.html
 # Plantillas de correo: se usan para enviar, no se publican en el sitio
 correos/
 
+# Identidad del podcast: archivos de trabajo, no se publican en el sitio
+podcast/
+
 # Vercel CLI
 .vercel/
 

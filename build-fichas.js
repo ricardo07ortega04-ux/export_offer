@@ -53,6 +53,7 @@ function header() {
         ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
         <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
         ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
+        <a href="/podcast">Podcast</a>
         ${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}
       </nav>
       <button class="lang-btn" type="button" data-lang-toggle aria-label="${esc(es('switchLabel'))}" data-i18n-attr="aria-label:switchLabel">
@@ -67,6 +68,7 @@ function header() {
       ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
       <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
       ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
+      <a href="/podcast">Podcast</a>
       ${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}
     </nav>
   </div>
@@ -86,6 +88,7 @@ function footer() {
         <ul>
           <li>${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}</li>
           <li>${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}</li>
+          <li><a href="/podcast">Podcast</a></li>
           <li>${i18('a', 'navPrograma').replace('<a ', '<a href="/#programa" ')}</li>
           <li>${i18('a', 'navContacto').replace('<a ', '<a href="/contacto" ')}</li>
         </ul>
@@ -448,6 +451,7 @@ const PAGINAS = [
   ['/registro', '0.6'],
   ['/contacto', '0.5'],
   ['/agenda', '0.5'],
+  ['/podcast', '0.5'],
   ['/aviso-de-privacidad', '0.2'],
   ['/politica-de-cookies', '0.2']
 ];
