@@ -26,7 +26,7 @@
 
   // Enlaces al programa completo en cada plataforma. Vacío = «Próximamente».
   var PLATAFORMAS = {
-    youtube: '',
+    youtube: 'https://www.youtube.com/@Sur-Exporta',
     spotify: '',
     apple: ''
   };
