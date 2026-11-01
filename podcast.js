@@ -4,7 +4,7 @@
  * Para publicar un episodio, agrega un objeto al arreglo EPISODIOS (o cambia el
  * que está como «proximamente» a «publicado») con estos campos:
  *
- *   numero    1, 2, 3…
+ *   numero    0, 1, 2… (el 0 es la bienvenida)
  *   estado    'publicado' o 'proximamente'
  *   titulo    { es: '…', en: '…' }
  *   resumen   { es: '…', en: '…' }
@@ -33,7 +33,7 @@
 
   var EPISODIOS = [
     {
-      numero: 1,
+      numero: 0,
       estado: 'proximamente',
       titulo: { es: 'Bienvenida', en: 'Welcome' },
       resumen: {
