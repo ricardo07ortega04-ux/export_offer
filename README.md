@@ -40,7 +40,7 @@ Para **agregar un estado o sector**: basta con que las empresas nuevas traigan o
 
 ## Agenda de reuniones
 
-`sur-exporta.com/agenda` permite apartar una reunión de 1 hora por Google Meet (lunes, martes, miércoles y viernes de 10:00 a 17:00, hora del centro de México, con 24 horas de anticipación y hasta 4 semanas adelante). El horario se cambia al inicio de `api/agenda.js`.
+`sur-exporta.com/agenda` permite apartar una reunión de 1 hora por Google Meet (lunes, martes, miércoles y viernes, de 10:00 a 11:00 y de 11:00 a 12:00, hora del centro de México, con 24 horas de anticipación y hasta 4 semanas adelante). El horario se cambia al inicio de `api/agenda.js`.
 
 Para los correos se puede usar una liga con la empresa ya escrita y la referencia del correo:
 `https://www.sur-exporta.com/agenda?empresa=La%20Morena&ref=SE-2026-006`

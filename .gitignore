@@ -15,6 +15,9 @@ correos/
 # Identidad del podcast: archivos de trabajo, no se publican en el sitio
 podcast/
 
+# Constancias de eventos: documentos con datos de personas, no se publican en el sitio
+constancias/
+
 # Vercel CLI
 .vercel/
 
