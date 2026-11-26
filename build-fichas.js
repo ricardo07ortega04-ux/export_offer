@@ -51,6 +51,7 @@ function header() {
       </a>
       <nav class="nav" aria-label="Principal">
         ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
+        <a href="/estado-puebla" data-es="Estados" data-en="States">Estados</a>
         <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
         ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
         <a href="/podcast">Podcast</a>
@@ -66,6 +67,7 @@ function header() {
     </div>
     <nav class="nav-mobile" id="nav-mobile" hidden aria-label="Principal (móvil)">
       ${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}
+      <a href="/estado-puebla" data-es="Estados" data-en="States">Estados</a>
       <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
       ${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}
       <a href="/podcast">Podcast</a>
@@ -87,6 +89,7 @@ function footer() {
         ${i18('h4', 'footerNav')}
         <ul>
           <li>${i18('a', 'navDirectorio').replace('<a ', '<a href="/#directorio" ')}</li>
+          <li><a href="/estado-puebla" data-es="Estados" data-en="States">Estados</a></li>
           <li>${i18('a', 'navComo').replace('<a ', '<a href="/#como" ')}</li>
           <li><a href="/podcast">Podcast</a></li>
           <li>${i18('a', 'navPrograma').replace('<a ', '<a href="/#programa" ')}</li>
@@ -452,6 +455,7 @@ const PAGINAS = [
   ['/contacto', '0.5'],
   ['/agenda', '0.5'],
   ['/podcast', '0.5'],
+  ['/estado-puebla', '0.7'],
   ['/aviso-de-privacidad', '0.2'],
   ['/politica-de-cookies', '0.2']
 ];

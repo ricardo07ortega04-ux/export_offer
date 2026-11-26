@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-title-es="Puebla — Estados de la Región Sur — Sur Exporta"
+       data-title-en="Puebla — Southern Region states — Sur Exporta">Puebla — Estados de la Región Sur — Sur Exporta</title>
+<meta name="description" content="Puebla en datos: conectividad, proveedores y talento. El estado que más exporta de la Región Sur de México.">
+<meta name="theme-color" content="#04162b">
+<link rel="canonical" href="https://www.sur-exporta.com/estado-puebla">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Puebla en datos — Sur Exporta">
+<meta property="og:description" content="Conectividad, proveedores y talento: por qué Puebla es el estado que más exporta de la Región Sur de México.">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bodoni-moda-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>(function (d) {
+  var h = d.documentElement;
+  h.className = h.className.replace('no-js', 'js');
+  setTimeout(function () { if (!window.__seReady) h.classList.add('reveal-off'); }, 2500);
+})(document);</script>
+<style>
+/* ================================================================
+   Página de estado: Puebla. Prefijo ep- para no chocar con styles.css.
+   ================================================================ */
+
+
+/* ---------- Menú «Estados» ---------- */
+.ep-drop { position: relative; }
+.ep-drop-btn {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.5rem 0.875rem; border: 0; border-radius: var(--radius-sm); background: transparent;
+  font-size: var(--fs-sm); font-weight: 600; color: var(--cobalto); white-space: nowrap;
+}
+.ep-drop-btn:hover, .ep-drop-btn[aria-expanded="true"] { background: var(--niebla); }
+.ep-drop-btn svg { width: 14px; height: 14px; transition: transform var(--dur-fast) var(--ease-out); }
+.ep-drop-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.ep-drop-menu {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+  width: 560px; padding: 1.25rem; z-index: 10;
+  background: #fff; border: 1px solid var(--linea-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-3);
+  display: grid; grid-template-columns: 190px 1fr; gap: 1.25rem; align-items: center;
+}
+.ep-drop-menu svg.ep-mini { width: 190px; height: auto; }
+.ep-drop-menu ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem 0.75rem; }
+.ep-drop-menu li a, .ep-drop-menu li span {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem;
+  padding: 0.45rem 0.6rem; border-radius: var(--radius-sm); font-size: var(--fs-sm); text-decoration: none;
+}
+.ep-drop-menu li a { color: var(--noche); font-weight: 600; background: var(--ocre-suave); }
+.ep-drop-menu li a:hover { background: #f8e9c6; }
+.ep-drop-menu li span { color: var(--pizarra); }
+.ep-drop-menu li small { font-size: 0.6875rem; color: var(--pizarra); font-weight: 500; }
+.ep-drop-menu .ep-drop-head { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--linea-2); padding-bottom: 0.6rem; margin-bottom: -0.25rem; }
+.ep-drop-menu .ep-drop-head p { margin: 0; font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--noche); }
+.ep-drop-menu .ep-drop-head span { font-size: var(--fs-xs); color: var(--pizarra); }
+.ep-mini path { fill: var(--linea-2); stroke: #fff; stroke-width: 0.6; }
+.ep-mini path.sur { fill: #f3e2bd; }
+.ep-mini path.pue { fill: var(--ocre); }
+.nav-mobile .ep-m-estados { padding: 0.25rem 0 0.5rem; }
+.nav-mobile .ep-m-estados p { margin: 0.25rem 0 0.25rem; font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocre-texto); }
+.nav-mobile .ep-m-estados span { display: block; padding: 0.35rem 0; color: var(--pizarra); font-size: var(--fs-sm); }
+
+/* ---------- Portada ---------- */
+.ep-hero {
+  position: relative; overflow: hidden; color: var(--texto-claro);
+  background:
+    radial-gradient(60rem 30rem at 85% 30%, rgba(224, 166, 58, 0.13), transparent 60%),
+    radial-gradient(40rem 30rem at 10% 110%, rgba(1, 68, 118, 0.55), transparent 60%),
+    var(--noche);
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem) clamp(2.5rem, 2rem + 2vw, 3.5rem);
+}
+.ep-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(90deg, transparent, #000 40%, #000 70%, transparent);
+}
+.ep-hero-grid { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+.ep-hero h1 { color: #fff; font-size: clamp(3.25rem, 2rem + 6vw, 6.5rem); line-height: 0.95; letter-spacing: -0.02em; }
+.ep-hero h1 em { display: block; font-style: italic; font-weight: 500; font-size: 0.36em; line-height: 1.2; color: var(--ocre); letter-spacing: -0.005em; margin-top: 0.65rem; }
+.ep-hero .ep-lead { font-size: var(--fs-lead); color: #c9d4e0; max-width: 36rem; margin: 1.5rem 0 2rem; }
+.ep-hero .ep-acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.ep-silueta { position: relative; justify-self: center; width: min(100%, 440px); }
+.ep-silueta > svg { width: 100%; height: auto; overflow: visible; }
+.ep-silueta .contorno { fill: rgba(224, 166, 58, 0.07); stroke: var(--ocre); stroke-width: 1.6; stroke-linejoin: round; }
+.js .ep-silueta .contorno { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; }
+.js .ep-silueta.is-on .contorno { animation: ep-trazo 2.4s var(--ease-in-out) forwards, ep-relleno 1s 1.8s ease forwards; }
+@keyframes ep-trazo { to { stroke-dashoffset: 0; } }
+@keyframes ep-relleno { to { fill-opacity: 1; } }
+.ep-silueta .eje { fill: none; stroke: rgba(255,255,255,0.22); stroke-width: 1.2; stroke-dasharray: 3 4; }
+.ep-pin { opacity: 0; }
+.ep-silueta.is-on .ep-pin { animation: ep-aparece 0.5s var(--ease-out) forwards; }
+.ep-pin circle.punto { fill: var(--ocre); stroke: var(--noche); stroke-width: 1.5; }
+.ep-pin circle.halo { fill: none; stroke: var(--ocre); stroke-width: 1; transform-box: fill-box; transform-origin: center; }
+.ep-silueta.is-on .ep-pin circle.halo { animation: ep-pulso 2.6s 2.6s ease-out infinite; }
+.ep-pin text { fill: #fff; font: 600 11px var(--font-text); paint-order: stroke; stroke: var(--noche); stroke-width: 3px; }
+@keyframes ep-aparece { to { opacity: 1; } }
+@keyframes ep-pulso { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
+.ep-ubica {
+  position: absolute; left: -0.5rem; top: 0.5rem; width: 150px; padding: 0.6rem 0.7rem 0.5rem;
+  background: rgba(4, 22, 43, 0.75); border: 1px solid var(--linea-oscura); border-radius: var(--radius-md);
+  backdrop-filter: blur(6px);
+}
+.ep-ubica svg { width: 100%; height: auto; }
+.ep-ubica path { fill: rgba(255,255,255,0.12); stroke: var(--noche); stroke-width: 0.6; }
+.ep-ubica path.sur { fill: rgba(224, 166, 58, 0.35); }
+.ep-ubica path.pue { fill: var(--ocre); }
+.ep-ubica p { margin: 0.35rem 0 0; font-size: 0.6875rem; color: #b8c4d2; line-height: 1.3; }
+
+.ep-kpis { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: clamp(2rem, 4vw, 3.5rem); background: var(--linea-oscura); border: 1px solid var(--linea-oscura); border-radius: var(--radius-lg); overflow: hidden; }
+.ep-kpi { background: rgba(4, 22, 43, 0.92); padding: 1.25rem 1.25rem 1.1rem; }
+.ep-kpi b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.75rem); line-height: 1; color: #fff; white-space: nowrap; }
+.ep-kpi b small { font-size: 0.5em; color: var(--ocre); margin-left: 0.15em; font-weight: 600; }
+.ep-kpi b .pre { font-size: 0.5em; color: var(--ocre); margin-right: 0.12em; }
+.ep-kpi span.l { display: block; margin-top: 0.55rem; font-size: var(--fs-sm); color: #dbe3ec; line-height: 1.35; }
+.ep-kpi span.f { display: block; margin-top: 0.4rem; font-size: 0.6875rem; color: #8b9bb0; }
+
+/* ---------- Pilares (pestañas) ---------- */
+.ep-pilares { background: #fff; }
+.ep-tabs {
+  display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+  padding: 0.35rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--niebla); border-radius: var(--radius-pill); width: max-content; max-width: 100%;
+}
+.ep-tabs::-webkit-scrollbar { display: none; }
+.ep-tab {
+  display: inline-flex; align-items: center; gap: 0.5rem; flex: none;
+  min-height: 44px; padding: 0.5rem 1.1rem; border: 0; border-radius: var(--radius-pill);
+  background: transparent; font-size: var(--fs-sm); font-weight: 600; color: var(--pizarra);
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast);
+}
+.ep-tab svg { width: 18px; height: 18px; }
+.ep-tab:hover { color: var(--noche); }
+.ep-tab[aria-selected="true"] { background: var(--noche); color: #fff; box-shadow: var(--shadow-2); }
+.ep-tab[aria-selected="true"] svg { color: var(--ocre); }
+
+.ep-panel { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.js .ep-panel:not(.is-active) { display: none; }
+.ep-panel.is-active .ep-panel-intro, .ep-panel.is-active .ep-datos > * { animation: ep-sube 0.55s var(--ease-out) both; }
+.ep-panel.is-active .ep-datos > *:nth-child(2) { animation-delay: 70ms; }
+.ep-panel.is-active .ep-datos > *:nth-child(3) { animation-delay: 140ms; }
+.ep-panel.is-active .ep-datos > *:nth-child(4) { animation-delay: 210ms; }
+@keyframes ep-sube { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.ep-panel-intro .num { font-family: var(--font-display); font-size: 1rem; color: var(--ocre-texto); font-weight: 600; letter-spacing: 0.04em; }
+.ep-panel-intro h3 { font-size: var(--fs-h3); margin: 0.35rem 0 1rem; color: var(--noche); }
+.ep-panel-intro p { color: var(--pizarra); }
+.ep-panel-intro ul.ep-lista { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
+.ep-panel-intro ul.ep-lista li { display: flex; gap: 0.6rem; font-size: var(--fs-sm); color: var(--tinta); }
+.ep-panel-intro ul.ep-lista li::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: 0.55em; border-radius: 50%; background: var(--ocre); }
+.ep-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.25rem; font-weight: 600; font-size: var(--fs-sm); color: var(--cobalto); text-decoration: none; }
+.ep-link svg { width: 16px; height: 16px; transition: transform var(--dur-fast) var(--ease-out); }
+.ep-link:hover svg { transform: translateX(3px); }
+
+.ep-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.ep-dato {
+  position: relative; padding: 1.35rem 1.35rem 1.1rem; border: 1px solid var(--linea-2); border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #fff, var(--niebla-2));
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base);
+}
+.ep-dato:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); border-color: var(--linea); }
+.ep-dato .n { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 1.5rem + 1.4vw, 2.6rem); line-height: 1; color: var(--noche); margin: 0 0 0.6rem; white-space: nowrap; }
+.ep-dato .n small { font-size: 0.48em; color: var(--ocre-texto); margin-left: 0.15em; }
+.ep-dato .n .pre { font-size: 0.48em; color: var(--ocre-texto); margin-right: 0.1em; }
+.ep-dato .t { font-size: var(--fs-sm); color: var(--tinta); line-height: 1.45; margin: 0 0 0.75rem; }
+.ep-dato .f { font-size: 0.6875rem; color: var(--pizarra); margin: 0; padding-top: 0.6rem; border-top: 1px dashed var(--linea); }
+.ep-dato.ancho { grid-column: 1 / -1; }
+/* Comparativo de autopistas: nombres más largos que «Puebla / Nacional» */
+.ep-compara.ep-autopistas { gap: 0.1rem; margin-top: 0.25rem; }
+.ep-autopistas .ep-barra { grid-template-columns: 9.5rem 1fr 4rem; margin-bottom: 0.2rem; }
+@media (max-width: 560px) { .ep-autopistas .ep-barra { grid-template-columns: 7.5rem 1fr 3.4rem; font-size: 0.6875rem; } }
+.ep-nota-ha { margin: 0.9rem 0 0.75rem; padding: 0.7rem 0.85rem; border-radius: var(--radius-md); background: var(--ocre-suave); border: 1px solid #f0dfb8; font-size: 0.8125rem; line-height: 1.5; color: var(--tinta); }
+.ep-dato.pend { border-style: dashed; border-color: #e6cf9b; background: linear-gradient(180deg, #fff, var(--ocre-suave)); }
+.ep-dato > .ep-badge { display: inline-block; margin-bottom: 0.75rem; }
+.ep-badge {
+  position: static;
+  font-size: 0.625rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.2rem 0.5rem; border-radius: var(--radius-pill); background: var(--ocre-suave); color: var(--ocre-texto); border: 1px solid #f0dfb8;
+}
+.ep-badge.rojo { background: #fbecec; color: #8f2424; border-color: #f2cccc; }
+.ep-dato .vacio { font-family: var(--font-display); font-size: 1.35rem; color: var(--ocre-texto); margin: 0 0 0.6rem; font-style: italic; }
+
+/* Lugar entre los 32 estados: etiqueta + regla de posición. Dorado = entre los 10 mejores;
+   rojo suave = entre los 10 últimos; gris = a media tabla. El texto lo arma el JS según el idioma. */
+.ep-lugar {
+  position: relative; display: inline-flex; align-items: baseline; gap: 0.3em;
+  padding: 0.2rem 0.6rem; border-radius: var(--radius-pill); cursor: help;
+  font-size: 0.75rem; font-weight: 600; line-height: 1.3; white-space: nowrap;
+  background: var(--niebla); color: var(--pizarra); border: 1px solid var(--linea-2);
+}
+/* Archivo en negritas: a este tamaño los trazos finos de la Bodoni se pierden */
+.ep-lugar b { font-family: var(--font-text); font-size: 0.875rem; font-weight: 800; color: var(--noche); font-variant-numeric: tabular-nums; }
+.ep-lugar.is-top { background: #fbf1dc; border-color: #ecd4a0; color: var(--ocre-texto); }
+.ep-lugar.is-bajo { background: #fbecec; border-color: #f2cccc; color: #8f2424; }
+.ep-lugar.is-bajo b { color: #8f2424; }
+.ep-lugar[data-tip]:hover::after, .ep-lugar[data-tip]:focus::after {
+  content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+  width: max-content; max-width: 250px; white-space: normal; z-index: 20;
+  padding: 0.5rem 0.65rem; border-radius: 8px; box-shadow: var(--shadow-2);
+  background: var(--noche); color: #fff; font-size: 0.72rem; font-weight: 500; line-height: 1.4; text-align: left;
+}
+.js .ep-lugar { opacity: 0; transform: translateY(5px) scale(0.94); transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out); }
+.js .ep-lugar.is-on { opacity: 1; transform: none; }
+.ep-kpi .ep-lugar { margin-top: 0.65rem; background: rgba(224, 166, 58, 0.12); border-color: rgba(224, 166, 58, 0.38); color: #efd29a; }
+.ep-kpi .ep-lugar b { color: #fff; }
+.ep-dato .ep-lugar { margin: -0.15rem 0 0.7rem; }
+.ep-fila .ep-lugar { margin-left: 0.5rem; vertical-align: middle; }
+/* Regla de 1 a 32 con el punto de Puebla */
+.ep-regla { position: relative; height: 18px; margin: -0.25rem 0 0.75rem; }
+.ep-regla::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #ecd4a0 0 29%, var(--linea-2) 29% 71%, #f2cccc 71%); }
+.ep-regla i { position: absolute; top: 0; left: var(--p, 0%); width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--noche); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--noche); transition: left 0.9s var(--ease-out); }
+.ep-regla span { position: absolute; top: 9px; font-size: 0.625rem; color: var(--pizarra); }
+.ep-regla span:first-of-type { left: 0; } .ep-regla span:last-of-type { right: 0; }
+.ep-leyenda { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-size: var(--fs-sm); color: var(--pizarra); margin-top: 0.75rem; }
+@media (prefers-reduced-motion: reduce) { .js .ep-lugar { opacity: 1; transform: none; transition: none; } .ep-regla i { transition: none; } }
+/* En celular el texto explicativo sale alineado a la izquierda de la etiqueta para no salirse de la pantalla */
+@media (max-width: 560px) {
+  .ep-lugar[data-tip]:hover::after, .ep-lugar[data-tip]:focus::after { left: 0; transform: none; max-width: min(250px, 80vw); }
+}
+
+.ep-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ep-chips span { font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.65rem; border-radius: var(--radius-pill); background: var(--cobalto-100); color: var(--cobalto-700); }
+
+/* Comparación con el promedio nacional */
+.ep-compara { display: grid; gap: 1.25rem; }
+.ep-fila p.q { margin: 0 0 0.5rem; font-size: var(--fs-sm); font-weight: 600; color: var(--noche); }
+.ep-barra { display: grid; grid-template-columns: 5.5rem 1fr 4.5rem; align-items: center; gap: 0.6rem; font-size: 0.75rem; color: var(--pizarra); margin-bottom: 0.35rem; }
+.ep-barra .pista { height: 12px; border-radius: 6px; background: var(--niebla); overflow: hidden; }
+.ep-barra .rel { display: block; height: 100%; width: 0; border-radius: 6px; background: var(--cobalto); transition: width 1.1s var(--ease-out); }
+.ep-barra.pue .rel { background: var(--ocre); }
+.ep-barra b { text-align: right; color: var(--noche); font-variant-numeric: tabular-nums; }
+
+/* ---------- Mapa del estado ---------- */
+.ep-mapa-sec { background: var(--niebla); }
+.ep-mapa-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(1.25rem, 3vw, 2.5rem); align-items: stretch; }
+.ep-mapa-caja { position: relative; background: #fff; border: 1px solid var(--linea-2); border-radius: var(--radius-lg); padding: 1rem; box-shadow: var(--shadow-1); }
+.ep-capas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.ep-capa {
+  display: inline-flex; align-items: center; gap: 0.45rem; min-height: 38px; padding: 0.35rem 0.85rem;
+  border: 1px solid var(--linea); border-radius: var(--radius-pill); background: #fff;
+  font-size: 0.8125rem; font-weight: 600; color: var(--pizarra);
+}
+.ep-capa i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); opacity: 0.35; }
+.ep-capa[aria-pressed="true"] { border-color: var(--noche); color: var(--noche); }
+.ep-capa[aria-pressed="true"] i { opacity: 1; }
+.ep-zoom { margin-left: auto; }
+.ep-mapa { width: 100%; height: auto; max-height: 620px; touch-action: manipulation; }
+.ep-mapa .contorno { fill: #f6f1e6; stroke: #c9b994; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.ep-mapa .via { fill: none; stroke: var(--cobalto); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 6 5; vector-effect: non-scaling-stroke; opacity: 0.6; }
+.ep-mapa .via-txt { fill: var(--cobalto-700); font: 700 10px var(--font-text); paint-order: stroke; stroke: #f6f1e6; stroke-width: 3px; }
+.ep-mapa g.capa { transition: opacity var(--dur-base) var(--ease-out); }
+.ep-mapa g.capa.is-off { opacity: 0; pointer-events: none; }
+.ep-punto { cursor: pointer; outline: none; }
+.ep-punto circle { fill: var(--c); stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; transition: r var(--dur-fast) var(--ease-out); }
+.ep-punto:hover circle, .ep-punto:focus-visible circle, .ep-punto.is-sel circle { stroke: var(--noche); stroke-width: 3; }
+.ep-punto text { fill: var(--noche); font-weight: 600; paint-order: stroke; stroke: #f6f1e6; pointer-events: none; }
+.ep-ficha {
+  display: flex; flex-direction: column; background: var(--noche); color: var(--texto-claro);
+  border-radius: var(--radius-lg); padding: clamp(1.25rem, 2.5vw, 2rem); min-height: 100%;
+}
+.ep-ficha .tipo { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ocre); margin: 0 0 0.6rem; }
+.ep-ficha h3 { color: #fff; font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); margin-bottom: 0.4rem; }
+.ep-ficha .lugar { font-size: var(--fs-sm); color: #9fb0c3; margin-bottom: 1.1rem; }
+.ep-ficha .desc { color: #d6dee8; font-size: var(--fs-md); }
+.ep-ficha .cifra { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid var(--linea-oscura); }
+.ep-ficha .cifra b { display: block; font-family: var(--font-display); font-size: 2.25rem; color: #fff; line-height: 1; font-weight: 600; }
+.ep-ficha .cifra span { font-size: var(--fs-sm); color: #b8c4d2; }
+.ep-ficha .fuente { margin-top: auto; padding-top: 1.25rem; font-size: 0.6875rem; color: #7f90a5; }
+.ep-ficha .ep-badge { position: static; display: inline-block; margin-top: 0.75rem; align-self: flex-start; }
+.ep-ficha-vacia { margin: auto 0; text-align: center; color: #9fb0c3; }
+.ep-ficha-vacia svg { width: 44px; height: 44px; margin: 0 auto 0.75rem; color: var(--ocre); }
+.ep-nota-mapa { margin: 0.6rem 0 0; font-size: 0.6875rem; color: var(--pizarra); }
+
+/* ---------- Rutas ---------- */
+.ep-rutas { position: relative; overflow: hidden; color: var(--texto-claro); background: var(--noche); }
+.ep-rutas-grid { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+.ep-rutas h2 { color: #fff; }
+.ep-rutas .ep-intro { color: #b8c4d2; font-size: var(--fs-lead); margin: 1rem 0 1.75rem; }
+.ep-destinos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.ep-destino {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; text-align: left;
+  padding: 0.7rem 0.9rem; border: 1px solid var(--linea-oscura); border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.03); color: #dbe3ec;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.ep-destino small { font-size: 0.6875rem; color: #8b9bb0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+.ep-destino span { font-weight: 600; font-size: var(--fs-sm); }
+.ep-destino:hover { background: rgba(255,255,255,0.07); }
+.ep-destino[aria-pressed="true"] { background: var(--ocre); border-color: var(--ocre); color: var(--noche); }
+.ep-destino[aria-pressed="true"] small { color: var(--noche); opacity: 0.7; }
+.ep-lectura { margin-top: 1.5rem; display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+.ep-lectura b { font-family: var(--font-display); font-size: clamp(3rem, 2rem + 3vw, 4.5rem); line-height: 1; color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ep-lectura span { color: #b8c4d2; font-size: var(--fs-sm); }
+.ep-lectura .ep-badge { position: static; }
+.ep-fuente-rutas { flex-basis: 100%; font-size: 0.6875rem; color: #8b9bb0; }
+.ep-mx { width: 100%; height: auto; }
+.ep-mx path.edo { fill: rgba(255,255,255,0.06); stroke: rgba(4,22,43,1); stroke-width: 0.5; }
+.ep-mx path.edo.sur { fill: rgba(224,166,58,0.16); }
+.ep-mx path.edo.pue { fill: var(--ocre); }
+.ep-mx .ruta { fill: none; stroke: var(--ocre); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 1.5 3; }
+.ep-mx .ruta-base { fill: none; stroke: rgba(224,166,58,0.25); stroke-width: 1; stroke-dasharray: 1 3; }
+.ep-mx .dest circle.d { fill: var(--noche); stroke: rgba(255,255,255,0.55); stroke-width: 1; }
+.ep-mx .dest.is-sel circle.d { stroke: var(--ocre); stroke-width: 1.6; fill: var(--ocre); }
+.ep-mx .dest text { fill: #dbe3ec; font: 600 6.5px var(--font-text); paint-order: stroke; stroke: var(--noche); stroke-width: 2.5px; }
+.ep-mx .dest.is-sel text { fill: #fff; }
+.ep-mx .origen { fill: #fff; stroke: var(--ocre); stroke-width: 1.4; }
+.ep-mx .viajero { fill: #fff; }
+.ep-mx .frontera { stroke: rgba(255,255,255,0.3); stroke-width: 0.6; stroke-dasharray: 2 2; }
+
+/* ---------- Exportaciones de la región ---------- */
+.ep-export { background: #fff; }
+.ep-export-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.ep-modo { display: inline-flex; padding: 0.3rem; background: var(--niebla); border-radius: var(--radius-pill); margin-bottom: 1.25rem; }
+.ep-modo button { border: 0; background: transparent; min-height: 38px; padding: 0.35rem 1rem; border-radius: var(--radius-pill); font-size: 0.8125rem; font-weight: 600; color: var(--pizarra); }
+.ep-modo button[aria-pressed="true"] { background: #fff; color: var(--noche); box-shadow: var(--shadow-1); }
+.ep-ranking { display: grid; gap: 0.55rem; }
+.ep-rk { display: grid; grid-template-columns: 8.5rem 1fr 5.5rem; gap: 0.75rem; align-items: center; font-size: var(--fs-sm); }
+.ep-rk .e { color: var(--tinta); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ep-rk .pista { position: relative; height: 26px; border-radius: 6px; background: var(--niebla-2); }
+.ep-rk .rel { position: absolute; top: 0; bottom: 0; left: var(--l, 0); width: 0; border-radius: 6px; background: #c7d5e3; transition: width 0.9s var(--ease-out), left 0.9s var(--ease-out), background 0.3s; }
+.ep-rk.neg .rel { background: #e7b9b9; }
+.ep-rk .cero { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--pizarra); opacity: 0.5; left: var(--z, 0); }
+.ep-rk b { text-align: right; font-variant-numeric: tabular-nums; color: var(--noche); }
+.ep-rk.pue .e { font-weight: 700; color: var(--noche); }
+.ep-rk.pue .rel { background: var(--ocre); }
+.ep-big { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.ep-big div b { display: block; font-family: var(--font-display); font-size: 2.25rem; line-height: 1; color: var(--noche); font-weight: 600; }
+.ep-big div span { font-size: var(--fs-sm); color: var(--pizarra); }
+
+/* ---------- Empresas ---------- */
+.ep-emp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+.ep-emp {
+  display: flex; flex-direction: column; gap: 0.75rem; padding: 1.1rem; text-decoration: none; color: inherit;
+  background: #fff; border: 1px solid var(--linea-2); border-radius: var(--radius-lg);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.ep-emp:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); color: inherit; }
+.ep-emp .logo { height: 72px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: linear-gradient(160deg, var(--niebla-2), var(--cobalto-100)); }
+.ep-emp .logo img { max-height: 48px; max-width: 70%; width: auto; mix-blend-mode: multiply; }
+.ep-emp .logo .mono { width: 48px; height: 48px; border-radius: 50%; background: var(--cobalto); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.4rem; }
+.ep-emp h3 { font-size: 1.2rem; color: var(--noche); }
+.ep-emp p { margin: 0; font-size: 0.8125rem; color: var(--pizarra); }
+.ep-emp .sec { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ocre-texto); }
+
+/* ---------- Llamado y fuentes ---------- */
+.ep-cta { background: linear-gradient(120deg, var(--noche), var(--cobalto)); color: #fff; border-radius: var(--radius-lg); padding: clamp(1.75rem, 4vw, 3rem); display: grid; grid-template-columns: 1.3fr auto; gap: 1.5rem; align-items: center; }
+.ep-cta h2 { color: #fff; font-size: var(--fs-h3); }
+.ep-cta p { color: #c9d4e0; margin: 0.6rem 0 0; }
+.ep-cta .ep-acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.ep-fuentes { margin-top: 2rem; border: 1px solid var(--linea-2); border-radius: var(--radius-lg); background: #fff; }
+.ep-fuentes summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 600; color: var(--noche); display: flex; justify-content: space-between; gap: 1rem; list-style: none; }
+.ep-fuentes summary::-webkit-details-marker { display: none; }
+.ep-fuentes summary::after { content: "+"; font-size: 1.25rem; line-height: 1; color: var(--ocre-texto); }
+.ep-fuentes[open] summary::after { content: "–"; }
+.ep-fuentes ol { list-style: decimal; padding: 0 1.25rem 1.25rem 2.75rem; display: grid; gap: 0.45rem; font-size: 0.8125rem; color: var(--pizarra); }
+.ep-fuentes .ep-nota { padding: 0 1.25rem 1.25rem; font-size: 0.8125rem; color: var(--pizarra); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1080px) {
+  .ep-drop-menu { width: 460px; grid-template-columns: 1fr; }
+  .ep-drop-menu svg.ep-mini { display: none; }
+}
+@media (max-width: 960px) {
+  .ep-hero-grid, .ep-panel, .ep-mapa-grid, .ep-rutas-grid, .ep-export-grid, .ep-cta { grid-template-columns: 1fr; }
+  .ep-silueta { width: min(100%, 360px); }
+  .ep-kpis { grid-template-columns: 1fr 1fr; }
+  .ep-ficha { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .ep-datos { grid-template-columns: 1fr; }
+  .ep-destinos { grid-template-columns: 1fr 1fr; }
+  .ep-rk { grid-template-columns: 6.25rem 1fr 4.6rem; gap: 0.5rem; font-size: 0.8125rem; }
+  .ep-kpi { padding: 1rem; }
+  .ep-ubica { width: 120px; left: 0; }
+  .ep-zoom { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .ep-silueta .contorno { stroke-dasharray: none; stroke-dashoffset: 0; fill-opacity: 1; animation: none !important; }
+  .ep-pin { opacity: 1; animation: none !important; }
+  .ep-pin circle.halo { display: none; }
+  .ep-panel.is-active .ep-panel-intro, .ep-panel.is-active .ep-datos > * { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-lang" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11M8.5 3.5v2.5M11 6c0 4.5-3 8-7 9.5M6 10.5c1 2.5 3.5 4.5 7 5.5"/><path d="m13 21 4.5-10L22 21m-7.4-2.6h5.8"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-ruta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="7" r="2.5"/><path d="M6.5 16.5C9 9 13 6.5 16.5 7" stroke-dasharray="1.5 2.5"/></symbol>
+<symbol id="i-rayo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+<symbol id="i-fabrica" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 4V10l6 4V5h4l2 16H3Z"/><path d="M7 17h2m4 0h2"/></symbol>
+<symbol id="i-escudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 9 9.5-5 9.5 5-9.5 5-9.5-5Z"/><path d="M6.5 11.2V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.8M21.5 9v5"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+<symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></symbol>
+</defs></svg>
+
+<a class="skip-link" href="#main" data-i18n="skip">Ir al contenido principal</a>
+
+<header class="header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <img src="comce-sur-logo.webp" width="286" height="131" alt="COMCE Región Sur">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Sur Exporta</span>
+          <span class="brand-sub" data-i18n="brandSub">Directorio de oferta exportable · Región Sur</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="/#directorio" data-i18n="navDirectorio">Directorio</a>
+        <div class="ep-drop" data-drop>
+          <button class="ep-drop-btn" type="button" aria-expanded="false" aria-controls="ep-menu-estados" data-drop-btn>
+            <span data-es="Estados" data-en="States">Estados</span>
+            <svg aria-hidden="true"><use href="#i-chev"/></svg>
+          </button>
+          <div class="ep-drop-menu" id="ep-menu-estados" hidden data-drop-menu>
+            <div class="ep-drop-head">
+              <p data-es="Estados de la Región Sur" data-en="Southern Region states">Estados de la Región Sur</p>
+              <span data-es="9 estados" data-en="9 states">9 estados</span>
+            </div>
+            <svg class="ep-mini" viewBox="330 200 280 180" aria-hidden="true" data-mapa-mini></svg>
+            <ul data-lista-estados></ul>
+          </div>
+        </div>
+        <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
+        <a href="/#como" data-i18n="navComo">Cómo funciona</a>
+        <a href="/podcast">Podcast</a>
+        <a href="/contacto" data-i18n="navContacto">Contacto</a>
+      </nav>
+      <button class="lang-btn" type="button" data-lang-toggle aria-label="Cambiar idioma a inglés" data-i18n-attr="aria-label:switchLabel">
+        <svg aria-hidden="true"><use href="#i-lang"/></svg>
+        <span class="lang-long" data-i18n="switchTo">English</span>
+        <span class="lang-short" data-i18n="switchCode">EN</span>
+      </button>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-mobile" aria-label="Menú">
+        <svg aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" hidden aria-label="Principal (móvil)">
+      <a href="/#directorio" data-i18n="navDirectorio">Directorio</a>
+      <div class="ep-m-estados">
+        <p data-es="Estados" data-en="States">Estados</p>
+        <a href="/estado-puebla" aria-current="page">Puebla</a>
+        <span data-es="Tlaxcala, Oaxaca, Veracruz, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo: próximamente"
+              data-en="Tlaxcala, Oaxaca, Veracruz, Chiapas, Tabasco, Campeche, Yucatán and Quintana Roo: coming soon">Tlaxcala, Oaxaca, Veracruz, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo: próximamente</span>
+      </div>
+      <a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a>
+      <a href="/#como" data-i18n="navComo">Cómo funciona</a>
+      <a href="/podcast">Podcast</a>
+      <a href="/contacto" data-i18n="navContacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. Portada -->
+  <section class="ep-hero">
+    <div class="wrap">
+      <div class="ep-hero-grid">
+        <div>
+          <p class="eyebrow" style="color:var(--ocre)" data-es="Estados de la Región Sur" data-en="Southern Region states">Estados de la Región Sur</p>
+          <h1>Puebla<em data-es="Industria, talento y conexión con Norteamérica" data-en="Industry, talent and a link to North America">Industria, talento y conexión con Norteamérica</em></h1>
+          <p class="ep-lead" data-es="Puebla es el estado que más exporta de la Región Sur y la décima economía de México. Sobre la autopista de mayor tránsito del país, entre la Ciudad de México y el Golfo, reúne a Volkswagen y Audi, universidades reconocidas y terreno disponible para nuevas plantas."
+             data-en="Puebla is the Southern Region's largest exporter and Mexico's tenth-largest state economy. On the country's busiest toll road, between Mexico City and the Gulf, it is home to Volkswagen and Audi, well-known universities and land ready for new plants.">Puebla es el estado que más exporta de la Región Sur y la décima economía de México. Sobre la autopista de mayor tránsito del país, entre la Ciudad de México y el Golfo, reúne a Volkswagen y Audi, universidades reconocidas y terreno disponible para nuevas plantas.</p>
+          <div class="ep-acciones">
+            <a class="btn btn-gold" href="#pilares" data-es="Explorar el estado" data-en="Explore the state">Explorar el estado</a>
+            <a class="btn btn-ghost-light" href="#empresas" data-es="Ver empresas de Puebla" data-en="See companies from Puebla">Ver empresas de Puebla</a>
+          </div>
+        </div>
+
+        <div class="ep-silueta" data-silueta>
+          <svg viewBox="-10 -10 430 557" role="img" aria-labelledby="ep-sil-t">
+            <title id="ep-sil-t" data-es="Contorno del estado de Puebla con la capital, Volkswagen, Audi y el aeropuerto" data-en="Outline of Puebla state showing the capital, Volkswagen, Audi and the airport">Contorno del estado de Puebla con la capital, Volkswagen, Audi y el aeropuerto</title>
+            <path class="contorno" pathLength="1" data-puebla-path/>
+            <path class="eje" d="M93 286 L133.5 330 L160.7 330 L205.4 341.3 L275.9 363.2 L300 368"/>
+            <path class="eje" d="M250.1 372.3 L272 435.8 L318 492"/>
+            <g class="ep-pin" style="animation-delay:2.0s"><circle class="halo" cx="133.5" cy="329.8" r="5"/><circle class="punto" cx="133.5" cy="329.8" r="5"/><text x="143" y="345">Puebla</text></g>
+            <g class="ep-pin" style="animation-delay:2.15s"><circle class="halo" cx="122" cy="315.8" r="4"/><circle class="punto" cx="122" cy="315.8" r="4"/><text x="113" y="323" text-anchor="end">Volkswagen</text></g>
+            <g class="ep-pin" style="animation-delay:2.3s"><circle class="halo" cx="207.1" cy="296.6" r="4"/><circle class="punto" cx="207.1" cy="296.6" r="4"/><text x="216" y="292">Audi</text></g>
+            <g class="ep-pin" style="animation-delay:2.45s"><circle class="halo" cx="103.8" cy="308.9" r="4"/><circle class="punto" cx="103.8" cy="308.9" r="4"/><text x="98" y="300" text-anchor="end" data-es="Aeropuerto" data-en="Airport">Aeropuerto</text></g>
+            <g class="ep-pin" style="animation-delay:2.6s"><circle class="halo" cx="272" cy="435.8" r="4"/><circle class="punto" cx="272" cy="435.8" r="4"/><text x="282" y="440">Tehuacán</text></g>
+          </svg>
+          <div class="ep-ubica">
+            <svg viewBox="0 0 600 375" aria-hidden="true" data-mapa-ubica></svg>
+            <p data-es="Puebla en la Región Sur de México" data-en="Puebla in Mexico's Southern Region">Puebla en la Región Sur de México</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ep-kpis">
+        <div class="ep-kpi">
+          <b><span data-num="6.58" data-dec="2">6.58</span><small>M</small></b>
+          <span class="l" data-es="habitantes" data-en="inhabitants">habitantes</span>
+          <span class="ep-lugar" tabindex="0" data-lugar="5" data-tip-es="5.° estado más poblado de México (1 = más habitantes). INEGI, Censo 2020." data-tip-en="5th most populous state in Mexico (1 = most inhabitants). INEGI, 2020 Census."></span>
+          <span class="f">INEGI, Censo 2020</span>
+        </div>
+        <div class="ep-kpi">
+          <b><span data-num="3.5" data-dec="1">3.5</span><small>%</small></b>
+          <span class="l" data-es="del PIB nacional" data-en="of national GDP">del PIB nacional</span>
+          <span class="ep-lugar" tabindex="0" data-lugar="10" data-tip-es="10.ª economía de los 32 estados por tamaño del PIB (1 = la más grande). INEGI, PIBE 2024." data-tip-en="10th largest of the 32 state economies by GDP (1 = largest). INEGI, 2024 state GDP."></span>
+          <span class="f">INEGI, PIBE 2024</span>
+        </div>
+        <div class="ep-kpi">
+          <b><span class="pre">US$</span><span data-num="4882" data-dec="0">4,882</span><small>M</small></b>
+          <span class="l" data-es="exportados en un trimestre, 1.° de la Región Sur" data-en="exported in one quarter, 1st in the Southern Region">exportados en un trimestre, 1.° de la Región Sur</span>
+          <span class="ep-lugar" tabindex="0" data-lugar="12" data-tip-es="12.° lugar nacional por valor exportado (1 = el que más exporta). INEGI, ETEF 2.º trimestre 2026." data-tip-en="12th nationally by export value (1 = top exporter). INEGI, quarterly state exports, Q2 2026."></span>
+          <span class="f">INEGI, ETEF 2T 2026</span>
+        </div>
+        <div class="ep-kpi">
+          <b><span data-num="3.13" data-dec="2">3.13</span><small>M</small></b>
+          <span class="l" data-es="personas en la fuerza laboral" data-en="people in the labour force">personas en la fuerza laboral</span>
+          <span class="f">INEGI, ENOE 1T 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Cinco pilares -->
+  <section class="section ep-pilares" id="pilares">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow" data-es="Por qué Puebla" data-en="Why Puebla">Por qué Puebla</p>
+        <h2 data-es="Tres razones, con datos oficiales" data-en="Three reasons, backed by official data">Tres razones, con datos oficiales</h2>
+        <p data-es="Elige un tema. Cada cifra trae su fuente y el periodo al que corresponde." data-en="Pick a topic. Every figure shows its source and the period it covers.">Elige un tema. Cada cifra trae su fuente y el periodo al que corresponde.</p>
+        <p class="ep-leyenda"><span class="ep-lugar is-top is-on" aria-hidden="true"><b>7.°</b>&nbsp;de 32</span><span data-es="Lugar de Puebla entre los 32 estados. Pasa el cursor o toca la etiqueta para ver qué significa." data-en="Puebla's rank among the 32 states. Hover or tap the tag to see what it means.">Lugar de Puebla entre los 32 estados. Pasa el cursor o toca la etiqueta para ver qué significa.</span></p>
+      </div>
+
+      <div class="ep-tabs" role="tablist" aria-label="Pilares" data-tabs>
+        <button class="ep-tab" role="tab" id="tab-con" aria-controls="pan-con" aria-selected="true"><svg aria-hidden="true"><use href="#i-ruta"/></svg><span data-es="Conectividad" data-en="Connectivity">Conectividad</span></button>
+        <button class="ep-tab" role="tab" id="tab-pro" aria-controls="pan-pro" aria-selected="false" tabindex="-1"><svg aria-hidden="true"><use href="#i-fabrica"/></svg><span data-es="Proveedores" data-en="Suppliers">Proveedores</span></button>
+        <button class="ep-tab" role="tab" id="tab-tal" aria-controls="pan-tal" aria-selected="false" tabindex="-1"><svg aria-hidden="true"><use href="#i-cap"/></svg><span data-es="Talento" data-en="Talent">Talento</span></button>
+      </div>
+
+      <!-- Conectividad -->
+      <div class="ep-panel is-active" role="tabpanel" id="pan-con" aria-labelledby="tab-con" tabindex="0">
+        <div class="ep-panel-intro">
+          <span class="num">01</span>
+          <h3 data-es="En medio del corredor más transitado del país" data-en="On Mexico's busiest trade corridor">En medio del corredor más transitado del país</h3>
+          <p data-es="Puebla está sobre la ruta que une a la Ciudad de México con el Puerto de Veracruz, con salida al Pacífico y a la frontera norte por el Arco Norte." data-en="Puebla sits on the route linking Mexico City with the Port of Veracruz, with access to the Pacific and the northern border via the Arco Norte highway.">Puebla está sobre la ruta que une a la Ciudad de México con el Puerto de Veracruz, con salida al Pacífico y a la frontera norte por el Arco Norte.</p>
+          <ul class="ep-lista">
+            <li data-es="Autopista 150D México–Puebla–Veracruz" data-en="150D Mexico City–Puebla–Veracruz highway">Autopista 150D México–Puebla–Veracruz</li>
+            <li data-es="Arco Norte, hacia el Bajío y el norte sin entrar a la Ciudad de México" data-en="Arco Norte, to the Bajío and the north without entering Mexico City">Arco Norte, hacia el Bajío y el norte sin entrar a la Ciudad de México</li>
+            <li data-es="Autopista 135D Puebla–Oaxaca" data-en="135D Puebla–Oaxaca highway">Autopista 135D Puebla–Oaxaca</li>
+            <li data-es="Ferrocarril de carga (Ferrosur) hacia el Valle de México y el Puerto de Veracruz" data-en="Freight rail (Ferrosur) to the Valley of Mexico and the Port of Veracruz">Ferrocarril de carga (Ferrosur) hacia el Valle de México y el Puerto de Veracruz</li>
+          </ul>
+          <a class="ep-link" href="#rutas"><span data-es="¿A cuánto estás de los puertos?" data-en="How far are the ports?">¿A cuánto estás de los puertos?</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="ep-datos">
+          <article class="ep-dato ancho">
+            <p class="n"><span data-num="51.4" data-dec="1">51.4</span><small data-es="M de vehículos" data-en="M vehicles">M de vehículos</small></p>
+            <p class="t" data-es="cruzaron en 2025 la autopista México–Puebla, la de mayor tránsito de toda la red de CAPUFE: 12.7 % del total nacional" data-en="used the Mexico City–Puebla toll road in 2025, the busiest in the entire CAPUFE network: 12.7% of the national total">cruzaron en 2025 la autopista México–Puebla, la de mayor tránsito de toda la red de CAPUFE: 12.7 % del total nacional</p>
+            <div class="ep-compara ep-autopistas">
+              <div class="ep-barra pue"><span>México–Puebla</span><span class="pista"><span class="rel" data-w="51.4" data-max="55"></span></span><b>51.4 M</b></div>
+              <div class="ep-barra"><span>México–Querétaro</span><span class="pista"><span class="rel" data-w="46.8" data-max="55"></span></span><b>46.8 M</b></div>
+              <div class="ep-barra"><span>Lechería–Chamapa</span><span class="pista"><span class="rel" data-w="41.0" data-max="55"></span></span><b>41.0 M</b></div>
+              <div class="ep-barra"><span>Cuernavaca–Acapulco</span><span class="pista"><span class="rel" data-w="32.2" data-max="55"></span></span><b>32.2 M</b></div>
+            </div>
+            <p class="f" style="margin-top:0.9rem" data-es="2025 · SICT, Anuario Estadístico 2025, con datos de CAPUFE" data-en="2025 · SICT, 2025 Statistical Yearbook, CAPUFE data">2025 · SICT, Anuario Estadístico 2025, con datos de CAPUFE</p>
+          </article>
+          <article class="ep-dato">
+            <p class="n"><span data-num="802" data-dec="0">802</span><small>km</small></p>
+            <span class="ep-lugar" tabindex="0" data-lugar="12" data-tip-es="12.° de 32 en densidad de vías férreas: 2.3 km por cada 100 km², contra 1.5 del promedio nacional. SICT, Anuario 2025." data-tip-en="12th of 32 in rail density: 2.3 km per 100 km², against a national average of 1.5. SICT, 2025 Yearbook."></span>
+            <div class="ep-regla" data-lugar="12" aria-hidden="true"><span>1</span><i></i><span>32</span></div>
+            <p class="t" data-es="de vías férreas; 458 km son de Ferrosur, con salida al Puerto de Veracruz y al Valle de México" data-en="of railway; 458 km belong to Ferrosur, linking to the Port of Veracruz and the Valley of Mexico">de vías férreas; 458 km son de Ferrosur, con salida al Puerto de Veracruz y al Valle de México</p>
+            <p class="f" data-es="2025 · SICT, Anuario Estadístico 2025, con datos de ATTRAPI" data-en="2025 · SICT, 2025 Statistical Yearbook, ATTRAPI data">2025 · SICT, Anuario Estadístico 2025, con datos de ATTRAPI</p>
+          </article>
+          <article class="ep-dato">
+            <p class="n"><span data-num="10709" data-dec="0">10,709</span><small>km</small></p>
+            <span class="ep-lugar" tabindex="0" data-lugar="15" data-tip-es="15.° de 32 en densidad carretera: 31.2 km por cada 100 km², contra 20.7 del promedio nacional. SICT, Anuario 2025." data-tip-en="15th of 32 in road density: 31.2 km per 100 km², against a national average of 20.7. SICT, 2025 Yearbook."></span>
+            <div class="ep-regla" data-lugar="15" aria-hidden="true"><span>1</span><i></i><span>32</span></div>
+            <p class="t" data-es="de carreteras, 684 km de ellas autopistas de cuota" data-en="of roads, 684 km of them toll highways">de carreteras, 684 km de ellas autopistas de cuota</p>
+            <p class="f" data-es="2025 · SICT, Anuario Estadístico 2025" data-en="2025 · SICT, 2025 Statistical Yearbook">2025 · SICT, Anuario Estadístico 2025</p>
+          </article>
+          <article class="ep-dato">
+            <p class="n"><span data-num="34944" data-dec="0">34,944</span></p>
+            <span class="ep-lugar" tabindex="0" data-lugar="13" data-tip-es="13.° de 32 por tamaño de la flota de carga del autotransporte federal (1 = la más grande). SICT, Anuario 2025." data-tip-en="13th of 32 by size of the federal trucking fleet (1 = largest). SICT, 2025 Yearbook."></span>
+            <div class="ep-regla" data-lugar="13" aria-hidden="true"><span>1</span><i></i><span>32</span></div>
+            <p class="t" data-es="vehículos de autotransporte federal de carga con base en Puebla" data-en="federal freight trucks based in Puebla">vehículos de autotransporte federal de carga con base en Puebla</p>
+            <p class="f" data-es="2025 · SICT, Anuario Estadístico 2025, con datos de la DGAF" data-en="2025 · SICT, 2025 Statistical Yearbook, DGAF data">2025 · SICT, Anuario Estadístico 2025, con datos de la DGAF</p>
+          </article>
+          <article class="ep-dato">
+            <p class="n"><span data-num="3605" data-dec="0">3,605</span><small>m</small></p>
+            <p class="t" data-es="de pista en el Aeropuerto Internacional Hermanos Serdán, para aviones tipo Boeing 737, a 25 km de la ciudad de Puebla" data-en="runway at Hermanos Serdán International Airport, for Boeing 737-type aircraft, 25 km from the city of Puebla">de pista en el Aeropuerto Internacional Hermanos Serdán, para aviones tipo Boeing 737, a 25 km de la ciudad de Puebla</p>
+            <p class="f" data-es="2023 · Grupo Mundo Maya, ficha técnica del aeropuerto (gob.mx)" data-en="2023 · Grupo Mundo Maya, airport technical sheet (gob.mx)">2023 · Grupo Mundo Maya, ficha técnica del aeropuerto (gob.mx)</p>
+          </article>
+        </div>
+      </div>
+
+
+      <!-- Proveedores -->
+      <div class="ep-panel" role="tabpanel" id="pan-pro" aria-labelledby="tab-pro" tabindex="0">
+        <div class="ep-panel-intro">
+          <span class="num">02</span>
+          <h3 data-es="Una base industrial que ya exporta" data-en="An industrial base that already exports">Una base industrial que ya exporta</h3>
+          <p data-es="El 98.4 % de lo que Puebla exporta son manufacturas. Volkswagen tiene planta en Cuautlancingo y Audi en San José Chiapa, y el estado tiene terreno disponible para nuevas plantas."
+             data-en="Manufactured goods make up 98.4% of Puebla's exports. Volkswagen has a plant in Cuautlancingo and Audi in San José Chiapa, and the state has land available for new plants.">El 98.4 % de lo que Puebla exporta son manufacturas. Volkswagen tiene planta en Cuautlancingo y Audi en San José Chiapa, y el estado tiene terreno disponible para nuevas plantas.</p>
+          <ul class="ep-lista">
+            <li data-es="Municipios que más exportan: Cuautlancingo, Puebla, Huejotzingo, Tehuacán y Amozoc" data-en="Top exporting municipalities: Cuautlancingo, Puebla, Huejotzingo, Tehuacán and Amozoc">Municipios que más exportan: Cuautlancingo, Puebla, Huejotzingo, Tehuacán y Amozoc</li>
+            <li data-es="Alemania es el primer inversionista extranjero: 963 de los 1,151 millones de dólares de IED en 2024" data-en="Germany is the top foreign investor: 963 of the 1,151 million dollars of FDI in 2024">Alemania es el primer inversionista extranjero: 963 de los 1,151 millones de dólares de IED en 2024</li>
+          </ul>
+        </div>
+        <div class="ep-datos">
+          <article class="ep-dato ancho">
+            <p class="n"><span data-num="631" data-dec="0">631</span><small data-es="hectáreas" data-en="hectares">hectáreas</small></p>
+            <p class="t" data-es="disponibles para instalar nuevas plantas, en parques industriales, reservas territoriales y Ciudad Modelo" data-en="available for new plants, in industrial parks, land reserves and Ciudad Modelo">disponibles para instalar nuevas plantas, en parques industriales, reservas territoriales y Ciudad Modelo</p>
+            <div class="ep-compara ep-autopistas">
+              <div class="ep-barra pue"><span>Ciudad Modelo</span><span class="pista"><span class="rel" data-w="391.72" data-max="420"></span></span><b>391.7 ha</b></div>
+              <div class="ep-barra"><span data-es="Parques privados" data-en="Private parks">Parques privados</span><span class="pista"><span class="rel" data-w="113.7" data-max="420"></span></span><b>113.7 ha</b></div>
+              <div class="ep-barra"><span data-es="Reservas territoriales" data-en="Land reserves">Reservas territoriales</span><span class="pista"><span class="rel" data-w="92" data-max="420"></span></span><b>92.0 ha</b></div>
+              <div class="ep-barra"><span data-es="Parques públicos" data-en="Public parks">Parques públicos</span><span class="pista"><span class="rel" data-w="34.13" data-max="420"></span></span><b>34.1 ha</b></div>
+            </div>
+            <p class="ep-nota-ha" data-es="275 hectáreas de Ciudad Modelo, en San José Chiapa, son Polo de Desarrollo para el Bienestar del Plan México, con incentivos federales: deducción del 100 % en activos fijos nuevos y del 25 % en capacitación dual e innovación. Entre los parques privados están FINSA II, JIS Park y Mercatus."
+               data-en="275 hectares of Ciudad Modelo, in San José Chiapa, are a Plan México Development Hub, with federal incentives: a 100% deduction on new fixed assets and 25% on dual training and innovation. Private parks include FINSA II, JIS Park and Mercatus.">275 hectáreas de Ciudad Modelo, en San José Chiapa, son Polo de Desarrollo para el Bienestar del Plan México, con incentivos federales: deducción del 100 % en activos fijos nuevos y del 25 % en capacitación dual e innovación. Entre los parques privados están FINSA II, JIS Park y Mercatus.</p>
+            <p class="f" data-es="Mayo 2025 · Gobierno de Puebla, Secretaría de Desarrollo Económico y Trabajo, comunicado SDET 051/2025" data-en="May 2025 · Government of Puebla, Ministry of Economic Development and Labour, release SDET 051/2025">Mayo 2025 · Gobierno de Puebla, Secretaría de Desarrollo Económico y Trabajo, comunicado SDET 051/2025</p>
+          </article>
+          <article class="ep-dato ancho">
+            <p class="n"><span data-num="6.2" data-dec="1">6.2</span><small>%</small></p>
+            <span class="ep-lugar" tabindex="0" data-lugar="4" data-tip-es="4.° estado con más mipymes, después de Estado de México, Ciudad de México y Jalisco (1 = más mipymes)." data-tip-en="4th state by number of SMEs, after State of Mexico, Mexico City and Jalisco (1 = most SMEs)."></span>
+            <div class="ep-regla" data-lugar="4" aria-hidden="true"><span>1</span><i></i><span>32</span></div>
+            <p class="t" data-es="de las micro, pequeñas y medianas empresas del país están en Puebla: una base amplia de proveedores locales" data-en="of Mexico's micro, small and medium-sized businesses are in Puebla: a broad base of local suppliers">de las micro, pequeñas y medianas empresas del país están en Puebla: una base amplia de proveedores locales</p>
+            <p class="f" data-es="Secretaría de Economía, DataMéxico" data-en="Ministry of Economy, DataMéxico">Secretaría de Economía, DataMéxico</p>
+          </article>
+        </div>
+      </div>
+
+
+      <!-- Talento -->
+      <div class="ep-panel" role="tabpanel" id="pan-tal" aria-labelledby="tab-tal" tabindex="0">
+        <div class="ep-panel-intro">
+          <span class="num">03</span>
+          <h3 data-es="Gente joven y universidades con tradición" data-en="A young workforce and long-standing universities">Gente joven y universidades con tradición</h3>
+          <p data-es="La mitad de la población tiene 28 años o menos. Puebla concentra universidades públicas y privadas con programas de ingeniería, negocios y comercio internacional." data-en="Half the population is 28 or younger. Puebla is home to public and private universities with engineering, business and international trade programmes.">La mitad de la población tiene 28 años o menos. Puebla concentra universidades públicas y privadas con programas de ingeniería, negocios y comercio internacional.</p>
+          <div class="ep-chips" style="margin-top:1.25rem">
+            <span>BUAP</span><span>UDLAP</span><span>UPAEP</span><span>Tec de Monterrey</span><span>IBERO Puebla</span><span>Anáhuac Puebla</span>
+          </div>
+          <a class="ep-link" href="#mapa" data-capa-link="uni"><span data-es="Ver universidades en el mapa" data-en="See universities on the map">Ver universidades en el mapa</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="ep-datos">
+          <article class="ep-dato">
+            <p class="n"><span data-num="3.13" data-dec="2">3.13</span><small>M</small></p>
+            <p class="t" data-es="personas en la población económicamente activa" data-en="people in the economically active population">personas en la población económicamente activa</p>
+            <p class="f" data-es="1T 2026 · INEGI, ENOE, vía DataMéxico" data-en="Q1 2026 · INEGI, ENOE, via DataMéxico">1T 2026 · INEGI, ENOE, vía DataMéxico</p>
+          </article>
+          <article class="ep-dato">
+            <p class="n"><span data-num="1.8" data-dec="1">1.8</span><small>%</small></p>
+            <span class="ep-lugar" tabindex="0" data-lugar="7" data-tip-es="7.° estado con menos desocupación (1 = la más baja). Promedio nacional: 2.7 %. INEGI, ENOE 2.º trimestre 2026." data-tip-en="7th lowest unemployment of the 32 states (1 = lowest). National average: 2.7%. INEGI, ENOE Q2 2026."></span>
+            <div class="ep-regla" data-lugar="7" aria-hidden="true"><span>1</span><i></i><span>32</span></div>
+            <p class="t" data-es="tasa de desocupación; el promedio nacional es 2.7 %" data-en="unemployment rate; the national average is 2.7%">tasa de desocupación; el promedio nacional es 2.7 %</p>
+            <p class="f" data-es="2T 2026 · INEGI, ENOE" data-en="Q2 2026 · INEGI, ENOE">2T 2026 · INEGI, ENOE</p>
+          </article>
+          <article class="ep-dato ancho">
+            <p class="n"><span data-num="130041" data-dec="0">130,041</span></p>
+            <p class="t" data-es="estudiantes en la BUAP, la universidad pública del estado, con 371 programas en 32 municipios (incluye bachillerato)" data-en="students at BUAP, the state's public university, with 371 programmes in 32 municipalities (includes high school)">estudiantes en la BUAP, la universidad pública del estado, con 371 programas en 32 municipios (incluye bachillerato)</p>
+            <p class="f" data-es="Ciclo 2025-2026 · BUAP, estadística 911" data-en="2025-2026 school year · BUAP, 911 statistics">Ciclo 2025-2026 · BUAP, estadística 911</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Mapa del estado -->
+  <section class="section ep-mapa-sec" id="mapa">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow" data-es="El mapa" data-en="The map">El mapa</p>
+        <h2 data-es="Dónde está la industria, la logística y el talento" data-en="Where industry, logistics and talent are">Dónde está la industria, la logística y el talento</h2>
+        <p data-es="Activa las capas y toca un punto para ver su información." data-en="Turn layers on and tap a point to see its details.">Activa las capas y toca un punto para ver su información.</p>
+      </div>
+      <div class="ep-mapa-grid">
+        <div class="ep-mapa-caja">
+          <div class="ep-capas" data-capas>
+            <button class="ep-capa" type="button" aria-pressed="true" data-capa="ind" style="--c:#e0a63a"><i></i><span data-es="Industria" data-en="Industry">Industria</span></button>
+            <button class="ep-capa" type="button" aria-pressed="true" data-capa="log" style="--c:#014476"><i></i><span data-es="Logística" data-en="Logistics">Logística</span></button>
+            <button class="ep-capa" type="button" aria-pressed="false" data-capa="uni" style="--c:#0f6b45"><i></i><span data-es="Universidades" data-en="Universities">Universidades</span></button>
+            <button class="ep-capa" type="button" aria-pressed="true" data-capa="ciu" style="--c:#04162b"><i></i><span data-es="Ciudades" data-en="Cities">Ciudades</span></button>
+            <button class="ep-capa ep-zoom" type="button" aria-pressed="false" data-zoom style="--c:#8a5b0e"><svg aria-hidden="true" width="16" height="16"><use href="#i-lupa"/></svg><span data-es="Zona metropolitana" data-en="Metro area">Zona metropolitana</span></button>
+          </div>
+          <svg class="ep-mapa" viewBox="-10 -10 420 557" role="group" aria-label="Mapa interactivo del estado de Puebla" data-mapa></svg>
+          <p class="ep-nota-mapa" data-es="Ubicaciones y trazos de carreteras aproximados. Límites estatales simplificados de Natural Earth (dominio público)." data-en="Locations and highway lines are approximate. Simplified state boundaries from Natural Earth (public domain).">Ubicaciones y trazos de carreteras aproximados. Límites estatales simplificados de Natural Earth (dominio público).</p>
+        </div>
+        <aside class="ep-ficha" aria-live="polite" data-ficha></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Rutas -->
+  <section class="section ep-rutas" id="rutas">
+    <div class="wrap">
+      <div class="ep-rutas-grid">
+        <div>
+          <p class="eyebrow" data-es="Conectividad" data-en="Connectivity">Conectividad</p>
+          <h2 data-es="¿A cuánto estás de…?" data-en="How far is it to…?">¿A cuánto estás de…?</h2>
+          <p class="ep-intro" data-es="Elige un destino para ver la distancia por carretera desde la ciudad de Puebla." data-en="Pick a destination to see the road distance from the city of Puebla.">Elige un destino para ver la distancia por carretera desde la ciudad de Puebla.</p>
+          <div class="ep-destinos" data-destinos></div>
+          <div class="ep-lectura">
+            <b data-km>285</b>
+            <span><span data-es="km por carretera (aprox.)" data-en="km by road (approx.)">km por carretera (aprox.)</span></span>
+            <span class="ep-fuente-rutas" data-es="Fuente: SICT, Traza tu ruta" data-en="Source: SICT route planner">Fuente: SICT, Traza tu ruta</span>
+          </div>
+        </div>
+        <svg class="ep-mx" viewBox="205 92 290 250" role="img" aria-label="Mapa de México con la ruta desde Puebla al destino elegido" data-mx></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Exportaciones de la región -->
+  <section class="section ep-export">
+    <div class="wrap">
+      <div class="ep-export-grid">
+        <div data-reveal>
+          <p class="eyebrow" data-es="Comercio exterior" data-en="Foreign trade">Comercio exterior</p>
+          <h2 data-es="El primer exportador de la Región Sur" data-en="The Southern Region's top exporter">El primer exportador de la Región Sur</h2>
+          <p class="section-head" style="margin:1rem 0 0;color:var(--pizarra);font-size:var(--fs-lead)" data-es="En el segundo trimestre de 2026 Puebla exportó más que Campeche y Tabasco juntos. Cambia la vista para comparar el crecimiento frente al mismo trimestre de 2025."
+             data-en="In Q2 2026 Puebla exported more than Campeche and Tabasco combined. Switch the view to compare growth against the same quarter of 2025.">En el segundo trimestre de 2026 Puebla exportó más que Campeche y Tabasco juntos. Cambia la vista para comparar el crecimiento frente al mismo trimestre de 2025.</p>
+          <div class="ep-big">
+            <div><b>98.4 %</b><span data-es="son manufacturas" data-en="are manufactured goods">son manufacturas</span></div>
+            <div><b data-es="12.°" data-en="12th">12.°</b><span data-es="lugar nacional" data-en="in the country">lugar nacional</span></div>
+          </div>
+        </div>
+        <div data-reveal style="--d:90ms">
+          <div class="ep-modo" role="group" aria-label="Vista" data-modo>
+            <button type="button" aria-pressed="true" data-v="mdd" data-es="Millones de dólares" data-en="Million dollars">Millones de dólares</button>
+            <button type="button" aria-pressed="false" data-v="var" data-es="Variación anual" data-en="Annual change">Variación anual</button>
+          </div>
+          <div class="ep-ranking" data-ranking></div>
+          <p class="ep-nota-mapa" style="margin-top:1rem" data-es="Segundo trimestre de 2026, cifras preliminares. INEGI, Boletín 609/26, Exportaciones Trimestrales por Entidad Federativa (30 de septiembre de 2026)." data-en="Q2 2026, preliminary figures. INEGI, Bulletin 609/26, Quarterly Exports by State (30 September 2026).">Segundo trimestre de 2026, cifras preliminares. INEGI, Boletín 609/26, Exportaciones Trimestrales por Entidad Federativa (30 de septiembre de 2026).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Empresas -->
+  <section class="section" id="empresas" style="background:var(--niebla)">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow" data-es="Directorio" data-en="Directory">Directorio</p>
+        <h2 data-es="Empresas de Puebla en Sur Exporta" data-en="Companies from Puebla on Sur Exporta">Empresas de Puebla en Sur Exporta</h2>
+        <p data-empresas-cuenta></p>
+      </div>
+      <div class="ep-emp-grid" data-empresas></div>
+
+      <div class="ep-cta" style="margin-top:clamp(2.5rem,5vw,4rem)">
+        <div>
+          <h2 data-es="¿Buscas proveedores en Puebla o quieres instalarte aquí?" data-en="Looking for suppliers in Puebla or planning to set up here?">¿Buscas proveedores en Puebla o quieres instalarte aquí?</h2>
+          <p data-es="Agenda una llamada con COMCE Región Sur y te ponemos en contacto con las empresas y los organismos indicados." data-en="Book a call with COMCE Southern Region and we will connect you with the right companies and agencies.">Agenda una llamada con COMCE Región Sur y te ponemos en contacto con las empresas y los organismos indicados.</p>
+        </div>
+        <div class="ep-acciones">
+          <a class="btn btn-gold" href="/agenda?ref=estado-puebla" data-es="Agendar una llamada" data-en="Book a call">Agendar una llamada</a>
+          <a class="btn btn-ghost-light" href="/#directorio" data-es="Ver el directorio" data-en="See the directory">Ver el directorio</a>
+        </div>
+      </div>
+
+      <details class="ep-fuentes">
+        <summary><span data-es="Fuentes y notas · Datos revisados en noviembre de 2026" data-en="Sources and notes · Data reviewed in November 2026">Fuentes y notas · Datos revisados en noviembre de 2026</span></summary>
+        <ol>
+          <li><a href="https://www.inegi.org.mx/programas/ccpv/2020/" rel="noopener">INEGI, Censo de Población y Vivienda 2020</a></li>
+          <li><a href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_12_CP_Pue.pdf" rel="noopener">INEGI, Comunicado 177/25, PIB por Entidad Federativa 2024: Puebla</a></li>
+          <li><a href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/exporta_ef/etef2026_09.pdf" rel="noopener">INEGI, Boletín 609/26, Exportaciones Trimestrales por Entidad Federativa</a></li>
+          <li><a href="https://www.economia.gob.mx/datamexico/es/profile/geo/puebla-pu" rel="noopener">Secretaría de Economía, DataMéxico: perfil de Puebla (ENOE, IED, Censos Económicos)</a></li>
+          <li><a href="https://www.gob.mx/grupomundomaya/articulos/aeropuerto-internacional-de-puebla" rel="noopener">Grupo Mundo Maya, ficha técnica del Aeropuerto Internacional de Puebla (2023)</a></li>
+          <li>SICT, Anuario Estadístico del Sector de Infraestructura, Comunicaciones y Transportes 2025 (carreteras, autopistas de CAPUFE, ferrocarril y autotransporte)</li>
+          <li><a href="https://www.puebla.gob.mx/index.php/noticias/item/18980-puebla-con-mas-de-630-hectareas-disponibles-para-desarrollo-industrial" rel="noopener">Gobierno de Puebla, SDET, comunicado 051/2025: superficie disponible para desarrollo industrial</a></li>
+          <li><a href="https://app.sct.gob.mx/sibuac_internet/ControllerUI?action=cmdEscogeRuta" rel="noopener">SICT, Traza tu ruta (distancias por carretera)</a></li>
+          <li><a href="https://www.inegi.org.mx/programas/enoe/15ymas/" rel="noopener">INEGI, Encuesta Nacional de Ocupación y Empleo (ENOE)</a></li>
+          <li><a href="https://repositorio.buap.mx/rdocencia/public/inf_public/2025/0/Historico-Mtricula-2013-2025.pdf" rel="noopener">BUAP, estadística 911: matrícula 2025-2026</a></li>
+        </ol>
+        <p class="ep-nota" data-es="Todas las cifras vienen de fuentes oficiales. Las distancias por carretera son aproximadas y las ubicaciones del mapa son de referencia. El lugar entre los 32 estados indica qué significa el 1 en cada caso."
+           data-en="Every figure comes from an official source. Road distances are approximate and map locations are for reference. Each rank among the 32 states explains what 1 means in that case.">Todas las cifras vienen de fuentes oficiales. Las distancias por carretera son aproximadas y las ubicaciones del mapa son de referencia. El lugar entre los 32 estados indica qué significa el 1 en cada caso.</p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="comce-sur-logo.webp" width="286" height="131" alt="COMCE Región Sur">
+        <p data-i18n="footerRights">Consejo Mexicano de Comercio Exterior, Inversión y Tecnología Región Sur, A.C.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footerNav">Navegación</h4>
+        <ul>
+          <li><a href="/#directorio" data-i18n="navDirectorio">Directorio</a></li>
+          <li><a href="/estado-puebla" data-es="Estados" data-en="States">Estados</a></li>
+          <li><a href="/nosotros" data-es="Nosotros" data-en="About us">Nosotros</a></li>
+          <li><a href="/#como" data-i18n="navComo">Cómo funciona</a></li>
+          <li><a href="/podcast">Podcast</a></li>
+          <li><a href="/contacto" data-i18n="navContacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="backToComce">COMCE Región Sur</h4>
+        <ul>
+          <li><a href="https://www.comce-sur.org.mx/" rel="noopener">comce-sur.org.mx</a></li>
+          <li><a href="/registro" data-es="Registra tu empresa" data-en="List your company">Registra tu empresa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footerSource">Datos en validación continua.</p>
+      <p class="footer-credito" data-es="Sitio desarrollado con apoyo de IA" data-en="Site developed with AI assistance">Sitio desarrollado con apoyo de IA</p>
+      <span class="footer-legal">
+        <a href="/aviso-de-privacidad" data-es="Aviso de privacidad" data-en="Privacy notice">Aviso de privacidad</a>
+        <a href="/politica-de-cookies" data-es="Política de cookies" data-en="Cookie policy">Política de cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+/* Página de estado: Puebla. Cifras verificadas en la hoja «Fuentes de Datos Puebla». */
+(function () {
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function idioma() {
+    var l = null;
+    try { l = localStorage.getItem('se-lang'); } catch (e) {}
+    if (l !== 'es' && l !== 'en') l = (navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es';
+    return l;
+  }
+  function L(o) { var l = idioma(); return o && typeof o === 'object' ? (o[l] || o.es) : (o || ''); }
+  function fmt(n, dec) {
+    return Number(n).toLocaleString(idioma() === 'en' ? 'en-US' : 'es-MX', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+  function el(tag, attrs) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  /* ---------- Geometría (proyección equirectangular simplificada) ---------- */
+
+  // Límites estatales: Natural Earth 1:10m, admin 1 (dominio público, naturalearthdata.com),
+  // simplificados y proyectados con los mismos parámetros que los puntos del mapa.
+  // Contorno de Puebla: 400 x 537 unidades.
+  var PUEBLA = 'M56.4 333.4L57.5 329.0L54.9 322.8L55.6 306.7L58.7 303.1L55.9 283.9L52.0 266.6L54.7 257.4L57.3 253.5L73.3 257.8L77.8 257.5L82.8 254.9L87.4 257.8L89.0 264.9L92.5 271.0L93.1 274.9L101.2 281.5L108.6 295.9L124.2 308.2L130.5 317.2L134.3 318.3L149.0 313.1L159.0 299.5L179.8 308.8L183.7 309.2L187.5 307.4L193.0 302.2L194.0 299.0L189.0 293.1L187.6 289.0L188.6 287.0L194.4 284.4L197.2 280.9L206.2 283.6L211.0 283.9L214.1 282.1L219.5 286.1L224.7 285.9L229.4 283.4L232.9 279.4L234.2 274.5L232.7 271.2L229.3 269.7L224.6 270.2L220.4 268.2L209.0 256.0L205.9 254.4L202.9 254.4L194.3 258.1L191.2 250.3L188.6 249.2L187.8 246.3L188.5 244.4L193.3 243.4L194.7 238.6L189.6 235.8L177.8 232.0L170.7 224.5L161.6 221.7L160.6 220.0L162.6 216.9L162.7 211.5L160.1 206.6L156.8 204.4L155.0 207.1L155.1 214.2L150.0 215.4L143.0 215.0L134.0 201.6L125.7 187.0L124.3 182.9L127.9 174.8L137.9 160.5L140.5 150.3L143.0 146.2L150.2 139.6L150.2 136.7L146.8 130.3L146.5 123.9L144.3 117.0L140.0 114.7L126.6 118.7L121.4 114.9L120.2 111.2L123.0 106.4L124.4 100.2L127.1 98.0L140.2 95.2L147.6 83.6L158.6 77.4L173.5 61.2L176.8 51.3L177.1 43.8L176.1 35.8L173.4 31.0L177.6 29.5L178.6 22.2L179.8 20.3L185.4 17.1L185.4 8.3L187.0 5.8L188.9 4.9L194.6 7.0L205.6 7.0L211.8 13.5L212.1 25.3L213.3 28.9L219.0 37.9L215.5 42.2L215.3 44.0L218.2 45.5L227.9 45.1L238.3 49.2L243.3 58.9L243.5 63.4L232.6 78.5L229.5 79.5L227.2 78.1L220.3 70.4L214.5 75.1L207.2 75.4L205.7 77.0L207.6 82.7L207.3 90.3L208.9 94.1L205.6 102.4L206.4 105.5L216.7 111.7L220.9 121.0L223.0 122.7L226.1 122.7L232.7 120.2L235.4 121.2L237.2 130.8L240.0 133.7L245.1 131.3L249.7 126.6L255.4 118.9L258.7 112.0L270.2 108.0L274.0 108.5L287.8 117.8L298.6 123.4L313.3 128.8L316.3 133.2L313.0 140.7L295.8 159.2L286.5 174.2L287.6 190.5L286.7 201.2L283.8 211.1L278.5 216.3L275.4 216.5L273.6 219.7L272.1 232.7L278.3 237.4L277.8 242.0L282.8 246.5L284.4 250.0L283.0 252.8L279.8 254.6L271.0 255.2L269.5 256.4L270.9 259.3L273.0 260.6L280.9 261.5L285.1 267.0L291.1 264.6L293.2 264.8L300.7 275.9L303.6 277.6L311.0 278.8L320.2 282.4L327.4 279.8L331.1 279.8L340.6 283.9L342.7 285.2L342.8 286.5L333.1 298.1L329.7 299.9L325.5 299.6L320.8 305.1L310.9 302.3L302.0 306.8L294.2 308.4L292.8 312.7L293.2 318.4L300.6 357.3L291.1 361.7L288.2 367.6L282.7 372.3L280.8 377.3L283.1 388.4L286.2 395.2L290.2 399.1L293.3 399.9L301.6 396.8L316.1 401.5L317.9 405.2L318.9 411.7L323.0 416.6L323.9 419.5L320.8 428.8L322.3 431.6L330.0 431.6L332.7 432.7L344.0 425.6L373.9 419.6L375.5 423.2L376.4 432.8L384.8 442.3L386.3 445.2L385.6 448.9L375.8 468.3L357.8 477.3L352.1 483.0L345.2 493.7L340.5 497.5L335.2 497.7L319.2 493.3L307.3 487.9L295.6 489.3L285.6 493.6L278.4 499.8L272.8 507.7L266.1 521.8L261.6 524.0L256.8 522.7L253.2 519.0L248.1 510.7L247.3 502.7L245.8 500.8L234.1 493.4L229.5 488.9L229.1 483.1L235.4 461.6L235.3 454.3L230.3 456.7L223.8 461.9L219.4 463.4L217.1 462.6L214.9 464.9L199.8 491.8L198.9 495.0L199.6 498.1L211.1 509.9L212.9 513.9L213.6 519.1L211.2 522.6L202.6 530.4L192.1 535.4L189.3 535.2L187.5 533.8L184.9 526.1L183.4 515.9L180.5 513.5L166.6 515.9L139.7 515.7L136.4 518.9L130.5 531.2L125.8 535.7L119.9 536.2L114.3 534.0L107.8 539.7L98.0 529.2L94.1 526.6L83.6 528.7L72.1 528.8L46.3 521.7L38.5 518.5L32.0 513.8L27.3 507.3L24.9 498.8L11.8 496.1L9.3 494.5L7.6 484.4L5.5 483.5L0.9 486.2L-3.6 482.7L-4.7 475.7L-9.8 476.7L-9.7 473.9L-12.5 467.3L-13.0 456.2L-5.7 451.1L5.9 446.4L7.8 440.3L12.9 437.1L16.6 432.4L25.6 429.9L28.7 429.8L35.0 432.4L44.1 440.8L47.9 442.9L51.1 442.1L50.7 436.2L46.6 421.4L42.0 412.1L38.6 393.8L48.7 395.4L51.9 395.2L53.0 393.8L51.0 386.9L45.2 379.6L45.4 374.2L41.4 372.0L48.3 362.6L54.4 357.5L51.3 352.0L51.2 348.4L52.5 347.3L54.9 347.5Z';
+
+  // México por estado, 600 x 375 unidades (simplificado)
+  var MX = {"Zacatecas":"M332 168L325 179L310 192L307 192L305 195L307 204L314 211L317 210L319 208L323 209L323 219L319 224L311 218L310 215L305 211L297 215L298 217L294 224L296 226L295 229L298 230L298 231L295 235L290 235L290 240L279 236L277 237L277 231L279 231L281 229L281 224L288 221L291 215L288 214L284 210L283 212L284 214L282 218L279 218L280 210L277 208L275 217L274 211L276 206L273 205L273 213L266 215L270 191L274 187L276 186L274 181L275 181L275 178L286 170L295 171L301 170L301 163L298 157L299 156L306 156L313 157L315 160L318 161L318 163L317 163L317 164L325 163L327 166Z","Yucatán":"M531 245L531 242L530 246L532 241L542 235L555 234L573 229L585 231L585 242L582 249L576 253L572 253L571 257L569 255L561 262L550 266L549 269L538 252L536 254L531 251Z","Veracruz":"M390 215L394 224L399 230L397 236L396 232L398 230L390 219L393 228L396 231L402 249L415 265L419 276L429 287L425 285L428 288L427 288L432 289L429 287L432 288L439 289L443 292L447 293L452 300L459 299L461 306L469 312L469 318L464 321L444 319L438 312L439 309L432 313L428 313L426 308L428 303L427 301L421 300L416 292L411 289L412 292L410 295L409 292L403 293L403 290L399 289L399 287L401 285L400 279L405 277L397 273L399 273L398 271L399 264L403 259L397 257L394 259L390 256L390 253L393 253L395 252L391 249L390 245L388 245L386 252L385 248L377 255L375 252L378 247L377 246L378 244L382 245L384 240L381 239L381 236L379 238L377 236L378 234L374 229L377 225L375 221L378 221L380 217L374 212L380 213L382 211L388 214L389 216Z","Tlaxcala":"M381 268L384 269L385 267L385 269L389 271L389 274L393 276L389 276L388 279L385 278L382 280L377 274L374 273L373 271L377 269L380 270Z","Tamaulipas":"M354 104L358 106L358 117L362 121L366 130L371 131L383 137L393 138L397 141L402 139L402 144L396 155L393 169L391 184L390 184L391 187L391 185L391 203L391 202L388 206L388 208L389 207L390 215L389 216L382 211L380 213L374 212L370 213L363 212L360 207L359 208L357 206L357 208L348 205L347 203L350 200L348 197L346 198L347 194L346 193L347 192L350 192L349 189L351 185L356 184L359 182L356 178L356 169L354 170L353 168L362 163L364 164L364 158L367 156L369 157L378 150L375 149L375 138L370 137L369 139L366 136L365 137L364 132L359 130L360 126L355 124L356 121L353 119L354 115L353 108L350 107Z","Tabasco":"M519 307L519 319L511 318L512 317L507 313L506 309L504 309L504 306L501 305L498 308L493 309L486 316L481 313L481 305L479 305L476 303L470 316L469 312L461 306L459 299L466 298L470 296L470 295L465 297L471 294L478 294L479 296L478 294L484 294L486 291L487 294L487 290L491 290L493 294L497 294L497 300L502 304L507 304L508 301L510 301L519 304Z","Sonora":"M67 4L138 28L178 29L177 39L185 46L186 55L185 68L183 68L184 85L186 91L184 92L176 91L174 93L177 99L184 107L183 114L188 118L187 122L175 132L173 131L173 128L168 124L169 124L167 123L168 125L165 124L162 123L159 116L153 115L149 112L150 112L148 110L147 105L148 102L147 101L149 100L142 99L142 97L142 100L139 98L137 98L131 89L126 88L121 82L123 81L117 77L116 70L113 69L113 67L106 58L106 52L100 42L99 34L100 36L101 32L97 29L90 29L89 25L83 22L83 24L79 25L65 17L63 9L65 5ZM115 81L109 79L111 77L112 73L115 71L117 76Z","Sinaloa":"M240 210L235 203L226 196L224 192L219 187L215 180L200 169L206 172L205 169L203 170L196 166L195 163L197 164L197 160L195 159L195 163L190 157L193 159L194 158L196 158L192 155L190 155L190 153L189 156L188 154L182 152L185 152L182 151L182 148L179 147L179 149L175 148L178 148L180 142L176 147L173 145L174 147L170 146L172 144L170 143L170 145L169 143L169 138L172 133L172 135L174 132L176 134L175 131L187 122L189 116L196 119L199 126L201 134L208 136L211 141L217 146L214 149L213 156L215 161L220 165L223 172L225 174L231 172L235 178L237 178L236 182L237 188L239 189L241 195L246 197L245 202L242 205L245 210L240 210L240 211Z","San Luis Potosí":"M332 168L336 173L337 180L339 184L340 195L347 195L346 198L348 197L350 200L347 203L348 205L357 208L357 206L359 208L360 207L363 212L370 213L374 212L379 216L378 221L375 221L377 225L374 229L376 231L375 237L371 238L368 235L365 235L363 228L360 232L356 233L353 231L352 233L349 232L341 227L339 231L336 231L330 226L325 226L323 223L319 224L323 219L323 209L319 208L317 210L314 211L307 204L305 195L307 192L310 192L325 179Z","Quintana Roo":"M568 293L566 294L559 305L556 303L554 304L556 299L555 289L557 278L549 269L550 266L561 262L569 255L571 257L572 253L576 253L582 249L585 242L585 231L590 232L592 230L587 231L588 230L594 229L596 232L598 232L598 237L600 238L597 244L587 257L586 266L586 263L586 264L582 269L581 269L582 272L587 271L585 270L587 269L587 271L586 273L582 276L583 278L584 276L586 276L579 299L577 294L574 293L576 289L575 285L573 288L571 289L573 289L571 293ZM600 250L595 257L595 252Z","Querétaro":"M366 236L366 238L360 239L358 248L352 251L351 256L349 257L350 258L345 263L344 259L339 254L338 248L339 242L345 244L347 238L351 238L354 237L352 235L353 231L358 233L363 228L365 235Z","Puebla":"M374 282L374 273L377 274L382 280L385 278L388 279L389 276L393 276L389 274L389 271L385 269L385 268L383 269L381 265L384 260L384 258L381 257L381 256L387 251L388 245L390 245L391 249L395 252L393 253L390 253L390 256L394 259L397 257L403 259L399 264L398 271L399 273L397 273L405 277L400 279L401 285L399 288L403 290L403 293L409 292L410 295L405 301L400 300L397 304L393 300L394 296L390 300L391 303L389 305L388 302L383 303L380 305L373 303L367 298L366 296L370 293L373 294L372 289L373 289L372 286Z","Oaxaca":"M460 343L455 341L448 340L451 338L449 337L447 339L445 336L442 339L446 338L444 339L447 340L440 340L435 345L420 351L414 351L400 346L390 345L383 340L385 340L376 338L380 336L380 333L382 332L382 330L385 329L386 323L380 317L379 311L380 305L383 303L388 302L389 305L390 304L391 303L390 300L394 296L393 300L396 303L400 300L405 301L412 293L411 289L416 292L421 300L427 301L428 303L426 308L428 313L432 313L439 309L438 312L444 319L464 321L464 326L461 328L460 334L461 341L455 338L454 339Z","Nuevo León":"M352 102L354 104L350 107L353 108L354 115L353 119L356 121L355 124L360 126L359 130L364 132L365 137L366 136L369 139L370 137L375 138L375 149L378 150L369 157L367 156L364 158L364 164L362 163L353 168L354 170L356 169L356 178L359 182L356 184L351 185L349 189L350 192L347 192L346 193L347 195L342 195L342 196L340 195L339 184L337 180L336 173L332 168L334 160L332 158L336 155L343 155L344 153L339 152L335 149L337 148L333 145L332 139L325 131L334 123L335 126L337 124L338 117L336 116L334 117L333 114L340 110L341 104L345 101L349 105Z","Nayarit":"M248 248L246 246L243 246L249 240L250 232L245 228L241 222L239 210L240 211L240 210L245 210L242 205L245 199L254 202L255 204L254 206L253 210L258 207L262 212L266 211L265 219L270 225L268 231L273 234L272 237L268 238L267 247L258 241L252 243Z","Morelos":"M374 282L372 286L373 289L372 289L373 294L370 293L366 296L364 292L361 294L358 290L358 287L361 284L362 280L369 281L371 283Z","Michoacán":"M307 305L284 298L278 291L277 289L280 285L286 281L288 283L293 278L298 278L300 275L299 272L296 273L295 266L297 265L296 263L291 263L290 260L302 255L310 254L312 258L316 258L318 255L320 255L322 256L321 257L322 261L329 260L329 263L338 264L341 262L341 260L344 258L346 263L344 271L345 274L342 276L343 277L336 286L334 285L333 287L334 292L337 295L336 296L333 293L324 292L319 293L314 291L312 292L312 299L307 300Z","México":"M374 273L374 282L373 283L368 281L368 276L365 271L361 275L361 284L358 287L358 289L355 287L352 290L347 291L343 295L341 294L340 286L336 285L343 277L342 276L345 274L344 271L346 263L351 256L355 259L357 259L360 267L363 262L367 261L368 262L368 266L370 264L373 265L375 268L373 271Z","Jalisco":"M261 279L253 275L252 271L243 261L240 254L248 251L249 249L248 248L251 244L257 241L267 247L268 238L272 237L273 234L268 231L270 225L265 219L266 215L273 213L273 205L276 206L274 211L275 217L277 208L280 210L279 218L282 218L284 214L283 212L284 210L288 214L291 215L288 221L281 224L281 229L279 231L277 231L277 237L279 236L290 240L290 235L295 235L298 231L298 230L295 229L296 226L306 227L313 220L319 223L318 226L319 228L317 230L318 234L314 237L309 244L308 246L311 250L308 254L290 260L291 263L296 263L297 265L295 266L296 273L299 272L300 274L298 278L293 278L288 283L286 281L282 283L282 276L279 272L275 274L271 271L268 276L262 277Z","Hidalgo":"M366 238L367 235L371 238L375 237L375 234L376 233L378 238L381 236L381 239L384 240L382 245L378 244L377 246L378 247L375 252L377 255L384 248L386 248L386 252L381 257L384 258L384 260L381 265L383 269L381 268L380 270L377 269L374 270L375 268L374 266L370 264L368 266L368 262L367 261L363 262L360 267L357 259L355 259L351 256L352 251L358 248L360 239Z","Guerrero":"M376 338L371 333L355 330L348 326L328 318L326 315L317 310L314 305L310 303L307 305L307 300L312 299L312 292L314 291L319 293L324 292L333 293L336 296L337 295L334 292L333 287L334 285L335 287L336 285L340 286L342 295L347 291L352 290L355 287L361 294L364 292L369 300L380 306L379 311L380 317L386 323L385 329L382 330L382 332L380 333L380 336Z","Guanajuato":"M352 233L352 235L354 237L351 238L347 238L346 243L342 243L340 242L338 243L338 248L339 254L343 258L341 260L341 262L338 264L329 263L329 260L322 261L321 257L322 256L320 255L318 255L316 258L312 258L311 254L308 254L311 250L309 246L313 238L318 234L317 230L319 228L318 226L319 224L323 223L325 226L330 226L336 231L339 231L341 227Z","Durango":"M217 163L215 161L213 156L214 149L217 146L220 146L224 143L225 138L227 136L226 131L231 129L232 123L233 123L234 121L247 129L251 127L253 129L256 128L262 131L268 123L272 122L279 125L286 131L285 145L282 148L283 150L282 153L286 157L287 161L294 165L294 161L298 157L301 163L301 170L296 171L286 170L275 178L275 181L274 181L276 186L274 187L270 191L266 214L266 211L262 212L258 207L253 210L254 206L255 204L254 202L250 199L246 199L246 197L244 197L240 194L240 190L236 185L237 178L235 178L231 172L224 173L220 165Z","Ciudad de México":"M365 271L368 277L368 280L366 281L362 280L361 277Z","Colima":"M277 289L266 282L266 280L261 279L262 277L268 276L271 271L275 274L279 272L282 276L282 283Z","Coahuila":"M304 58L308 60L322 61L323 64L325 64L325 66L335 74L336 78L342 87L343 91L347 94L352 102L349 105L345 101L341 104L340 110L333 114L334 117L336 116L338 117L337 124L335 126L334 123L325 131L332 139L333 145L337 148L335 149L339 152L344 153L343 155L337 154L333 156L332 158L334 160L332 168L327 166L325 163L317 164L317 163L318 163L318 161L315 160L313 157L306 156L298 157L294 161L294 165L287 161L286 157L282 153L283 150L282 148L285 145L285 137L286 132L279 125L273 99L285 76L289 77L294 72L293 69L297 61L303 61Z","Chihuahua":"M192 19L227 20L230 26L235 28L246 38L255 43L259 52L259 57L264 64L271 70L285 76L273 99L279 125L269 123L262 131L256 128L253 129L251 127L247 129L234 121L231 123L231 129L226 131L227 136L225 138L224 143L220 146L217 146L211 141L208 136L201 134L199 126L196 119L189 116L188 118L185 117L183 114L184 107L177 99L174 93L176 91L184 92L186 91L184 85L183 68L185 68L186 55L185 46L177 39L178 29L192 29Z","Chiapas":"M511 318L518 326L524 329L526 334L530 336L530 342L505 343L496 359L499 363L497 365L496 374L484 362L486 363L485 361L463 344L465 344L464 342L460 341L461 338L460 334L461 328L464 326L464 321L469 317L476 303L479 305L481 305L481 313L486 316L493 309L498 308L500 305L503 305L507 313L512 317Z","Campeche":"M554 304L554 307L519 307L519 304L509 301L507 304L503 304L497 300L497 294L493 294L491 290L501 289L503 291L501 290L499 292L502 293L501 291L502 291L504 295L504 293L510 294L509 293L516 290L513 290L514 288L511 286L514 283L509 286L524 275L525 268L529 262L529 251L531 245L531 251L536 254L538 252L550 270L556 277L555 289L556 299Z","Baja California Sur":"M81 97L106 97L107 102L114 106L117 114L121 116L120 118L123 121L122 124L125 127L127 126L124 124L124 120L129 124L129 127L131 128L134 143L137 148L139 148L141 156L145 161L144 168L147 174L152 176L150 176L152 177L152 173L154 172L158 176L159 179L162 178L164 186L169 189L169 194L167 198L160 203L158 202L153 189L131 173L127 167L124 169L120 162L121 164L120 162L119 164L119 159L118 162L117 160L120 149L119 149L119 144L118 149L117 139L113 133L107 132L100 126L99 122L97 123L99 118L96 123L93 122L90 124L86 119L82 118L79 115L75 114L73 109L69 107L66 104L63 103L62 100L73 102L77 100L77 103L81 105L81 104L83 104L84 103L81 101L82 103L80 103L80 98L77 99L79 97L80 99Z","Baja California":"M69 0L67 4L65 5L63 9L65 15L65 17L63 15L67 19L68 22L66 32L69 37L71 46L70 52L75 60L79 61L89 71L92 79L94 78L95 81L98 81L100 87L104 88L104 91L106 97L81 97L80 95L81 93L80 92L82 88L79 84L77 84L64 69L60 68L50 61L50 58L48 57L48 49L45 48L45 46L44 49L44 46L43 39L38 36L38 31L32 24L32 22L30 20L32 20L33 18L28 14L27 10L23 5L23 4ZM99 75L99 77L92 71L90 68L91 65L94 67L94 70L98 71ZM60 90L61 94L59 97L57 95L59 92L59 90Z","Aguascalientes":"M313 220L305 228L296 226L294 224L298 215L301 214L305 211L310 215L311 218Z"};
+
+  var SUR = ['Puebla', 'Tlaxcala', 'Oaxaca', 'Veracruz', 'Chiapas', 'Tabasco', 'Campeche', 'Yucatán', 'Quintana Roo'];
+
+  function dibujaMexico(svg, conRegion) {
+    if (!svg) return;
+    Object.keys(MX).forEach(function (n) {
+      var cls = 'edo' + (n === 'Puebla' ? ' pue' : (conRegion && SUR.indexOf(n) > -1 ? ' sur' : ''));
+      svg.appendChild(el('path', { d: MX[n], 'class': cls }));
+    });
+  }
+
+  /* ---------- Menú «Estados» ---------- */
+
+  var ESTADOS = [
+    { n: 'Puebla', activo: true }, { n: 'Tlaxcala' }, { n: 'Oaxaca' }, { n: 'Veracruz' }, { n: 'Chiapas' },
+    { n: 'Tabasco' }, { n: 'Campeche' }, { n: 'Yucatán' }, { n: 'Quintana Roo' }
+  ];
+  var lista = document.querySelector('[data-lista-estados]');
+  function pintaLista() {
+    if (!lista) return;
+    var pronto = idioma() === 'en' ? 'Coming soon' : 'Próximamente';
+    lista.innerHTML = ESTADOS.map(function (e) {
+      return '<li>' + (e.activo
+        ? '<a href="/estado-puebla" aria-current="page">' + esc(e.n) + '<small>' + (idioma() === 'en' ? 'Available' : 'Disponible') + '</small></a>'
+        : '<span>' + esc(e.n) + '<small>' + pronto + '</small></span>') + '</li>';
+    }).join('');
+  }
+  var mini = document.querySelector('[data-mapa-mini]');
+  if (mini) Object.keys(MX).forEach(function (n) {
+    mini.appendChild(el('path', { d: MX[n], 'class': n === 'Puebla' ? 'pue' : (SUR.indexOf(n) > -1 ? 'sur' : '') }));
+  });
+  var ubica = document.querySelector('[data-mapa-ubica]');
+  if (ubica) Object.keys(MX).forEach(function (n) {
+    ubica.appendChild(el('path', { d: MX[n], 'class': n === 'Puebla' ? 'pue' : (SUR.indexOf(n) > -1 ? 'sur' : '') }));
+  });
+
+  var drop = document.querySelector('[data-drop]');
+  if (drop) {
+    var dBtn = drop.querySelector('[data-drop-btn]');
+    var dMenu = drop.querySelector('[data-drop-menu]');
+    var abre = function (si) { dBtn.setAttribute('aria-expanded', String(si)); dMenu.hidden = !si; };
+    dBtn.addEventListener('click', function () { abre(dBtn.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('click', function (e) { if (!drop.contains(e.target)) abre(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dMenu.hidden) { abre(false); dBtn.focus(); } });
+  }
+
+  /* ---------- Contadores con decimales ---------- */
+
+  function cuenta(span) {
+    var meta = Number(span.getAttribute('data-num'));
+    var dec = Number(span.getAttribute('data-dec') || 0);
+    if (reduce) { span.textContent = fmt(meta, dec); return; }
+    var t0 = performance.now(), dur = 1200;
+    (function paso(now) {
+      var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      span.textContent = fmt(meta * e, dec);
+      if (p < 1) requestAnimationFrame(paso);
+    })(t0);
+  }
+  // Las cifras cuentan hacia arriba; al terminar aparecen su lugar nacional y su regla
+  function cuentaEn(root) {
+    root.querySelectorAll('[data-num]').forEach(cuenta);
+    var lugares = root.querySelectorAll('.ep-lugar[data-lugar]'), reglas = root.querySelectorAll('.ep-regla');
+    reglas.forEach(function (r) { r.querySelector('i').style.left = '0%'; });
+    lugares.forEach(function (l) { l.classList.remove('is-on'); });
+    setTimeout(function () {
+      lugares.forEach(function (l, k) { setTimeout(function () { l.classList.add('is-on'); }, k * 90); });
+      reglas.forEach(function (r) { r.querySelector('i').style.left = posicion(r) + '%'; });
+    }, reduce ? 0 : 700);
+  }
+  function formateaTodo() {
+    document.querySelectorAll('[data-num]').forEach(function (s) { s.textContent = fmt(s.getAttribute('data-num'), Number(s.getAttribute('data-dec') || 0)); });
+  }
+
+  /* ---------- Lugar entre los 32 estados ---------- */
+
+  var TOTAL_ESTADOS = 32;
+  function ordinal(n) {
+    if (idioma() !== 'en') return n + '.°';
+    var s = n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
+    return n + s;
+  }
+  function posicion(el) { return (Number(el.getAttribute('data-lugar')) - 1) / (TOTAL_ESTADOS - 1) * 100; }
+  function pintaLugares() {
+    var en = idioma() === 'en';
+    document.querySelectorAll('.ep-lugar[data-lugar]').forEach(function (l) {
+      var n = Number(l.getAttribute('data-lugar'));
+      l.innerHTML = '<b>' + ordinal(n) + '</b>&nbsp;' + (en ? 'of ' : 'de ') + TOTAL_ESTADOS;
+      l.classList.toggle('is-top', n <= 10);
+      l.classList.toggle('is-bajo', n > TOTAL_ESTADOS - 10);
+      var tip = l.getAttribute(en ? 'data-tip-en' : 'data-tip-es');
+      l.setAttribute('data-tip', tip);
+      l.setAttribute('aria-label', tip);
+    });
+  }
+  pintaLugares();
+  if (!('IntersectionObserver' in window) || reduce) {
+    document.querySelectorAll('.ep-lugar').forEach(function (l) { l.classList.add('is-on'); });
+    document.querySelectorAll('.ep-regla').forEach(function (r) { r.querySelector('i').style.left = posicion(r) + '%'; });
+  }
+
+  /* ---------- Portada: el contorno se dibuja al entrar ---------- */
+
+  var sil = document.querySelector('[data-silueta]');
+  if (sil) {
+    sil.querySelector('[data-puebla-path]').setAttribute('d', PUEBLA);
+    requestAnimationFrame(function () { sil.classList.add('is-on'); });
+    var kpis = document.querySelector('.ep-kpis');
+    if (kpis) {
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (en) {
+          if (en[0].isIntersecting) { io.disconnect(); cuentaEn(kpis); }
+        }, { threshold: 0.4 });
+        io.observe(kpis);
+      } else formateaTodo();
+    }
+  }
+
+  /* ---------- Pestañas de pilares ---------- */
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[data-tabs] [role="tab"]'));
+  function activa(tab, foco) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      p.classList.toggle('is-active', on);
+      if (on) { cuentaEn(p); barras(p); }
+    });
+    if (foco) tab.focus({ preventScroll: true });
+    // En celular la fila de pestañas se desplaza de lado; la página no se mueve
+    var fila = tab.parentNode;
+    var izq = tab.offsetLeft - fila.offsetLeft, der = izq + tab.offsetWidth;
+    if (izq < fila.scrollLeft) fila.scrollLeft = izq - 8;
+    else if (der > fila.scrollLeft + fila.clientWidth) fila.scrollLeft = der - fila.clientWidth + 8;
+  }
+  function barras(root) {
+    root.querySelectorAll('.ep-barra .rel').forEach(function (r) {
+      r.style.width = '0';
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        r.style.width = (Number(r.getAttribute('data-w')) / Number(r.getAttribute('data-max')) * 100) + '%';
+      }); });
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { activa(t); });
+    t.addEventListener('keydown', function (e) {
+      var j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') j = 0;
+      if (e.key === 'End') j = tabs.length - 1;
+      if (j !== null) { e.preventDefault(); activa(tabs[j], true); }
+    });
+  });
+  var pil = document.getElementById('pilares');
+  if (pil && 'IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { io2.disconnect(); var activo = document.querySelector('.ep-panel.is-active'); cuentaEn(activo); barras(activo); }
+    }, { threshold: 0.25 });
+    io2.observe(pil);
+  }
+
+  /* ---------- Mapa del estado ---------- */
+
+  var PUNTOS = [
+    { id: 'vw', capa: 'ind', x: 122, y: 315.8, n: 'Volkswagen de México', lugar: 'Cuautlancingo',
+      tipo: { es: 'Armadora', en: 'Vehicle assembly' },
+      d: { es: 'Planta de ensamble de Volkswagen. Cuautlancingo es el municipio con más ventas internacionales del estado.', en: 'Volkswagen assembly plant. Cuautlancingo is the municipality with the highest international sales in the state.' },
+      f: 'Secretaría de Economía, DataMéxico (2025)' },
+    { id: 'audi', capa: 'ind', x: 207.1, y: 296.6, izq: true, n: 'Audi México', lugar: 'San José Chiapa',
+      tipo: { es: 'Armadora', en: 'Vehicle assembly' },
+      d: { es: 'Planta de Audi México en San José Chiapa, en el oriente del estado.', en: 'Audi México plant in San José Chiapa, in the east of the state.' },
+      f: 'Audi México' },
+    { id: 'cmodelo', capa: 'ind', x: 214, y: 302.5, n: 'Ciudad Modelo', lugar: 'San José Chiapa',
+      tipo: { es: 'Polo de Desarrollo para el Bienestar', en: 'Development Hub' },
+      d: { es: 'La mayor reserva de suelo industrial del estado. 275 de sus hectáreas son Polo de Desarrollo para el Bienestar del Plan México, con incentivos federales: deducción del 100 % en activos fijos nuevos y del 25 % en capacitación dual e innovación.', en: 'The state\'s largest industrial land reserve. 275 of its hectares are a Plan México Development Hub, with federal incentives: a 100% deduction on new fixed assets and 25% on dual training and innovation.' },
+      c: { v: '391.7 ha', t: { es: 'disponibles para nuevas plantas', en: 'available for new plants' } },
+      f: 'Gobierno de Puebla, SDET, comunicado 051/2025' },
+    { id: 'aero', capa: 'log', x: 103.8, y: 308.9, n: 'Aeropuerto Internacional Hermanos Serdán', lugar: 'Huejotzingo',
+      tipo: { es: 'Aeropuerto', en: 'Airport' },
+      d: { es: 'Aeropuerto internacional (PBC) a 25 km de la ciudad de Puebla, unos 40 minutos. Certificado por AFAC y PROFEPA; opera Grupo Mundo Maya.', en: 'International airport (PBC) 25 km from the city of Puebla, about 40 minutes. Certified by AFAC and PROFEPA; operated by Grupo Mundo Maya.' },
+      c: { v: '3,605 m', t: { es: 'de pista, diseñada para aviones tipo Boeing 737', en: 'runway, designed for Boeing 737-type aircraft' } },
+      f: 'Grupo Mundo Maya, ficha técnica del aeropuerto (gob.mx, 2023)' },
+    { id: 'buap', capa: 'uni', x: 132.6, y: 337.9, n: 'BUAP', lugar: 'Puebla',
+      tipo: { es: 'Universidad pública', en: 'Public university' },
+      d: { es: 'Benemérita Universidad Autónoma de Puebla, con 371 programas en 32 municipios del estado.', en: 'Benemérita Universidad Autónoma de Puebla, with 371 programmes in 32 municipalities.' },
+      c: { v: '130,041', t: { es: 'estudiantes, ciclo 2025-2026 (incluye bachillerato)', en: 'students, 2025-2026 (includes high school)' } },
+      f: 'BUAP, estadística 911' },
+    { id: 'udlap', capa: 'uni', x: 118.8, y: 327.7, n: 'UDLAP', lugar: 'San Andrés Cholula',
+      tipo: { es: 'Universidad privada', en: 'Private university' },
+      d: { es: 'Universidad de las Américas Puebla.', en: 'Universidad de las Américas Puebla.' }, f: 'UDLAP' },
+    { id: 'upaep', capa: 'uni', x: 131.2, y: 329.1, n: 'UPAEP', lugar: 'Puebla',
+      tipo: { es: 'Universidad privada', en: 'Private university' },
+      d: { es: 'Universidad Popular Autónoma del Estado de Puebla.', en: 'Universidad Popular Autónoma del Estado de Puebla.' }, f: 'UPAEP' },
+    { id: 'tec', capa: 'uni', x: 125.9, y: 334.4, n: 'Tec de Monterrey, campus Puebla', lugar: 'Puebla',
+      tipo: { es: 'Universidad privada', en: 'Private university' },
+      d: { es: 'Campus Puebla del Tecnológico de Monterrey.', en: 'Puebla campus of Tecnológico de Monterrey.' }, f: 'Tec de Monterrey' },
+    { id: 'ibero', capa: 'uni', x: 125.4, y: 331.6, n: 'IBERO Puebla', lugar: 'San Andrés Cholula',
+      tipo: { es: 'Universidad privada', en: 'Private university' },
+      d: { es: 'Universidad Iberoamericana Puebla.', en: 'Universidad Iberoamericana Puebla.' }, f: 'IBERO Puebla' },
+    { id: 'anahuac', capa: 'uni', x: 122.8, y: 333.4, n: 'Anáhuac Puebla', lugar: 'San Andrés Cholula',
+      tipo: { es: 'Universidad privada', en: 'Private university' },
+      d: { es: 'Universidad Anáhuac Puebla.', en: 'Universidad Anáhuac Puebla.' }, f: 'Anáhuac Puebla' },
+    { id: 'pue', capa: 'ciu', x: 133.5, y: 329.8, n: 'Puebla', lugar: { es: 'Capital del estado', en: 'State capital' },
+      tipo: { es: 'Ciudad', en: 'City' },
+      d: { es: 'Capital del estado y centro de la zona metropolitana Puebla–Tlaxcala.', en: 'State capital and centre of the Puebla–Tlaxcala metropolitan area.' },
+      c: { v: '1,692,181', t: { es: 'habitantes del municipio (2020)', en: 'inhabitants of the municipality (2020)' } }, f: 'INEGI, Censo 2020' },
+    { id: 'teh', capa: 'ciu', x: 272, y: 435.8, n: 'Tehuacán', lugar: { es: 'Sureste del estado', en: 'South-east of the state' },
+      tipo: { es: 'Ciudad', en: 'City' },
+      d: { es: 'Segunda ciudad del estado y uno de los municipios con más exportaciones.', en: 'The state\'s second city and one of its top exporting municipalities.' },
+      c: { v: '327,312', t: { es: 'habitantes (2020)', en: 'inhabitants (2020)' } }, f: 'INEGI, Censo 2020; SE, DataMéxico' },
+    { id: 'smt', capa: 'ciu', x: 93.1, y: 285.9, n: 'San Martín Texmelucan', lugar: { es: 'Poniente del estado', en: 'West of the state' },
+      tipo: { es: 'Ciudad', en: 'City' },
+      d: { es: 'Punto donde el Arco Norte se une con la autopista México–Puebla.', en: 'Where the Arco Norte joins the Mexico City–Puebla highway.' },
+      c: { v: '155,738', t: { es: 'habitantes (2020)', en: 'inhabitants (2020)' } }, f: 'INEGI, Censo 2020' }
+  ];
+  var VIAS = [
+    { n: '150D', d: 'M72 262 L93 286 L133.5 330 L160.7 330 L205.4 341.3 L275.9 363.2 L300 368', tx: 230, ty: 343 },
+    { n: '135D', d: 'M250.1 372.3 L272 435.8 L318 492', tx: 300, ty: 455 },
+    { n: 'Arco Norte', d: 'M66 268 L93 286', tx: 20, ty: 262 }
+  ];
+  var COLOR = { ind: '#e0a63a', log: '#014476', uni: '#0f6b45', ciu: '#04162b' };
+  // El acercamiento conserva la proporción del mapa completo para que no cambie de alto
+  var VB_TODO = [-10, -10, 420, 557], VB_ZONA = [70, 252, 90, 119.4];
+
+  var mapa = document.querySelector('[data-mapa]');
+  var ficha = document.querySelector('[data-ficha]');
+  var capasOn = { ind: true, log: true, uni: false, ciu: true };
+  var vb = VB_TODO.slice(), sel = null, grupos = {};
+
+  function escala() { return vb[2] / 420; }
+
+  function pintaMapa() {
+    if (!mapa) return;
+    mapa.innerHTML = '';
+    mapa.appendChild(el('path', { d: PUEBLA, 'class': 'contorno' }));
+    ['log', 'ind', 'uni', 'ciu'].forEach(function (c) {
+      var g = el('g', { 'class': 'capa' + (capasOn[c] ? '' : ' is-off'), 'data-g': c });
+      if (c === 'log') VIAS.forEach(function (v) {
+        g.appendChild(el('path', { d: v.d, 'class': 'via' }));
+        var t = el('text', { x: v.tx, y: v.ty, 'class': 'via-txt' }); t.textContent = v.n; g.appendChild(t);
+      });
+      PUNTOS.filter(function (p) { return p.capa === c; }).forEach(function (p) {
+        var a = el('g', { 'class': 'ep-punto' + (sel === p.id ? ' is-sel' : ''), tabindex: capasOn[c] ? '0' : '-1', role: 'button', 'aria-label': p.n, 'data-id': p.id, style: '--c:' + COLOR[c] });
+        a.appendChild(el('circle', { cx: p.x, cy: p.y, r: 6 }));
+        var t = el('text', { x: p.x + 9, y: p.y + 4 }); t.textContent = p.n.replace(/ de México$/, '').replace(/^Aeropuerto Internacional /, '').replace(/^Parque Industrial /, '');
+        a.appendChild(t);
+        g.appendChild(a);
+      });
+      grupos[c] = g;
+      mapa.appendChild(g);
+    });
+    ajustaTamanos();
+  }
+  function ajustaTamanos() {
+    if (!mapa) return;
+    var s = escala(), zoom = s < 0.5;
+    mapa.querySelectorAll('.ep-punto').forEach(function (a) {
+      var p = PUNTOS.filter(function (q) { return q.id === a.getAttribute('data-id'); })[0];
+      var r = (p.capa === 'ciu' ? 6.5 : 5.5) * s * (zoom ? 1.25 : 1);
+      a.querySelector('circle').setAttribute('r', r);
+      var t = a.querySelector('text');
+      var hueco = r + 2.5 * s;
+      t.setAttribute('x', p.izq ? p.x - hueco : p.x + hueco);
+      t.setAttribute('text-anchor', p.izq ? 'end' : 'start');
+      t.setAttribute('y', p.y + 3.6 * s);
+      t.style.fontSize = (11 * s) + 'px';
+      t.style.strokeWidth = (3 * s) + 'px';
+      // Las etiquetas de la zona metropolitana se encimarían: en el mapa completo solo
+      // se ven ciudades y Audi; acercado, todo menos universidades. La elegida siempre.
+      var visible = p.id === sel || (zoom ? p.capa !== 'uni' : (p.capa === 'ciu' || p.id === 'audi' || p.id === 'cmodelo'));
+      t.style.display = visible ? '' : 'none';
+    });
+    mapa.querySelectorAll('.via-txt').forEach(function (t) { t.style.fontSize = (10 * s) + 'px'; });
+  }
+  function ponVB(meta) {
+    var ini = vb.slice(), t0 = performance.now(), dur = reduce ? 0 : 700;
+    (function paso(now) {
+      var p = dur ? Math.min(1, (now - t0) / dur) : 1, e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      vb = ini.map(function (v, i) { return v + (meta[i] - v) * e; });
+      mapa.setAttribute('viewBox', vb.join(' '));
+      ajustaTamanos();
+      if (p < 1) requestAnimationFrame(paso);
+    })(t0);
+  }
+  function pintaFicha() {
+    if (!ficha) return;
+    var en = idioma() === 'en';
+    var p = PUNTOS.filter(function (q) { return q.id === sel; })[0];
+    if (!p) {
+      ficha.innerHTML = '<div class="ep-ficha-vacia"><svg aria-hidden="true"><use href="#i-pin"/></svg><p>' +
+        (en ? 'Tap a point on the map to see its details.' : 'Toca un punto del mapa para ver su información.') + '</p></div>';
+      return;
+    }
+    ficha.innerHTML =
+      '<p class="tipo">' + esc(L(p.tipo)) + '</p>' +
+      '<h3>' + esc(p.n) + '</h3>' +
+      '<p class="lugar">' + esc(L(p.lugar)) + '</p>' +
+      '<p class="desc">' + esc(L(p.d)) + '</p>' +
+      (p.c ? '<div class="cifra"><b>' + esc(p.c.v) + '</b><span>' + esc(L(p.c.t)) + '</span></div>' : '') +
+      (p.pend ? '<span class="ep-badge">' + (en ? 'To be confirmed' : 'Por confirmar') + '</span>' : '') +
+      '<p class="fuente">' + (en ? 'Source: ' : 'Fuente: ') + esc(p.f) + '</p>';
+  }
+  function elige(id) {
+    sel = id;
+    mapa.querySelectorAll('.ep-punto').forEach(function (a) { a.classList.toggle('is-sel', a.getAttribute('data-id') === id); });
+    ajustaTamanos();
+    pintaFicha();
+  }
+  if (mapa) {
+    pintaMapa();
+    pintaFicha();
+    mapa.addEventListener('click', function (e) {
+      var a = e.target.closest('.ep-punto'); if (a) elige(a.getAttribute('data-id'));
+    });
+    mapa.addEventListener('keydown', function (e) {
+      var a = e.target.closest('.ep-punto');
+      if (a && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); elige(a.getAttribute('data-id')); }
+    });
+    document.querySelectorAll('[data-capa]').forEach(function (b) {
+      b.addEventListener('click', function () { capa(b.getAttribute('data-capa'), b.getAttribute('aria-pressed') !== 'true'); });
+    });
+    var zb = document.querySelector('[data-zoom]');
+    zb.addEventListener('click', function () {
+      var on = zb.getAttribute('aria-pressed') !== 'true';
+      zb.setAttribute('aria-pressed', String(on));
+      ponVB(on ? VB_ZONA : VB_TODO);
+    });
+    // «Ver universidades en el mapa» desde la pestaña Talento
+    document.querySelectorAll('[data-capa-link]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        capa(a.getAttribute('data-capa-link'), true);
+        if (zb.getAttribute('aria-pressed') !== 'true') zb.click();
+        elige('buap');
+      });
+    });
+  }
+  function capa(c, on) {
+    capasOn[c] = on;
+    var b = document.querySelector('[data-capa="' + c + '"]');
+    if (b) b.setAttribute('aria-pressed', String(on));
+    var g = grupos[c];
+    if (g) {
+      g.classList.toggle('is-off', !on);
+      g.querySelectorAll('.ep-punto').forEach(function (a) { a.setAttribute('tabindex', on ? '0' : '-1'); });
+    }
+    if (!on && sel && PUNTOS.some(function (p) { return p.id === sel && p.capa === c; })) { sel = null; pintaFicha(); }
+  }
+
+  /* ---------- Rutas desde Puebla ---------- */
+
+  var ORIGEN = [382.4, 281.7];
+  var DESTINOS = [
+    { id: 'ver', n: { es: 'Puerto de Veracruz', en: 'Port of Veracruz' }, t: { es: 'Golfo', en: 'Gulf' }, p: [421.6, 278.5], km: 285 },
+    { id: 'cdmx', n: { es: 'Ciudad de México', en: 'Mexico City' }, t: { es: 'Mercado', en: 'Market' }, p: [364.7, 273.7], km: 130 },
+    { id: 'aifa', n: { es: 'AIFA', en: 'AIFA airport' }, t: { es: 'Carga aérea', en: 'Air cargo' }, p: [366.9, 267.2], km: 180 },
+    { id: 'nld', n: { es: 'Nuevo Laredo', en: 'Nuevo Laredo' }, t: { es: 'Frontera EE. UU.', en: 'US border' }, p: [357.6, 108], km: 1250 },
+    { id: 'lzc', n: { es: 'Lázaro Cárdenas', en: 'Lázaro Cárdenas' }, t: { es: 'Pacífico', en: 'Pacific' }, p: [306.7, 304.1], km: 770 },
+    { id: 'mzo', n: { es: 'Manzanillo', en: 'Manzanillo' }, t: { es: 'Pacífico', en: 'Pacific' }, p: [266.4, 281.5], km: 950 }
+  ];
+  var mx = document.querySelector('[data-mx]');
+  var kmEl = document.querySelector('[data-km]');
+  var destBox = document.querySelector('[data-destinos]');
+  var dSel = 'ver', ruta = null, viajero = null, kmMostrado = 285;
+
+  function curva(a, b) {
+    var mxp = (a[0] + b[0]) / 2, myp = (a[1] + b[1]) / 2;
+    var dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy);
+    var k = Math.min(0.28, 12 / Math.max(len, 1) + 0.12);
+    return 'M' + a.join(' ') + ' Q' + (mxp - dy * k).toFixed(1) + ' ' + (myp + dx * k).toFixed(1) + ' ' + b.join(' ');
+  }
+  function pintaMx() {
+    if (!mx) return;
+    mx.innerHTML = '';
+    dibujaMexico(mx, true);
+    mx.appendChild(el('line', { x1: 205, y1: 100.5, x2: 495, y2: 100.5, 'class': 'frontera' }));
+    DESTINOS.forEach(function (d) {
+      mx.appendChild(el('path', { d: curva(ORIGEN, d.p), 'class': 'ruta-base' }));
+    });
+    ruta = el('path', { 'class': 'ruta' });
+    mx.appendChild(ruta);
+    DESTINOS.forEach(function (d) {
+      var g = el('g', { 'class': 'dest' + (d.id === dSel ? ' is-sel' : ''), 'data-d': d.id });
+      g.appendChild(el('circle', { cx: d.p[0], cy: d.p[1], r: 2.6, 'class': 'd' }));
+      var izq = d.p[0] < ORIGEN[0] - 5;
+      var t = el('text', { x: d.p[0] + (izq ? -4.5 : 4.5), y: d.p[1] + (d.id === 'aifa' ? -3 : d.id === 'cdmx' ? 6 : 2.5), 'text-anchor': izq ? 'end' : 'start' });
+      t.textContent = L(d.n);
+      g.appendChild(t);
+      mx.appendChild(g);
+    });
+    mx.appendChild(el('circle', { cx: ORIGEN[0], cy: ORIGEN[1], r: 3.4, 'class': 'origen' }));
+    viajero = el('circle', { r: 1.8, 'class': 'viajero' });
+    mx.appendChild(viajero);
+    trazaRuta(false);
+  }
+  function trazaRuta(anima) {
+    var d = DESTINOS.filter(function (x) { return x.id === dSel; })[0];
+    ruta.setAttribute('d', curva(ORIGEN, d.p));
+    var len = ruta.getTotalLength();
+    mx.querySelectorAll('.dest').forEach(function (g) { g.classList.toggle('is-sel', g.getAttribute('data-d') === dSel); });
+    var desde = kmMostrado;
+    if (!anima || reduce) {
+      kmEl.textContent = fmt(d.km); kmMostrado = d.km;
+      viajero.setAttribute('cx', d.p[0]); viajero.setAttribute('cy', d.p[1]);
+      return;
+    }
+    // El trazo crece desde Puebla: cada cuadro dibuja el tramo de la curva de 0 a e
+    var t0 = performance.now(), dur = 900 + Math.min(900, len * 6), id = dSel;
+    (function paso(now) {
+      if (id !== dSel) return;
+      var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      var tramo = parcial(d, e);
+      ruta.setAttribute('d', tramo.d);
+      viajero.setAttribute('cx', tramo.fin[0]); viajero.setAttribute('cy', tramo.fin[1]);
+      kmEl.textContent = fmt(Math.round(desde + (d.km - desde) * e));
+      if (p < 1) requestAnimationFrame(paso); else kmMostrado = d.km;
+    })(t0);
+  }
+  // Tramo de la curva cuadrática de 0 a t (De Casteljau)
+  function parcial(d, t) {
+    var a = ORIGEN, b = d.p;
+    var m = curva(a, b).match(/Q([\d.\-]+) ([\d.\-]+)/);
+    var c = [Number(m[1]), Number(m[2])];
+    var q0 = [a[0] + (c[0] - a[0]) * t, a[1] + (c[1] - a[1]) * t];
+    var q1 = [c[0] + (b[0] - c[0]) * t, c[1] + (b[1] - c[1]) * t];
+    var p = [q0[0] + (q1[0] - q0[0]) * t, q0[1] + (q1[1] - q0[1]) * t];
+    return { d: 'M' + a.join(' ') + ' Q' + q0[0].toFixed(2) + ' ' + q0[1].toFixed(2) + ' ' + p[0].toFixed(2) + ' ' + p[1].toFixed(2), fin: p };
+  }
+  function pintaDestinos() {
+    if (!destBox) return;
+    destBox.innerHTML = DESTINOS.map(function (d) {
+      return '<button class="ep-destino" type="button" aria-pressed="' + (d.id === dSel) + '" data-dest="' + d.id + '"><small>' + esc(L(d.t)) + '</small><span>' + esc(L(d.n)) + '</span></button>';
+    }).join('');
+  }
+  if (mx) {
+    pintaDestinos();
+    pintaMx();
+    destBox.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-dest]'); if (!b) return;
+      dSel = b.getAttribute('data-dest');
+      destBox.querySelectorAll('[data-dest]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      trazaRuta(true);
+    });
+    mx.addEventListener('click', function (e) {
+      var g = e.target.closest('.dest'); if (!g) return;
+      var b = destBox.querySelector('[data-dest="' + g.getAttribute('data-d') + '"]'); if (b) b.click();
+    });
+    if ('IntersectionObserver' in window) {
+      var io3 = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { io3.disconnect(); kmMostrado = 0; trazaRuta(true); }
+      }, { threshold: 0.35 });
+      io3.observe(mx);
+    }
+  }
+
+  /* ---------- Exportaciones de la Región Sur, 2T 2026 (INEGI 609/26) ---------- */
+
+  var EXPORT = [
+    { e: 'Puebla', v: 4881.6, a: 21.3 }, { e: 'Campeche', v: 2718.1, a: 29.9 }, { e: 'Tabasco', v: 1962.7, a: 33.5 },
+    { e: 'Veracruz', v: 1862.7, a: 1.1 }, { e: 'Yucatán', v: 714.9, a: 17.7 }, { e: 'Tlaxcala', v: 572.3, a: 6.9 },
+    { e: 'Oaxaca', v: 428.8, a: 13.5 }, { e: 'Chiapas', v: 391.1, a: -8.3 }, { e: 'Quintana Roo', v: 2.0, a: -75.1 }
+  ];
+  var rk = document.querySelector('[data-ranking]');
+  var modo = 'mdd';
+  function pintaRanking() {
+    if (!rk) return;
+    var filas = EXPORT.slice().sort(function (a, b) { return modo === 'mdd' ? b.v - a.v : b.a - a.a; });
+    var min = modo === 'mdd' ? 0 : -80, max = modo === 'mdd' ? 5000 : 40;
+    var cero = (0 - min) / (max - min) * 100;
+    rk.innerHTML = filas.map(function (f) {
+      var val = modo === 'mdd' ? f.v : f.a;
+      var txt = modo === 'mdd' ? fmt(f.v, 1) : (f.a > 0 ? '+' : '') + fmt(f.a, 1) + ' %';
+      return '<div class="ep-rk' + (f.e === 'Puebla' ? ' pue' : '') + (val < 0 ? ' neg' : '') + '">' +
+        '<span class="e">' + esc(f.e) + '</span>' +
+        '<span class="pista">' + (modo === 'var' ? '<span class="cero" style="--z:' + cero + '%"></span>' : '') +
+        '<span class="rel" data-v="' + val + '"></span></span><b>' + txt + '</b></div>';
+    }).join('');
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      rk.querySelectorAll('.rel').forEach(function (r) {
+        var v = Number(r.getAttribute('data-v'));
+        var a = (Math.min(v, 0) - min) / (max - min) * 100, b = (Math.max(v, 0) - min) / (max - min) * 100;
+        r.style.left = a + '%'; r.style.width = Math.max(0.6, b - a) + '%';
+      });
+    }); });
+  }
+  var modoBox = document.querySelector('[data-modo]');
+  if (modoBox) modoBox.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-v]'); if (!b) return;
+    modo = b.getAttribute('data-v');
+    modoBox.querySelectorAll('[data-v]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    pintaRanking();
+  });
+  if (rk) {
+    if ('IntersectionObserver' in window) {
+      var io4 = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io4.disconnect(); pintaRanking(); } }, { threshold: 0.3 });
+      io4.observe(rk);
+    } else pintaRanking();
+  }
+
+  /* ---------- Empresas de Puebla (del directorio) ---------- */
+
+  var empBox = document.querySelector('[data-empresas]');
+  var empCuenta = document.querySelector('[data-empresas-cuenta]');
+  function pintaEmpresas() {
+    if (!empBox || !window.SE) return;
+    var en = idioma() === 'en';
+    var lista = window.SE.empresas.filter(function (c) { return c.estado === 'Puebla'; });
+    if (empCuenta) empCuenta.textContent = en
+      ? lista.length + ' of the ' + window.SE.empresas.length + ' companies in the directory are based in Puebla.'
+      : lista.length + ' de las ' + window.SE.empresas.length + ' empresas del directorio son de Puebla.';
+    empBox.innerHTML = lista.map(function (c) {
+      var s = window.SE.sectores[c.sector];
+      return '<a class="ep-emp" href="/empresa-' + esc(c.slug) + '">' +
+        '<span class="logo">' + (c.logo === false
+          ? '<span class="mono" aria-hidden="true">' + esc(c.marca.charAt(0)) + '</span>'
+          : '<img src="logo-' + esc(c.slug) + '.webp" alt="" loading="lazy" decoding="async">') + '</span>' +
+        '<span class="sec">' + esc(s ? s[en ? 'en' : 'es'] : '') + '</span>' +
+        '<h3>' + esc(c.marca) + '</h3>' +
+        '<p>' + esc(c.municipio || 'Puebla') + '</p></a>';
+    }).join('');
+  }
+  pintaEmpresas();
+  pintaLista();
+
+  // app.js cambia el idioma en su propio clic; se vuelve a dibujar justo después
+  document.querySelectorAll('[data-lang-toggle]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      setTimeout(function () {
+        formateaTodo(); pintaLugares(); pintaLista(); pintaFicha(); pintaDestinos(); pintaMx(); pintaRanking(); pintaEmpresas();
+      }, 0);
+    });
+  });
+})();
+</script>
+</body>
+</html>
